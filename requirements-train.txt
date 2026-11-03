@@ -1,0 +1,6 @@
+# Install the CUDA-enabled PyTorch build appropriate for your host first.
+# Colab and GPU-provider PyTorch images normally include it already.
+ultralytics==8.4.8
+PyYAML==6.0.3
+# For downloading the official IR-LPR archives during dataset preparation.
+gdown==6.4.2

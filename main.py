@@ -1,26 +1,36 @@
 import cv2
 import os
+from pathlib import Path
 from ultralytics import YOLO
+from plate_ocr import recognize_plate
 
 # ==========================================
 # Model settings
 # ==========================================
 # Model 1: plate detector (you need to download it)
-PLATE_MODEL_PATH = 'models/plate_detector.pt'
+ROOT = Path(__file__).resolve().parent
+PLATE_MODEL_PATH = str(ROOT / 'models/plate_detector.pt')
 # Model 2: character recognizer (the one you trained)
-CHAR_MODEL_PATH = 'models/best.pt'
+CHAR_MODEL_PATH = str(ROOT / 'models/chars37-best.pt')
+if not os.path.isfile(CHAR_MODEL_PATH):
+    CHAR_MODEL_PATH = str(ROOT / 'models/best.pt')
+# Selected on HezarAI validation; increasing image size did not improve the winner.
+CHAR_IMAGE_SIZE = 640
+CHAR_CONFIDENCE = 0.25
+CHAR_DUPLICATE_IOU = 0.5
 
 
 def start_smart_detection():
     # Check if model files exist
     if not os.path.exists(PLATE_MODEL_PATH) or not os.path.exists(CHAR_MODEL_PATH):
         print("Error: model files not found!")
-        print("Make sure plate_detector.pt and best.pt are inside the models folder.")
+        print(f"Required weights: {PLATE_MODEL_PATH}, {CHAR_MODEL_PATH}")
         return
 
     print("⏳ Loading models...")
     plate_model = YOLO(PLATE_MODEL_PATH)
     char_model = YOLO(CHAR_MODEL_PATH)
+    print(f"Character weights: {CHAR_MODEL_PATH}")
     print("System is ready.")
 
     cap = cv2.VideoCapture(0)  # laptop camera
@@ -28,6 +38,7 @@ def start_smart_detection():
     while True:
         ret, frame = cap.read()
         if not ret: break
+        clean_frame = frame.copy()
 
         # ---------------------------------------
         # Step 1: find plate location (Plate Detection)
@@ -42,35 +53,21 @@ def start_smart_detection():
                 # Plate coordinates
                 px1, py1, px2, py2 = map(int, p_box.xyxy[0])
 
-                # Draw rectangle around detected plate
-                cv2.rectangle(frame, (px1, py1), (px2, py2), (255, 0, 0), 3)
-
                 # ---------------------------------------
                 # Step 2: crop plate and recognize characters
                 # ---------------------------------------
                 # Crop with a small safety margin
                 h, w, _ = frame.shape
-                crop = frame[max(0, py1 - 5):min(h, py2 + 5), max(0, px1 - 5):min(w, px2 + 5)]
+                # Copy clean pixels before adding overlays to the displayed frame.
+                crop = clean_frame[max(0, py1 - 5):min(h, py2 + 5), max(0, px1 - 5):min(w, px2 + 5)].copy()
 
                 if crop.size > 0:
                     # Send cropped plate to character model
-                    char_results = char_model(crop, verbose=False)
+                    final_text = recognize_plate(char_model, crop, CHAR_IMAGE_SIZE,
+                                                 CHAR_CONFIDENCE, CHAR_DUPLICATE_IOU)
+                    cv2.rectangle(frame, (px1, py1), (px2, py2), (255, 0, 0), 3)
 
-                    detected_chars = []
-                    for c_res in char_results:
-                        for c_box in c_res.boxes:
-                            # Save (X coordinate, class name)
-                            # We need X to sort characters left to right
-                            cls_id = int(c_box.cls[0])
-                            char_name = char_model.names[cls_id]
-                            cx1 = int(c_box.xyxy[0][0])
-
-                            detected_chars.append((cx1, char_name))
-
-                    # Important: sort characters from left to right
-                    if len(detected_chars) > 2:
-                        detected_chars.sort(key=lambda x: x[0])
-                        final_text = "".join([c[1] for c in detected_chars])
+                    if final_text:
 
                         # Draw plate text on the image
                         cv2.putText(frame, final_text, (px1, py1 - 15),

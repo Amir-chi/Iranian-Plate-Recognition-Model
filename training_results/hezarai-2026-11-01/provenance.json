@@ -1,0 +1,24 @@
+{
+  "dataset": "hezarai/persian-license-plate-v1",
+  "revision": "3ca8609f245f0aab2c4f1d93986ecebc6b923081",
+  "files": [
+    {
+      "split": "test",
+      "name": "test-00000-of-00001.parquet",
+      "bytes": 8154065,
+      "sha256": "bbb8892741c6b01f043271980b51af52bee3d11d3a451cef1749708d5dd64dcf"
+    },
+    {
+      "split": "validation",
+      "name": "validation-00000-of-00001.parquet",
+      "bytes": 8568424,
+      "sha256": "72c313b7c6a6d7de3328deed3645dc753e69519beba5db23769727369abf4ffa"
+    },
+    {
+      "split": "train",
+      "name": "train-00000-of-00001.parquet",
+      "bytes": 67908137,
+      "sha256": "64cde253ce63914113c6e3d0b6190c6f336b51ba3c20a8a04e7ea96ace2487c5"
+    }
+  ]
+}

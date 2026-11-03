@@ -1,0 +1,13 @@
+{
+  "metrics/precision(B)": 0.8909070171809839,
+  "metrics/recall(B)": 0.8717200266664187,
+  "metrics/mAP50(B)": 0.8843258384639718,
+  "metrics/mAP50-95(B)": 0.7286722290722148,
+  "fitness": 0.7286722290722148,
+  "dataset": "E:\\Code\\Projects\\Iranian-Plate-Processing-Model\\runs\\datasets\\ir-lpr\\ready\\real.yaml",
+  "split": "val",
+  "images": 2755,
+  "weights": "E:\\Code\\Projects\\Iranian-Plate-Processing-Model\\models\\best.pt",
+  "imgsz": 640,
+  "batch": 16
+}

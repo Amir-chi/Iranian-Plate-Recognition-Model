@@ -1,0 +1,569 @@
+[
+  {
+    "imgsz": 640,
+    "conf": 0.1,
+    "duplicate_iou": null,
+    "correct": 833,
+    "images": 996,
+    "edits": 381,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.1,
+    "duplicate_iou": 0.5,
+    "correct": 854,
+    "images": 996,
+    "edits": 257,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.1,
+    "duplicate_iou": 0.7,
+    "correct": 853,
+    "images": 996,
+    "edits": 291,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.15,
+    "duplicate_iou": null,
+    "correct": 842,
+    "images": 996,
+    "edits": 325,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.15,
+    "duplicate_iou": 0.5,
+    "correct": 860,
+    "images": 996,
+    "edits": 246,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.15,
+    "duplicate_iou": 0.7,
+    "correct": 860,
+    "images": 996,
+    "edits": 270,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.2,
+    "duplicate_iou": null,
+    "correct": 848,
+    "images": 996,
+    "edits": 291,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.2,
+    "duplicate_iou": 0.5,
+    "correct": 863,
+    "images": 996,
+    "edits": 241,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.2,
+    "duplicate_iou": 0.7,
+    "correct": 863,
+    "images": 996,
+    "edits": 255,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.25,
+    "duplicate_iou": null,
+    "correct": 851,
+    "images": 996,
+    "edits": 280,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.25,
+    "duplicate_iou": 0.5,
+    "correct": 865,
+    "images": 996,
+    "edits": 240,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.25,
+    "duplicate_iou": 0.7,
+    "correct": 865,
+    "images": 996,
+    "edits": 250,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.35,
+    "duplicate_iou": null,
+    "correct": 853,
+    "images": 996,
+    "edits": 263,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.35,
+    "duplicate_iou": 0.5,
+    "correct": 864,
+    "images": 996,
+    "edits": 242,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.35,
+    "duplicate_iou": 0.7,
+    "correct": 864,
+    "images": 996,
+    "edits": 244,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.45,
+    "duplicate_iou": null,
+    "correct": 848,
+    "images": 996,
+    "edits": 269,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.45,
+    "duplicate_iou": 0.5,
+    "correct": 853,
+    "images": 996,
+    "edits": 262,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.45,
+    "duplicate_iou": 0.7,
+    "correct": 853,
+    "images": 996,
+    "edits": 262,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.55,
+    "duplicate_iou": null,
+    "correct": 828,
+    "images": 996,
+    "edits": 318,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.55,
+    "duplicate_iou": 0.5,
+    "correct": 828,
+    "images": 996,
+    "edits": 317,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 640,
+    "conf": 0.55,
+    "duplicate_iou": 0.7,
+    "correct": 828,
+    "images": 996,
+    "edits": 317,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.1,
+    "duplicate_iou": null,
+    "correct": 804,
+    "images": 996,
+    "edits": 377,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.1,
+    "duplicate_iou": 0.5,
+    "correct": 824,
+    "images": 996,
+    "edits": 293,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.1,
+    "duplicate_iou": 0.7,
+    "correct": 823,
+    "images": 996,
+    "edits": 301,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.15,
+    "duplicate_iou": null,
+    "correct": 827,
+    "images": 996,
+    "edits": 318,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.15,
+    "duplicate_iou": 0.5,
+    "correct": 841,
+    "images": 996,
+    "edits": 264,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.15,
+    "duplicate_iou": 0.7,
+    "correct": 840,
+    "images": 996,
+    "edits": 267,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.2,
+    "duplicate_iou": null,
+    "correct": 837,
+    "images": 996,
+    "edits": 288,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.2,
+    "duplicate_iou": 0.5,
+    "correct": 847,
+    "images": 996,
+    "edits": 252,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.2,
+    "duplicate_iou": 0.7,
+    "correct": 846,
+    "images": 996,
+    "edits": 254,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.25,
+    "duplicate_iou": null,
+    "correct": 846,
+    "images": 996,
+    "edits": 267,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.25,
+    "duplicate_iou": 0.5,
+    "correct": 854,
+    "images": 996,
+    "edits": 240,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.25,
+    "duplicate_iou": 0.7,
+    "correct": 853,
+    "images": 996,
+    "edits": 241,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.35,
+    "duplicate_iou": null,
+    "correct": 850,
+    "images": 996,
+    "edits": 250,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.35,
+    "duplicate_iou": 0.5,
+    "correct": 855,
+    "images": 996,
+    "edits": 234,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.35,
+    "duplicate_iou": 0.7,
+    "correct": 855,
+    "images": 996,
+    "edits": 234,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.45,
+    "duplicate_iou": null,
+    "correct": 846,
+    "images": 996,
+    "edits": 262,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.45,
+    "duplicate_iou": 0.5,
+    "correct": 848,
+    "images": 996,
+    "edits": 253,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.45,
+    "duplicate_iou": 0.7,
+    "correct": 848,
+    "images": 996,
+    "edits": 253,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.55,
+    "duplicate_iou": null,
+    "correct": 844,
+    "images": 996,
+    "edits": 279,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.55,
+    "duplicate_iou": 0.5,
+    "correct": 844,
+    "images": 996,
+    "edits": 278,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 800,
+    "conf": 0.55,
+    "duplicate_iou": 0.7,
+    "correct": 844,
+    "images": 996,
+    "edits": 278,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.1,
+    "duplicate_iou": null,
+    "correct": 772,
+    "images": 996,
+    "edits": 453,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.1,
+    "duplicate_iou": 0.5,
+    "correct": 794,
+    "images": 996,
+    "edits": 331,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.1,
+    "duplicate_iou": 0.7,
+    "correct": 790,
+    "images": 996,
+    "edits": 353,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.15,
+    "duplicate_iou": null,
+    "correct": 792,
+    "images": 996,
+    "edits": 365,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.15,
+    "duplicate_iou": 0.5,
+    "correct": 813,
+    "images": 996,
+    "edits": 293,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.15,
+    "duplicate_iou": 0.7,
+    "correct": 808,
+    "images": 996,
+    "edits": 305,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.2,
+    "duplicate_iou": null,
+    "correct": 817,
+    "images": 996,
+    "edits": 322,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.2,
+    "duplicate_iou": 0.5,
+    "correct": 836,
+    "images": 996,
+    "edits": 270,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.2,
+    "duplicate_iou": 0.7,
+    "correct": 832,
+    "images": 996,
+    "edits": 277,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.25,
+    "duplicate_iou": null,
+    "correct": 831,
+    "images": 996,
+    "edits": 294,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.25,
+    "duplicate_iou": 0.5,
+    "correct": 846,
+    "images": 996,
+    "edits": 252,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.25,
+    "duplicate_iou": 0.7,
+    "correct": 843,
+    "images": 996,
+    "edits": 258,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.35,
+    "duplicate_iou": null,
+    "correct": 843,
+    "images": 996,
+    "edits": 266,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.35,
+    "duplicate_iou": 0.5,
+    "correct": 851,
+    "images": 996,
+    "edits": 248,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.35,
+    "duplicate_iou": 0.7,
+    "correct": 849,
+    "images": 996,
+    "edits": 253,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.45,
+    "duplicate_iou": null,
+    "correct": 854,
+    "images": 996,
+    "edits": 260,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.45,
+    "duplicate_iou": 0.5,
+    "correct": 857,
+    "images": 996,
+    "edits": 253,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.45,
+    "duplicate_iou": 0.7,
+    "correct": 855,
+    "images": 996,
+    "edits": 257,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.55,
+    "duplicate_iou": null,
+    "correct": 845,
+    "images": 996,
+    "edits": 275,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.55,
+    "duplicate_iou": 0.5,
+    "correct": 846,
+    "images": 996,
+    "edits": 273,
+    "gt_characters": 7967
+  },
+  {
+    "imgsz": 960,
+    "conf": 0.55,
+    "duplicate_iou": 0.7,
+    "correct": 845,
+    "images": 996,
+    "edits": 275,
+    "gt_characters": 7967
+  }
+]

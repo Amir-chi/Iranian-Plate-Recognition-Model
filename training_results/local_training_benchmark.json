@@ -1,0 +1,15 @@
+{
+  "gpu": "RTX 4060 Laptop 8 GB",
+  "batch": 16,
+  "imgsz": 640,
+  "workers": 2,
+  "train_images": 512,
+  "val_images": 64,
+  "epochs": 2,
+  "second_epoch_seconds": 5.88579,
+  "reported_gpu_memory_gb": 2.09,
+  "full_train_images": 45273,
+  "estimated_seconds_per_full_epoch": 520.4440833398437,
+  "estimated_hours_for_60_epochs": 8.674068055664062,
+  "scope": "Throughput estimate only; tiny benchmark metrics are not an accuracy estimate."
+}

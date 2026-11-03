@@ -1,0 +1,41 @@
+{
+  "time": "2026-10-31T19:27:40.598403+00:00",
+  "kind": "completed",
+  "text": "آموزش و ارزیابی تمام شد\nmAP50 واقعی — مدل قبلی: 94.77%\nمدل جدید: 94.11%\nتغییر: -0.66 واحد درصد\nوزن منتخب: /opt/plate-training/outputs/chars37/weights/best.pt\nRAM آزاد: 22.89 GB | فرایند: 5.63 GB",
+  "comparison": {
+    "baseline_val": {
+      "metrics/precision(B)": 0.8905336738773334,
+      "metrics/recall(B)": 0.8712883940873061,
+      "metrics/mAP50(B)": 0.8840590452701069,
+      "metrics/mAP50-95(B)": 0.7284296378347433,
+      "fitness": 0.7284296378347433
+    },
+    "finetuned_val": {
+      "metrics/precision(B)": 0.9346071479945735,
+      "metrics/recall(B)": 0.9206330634440996,
+      "metrics/mAP50(B)": 0.9215076840775562,
+      "metrics/mAP50-95(B)": 0.7335074535221716,
+      "fitness": 0.7335074535221716
+    },
+    "finetuned_test": {
+      "metrics/precision(B)": 0.9639158010908314,
+      "metrics/recall(B)": 0.928620492053792,
+      "metrics/mAP50(B)": 0.9410746849544471,
+      "metrics/mAP50-95(B)": 0.7520294449823666,
+      "fitness": 0.7520294449823666
+    },
+    "baseline_test": {
+      "metrics/precision(B)": 0.9780321127609969,
+      "metrics/recall(B)": 0.9224711332336671,
+      "metrics/mAP50(B)": 0.9477037489790329,
+      "metrics/mAP50-95(B)": 0.7770606030348832,
+      "fitness": 0.7770606030348832
+    },
+    "best_weights": "/opt/plate-training/outputs/chars37/weights/best.pt"
+  },
+  "memory": {
+    "available_ram_gb": 22.89,
+    "process_ram_gb": 5.63,
+    "system_ram_percent": 27.0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "weights_sha256": "dc8e83b4442d6d88a47083c69cf9c65c99fb0fc37162e64e941088e35821ffa5",
+  "images": 5534,
+  "metrics": {
+    "metrics/precision(B)": 0.9147868285523783,
+    "metrics/recall(B)": 0.8294269298658605,
+    "metrics/mAP50(B)": 0.8537595080446344,
+    "metrics/mAP50-95(B)": 0.6983445746481778,
+    "fitness": 0.6983445746481778
+  },
+  "seconds": 26.375
+}

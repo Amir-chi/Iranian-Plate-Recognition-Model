@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+runs/
+ready_dataset/
+*.zip
+# Ultralytics downloads this model solely for its AMP compatibility check.
+/yolo26n.pt
+# Locally evaluated candidate; distribute weights separately after reviewing terms.
+/models/chars37-best.pt

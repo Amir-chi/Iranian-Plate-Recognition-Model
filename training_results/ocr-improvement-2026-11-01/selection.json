@@ -1,0 +1,22 @@
+{
+  "weights_sha256": "5ab6da27dedafc06f6c69d29c297d9f270c24fa5f0130d1d15fff40ebe9d56c8",
+  "selection_split": "validation",
+  "selected": {
+    "imgsz": 640,
+    "conf": 0.25,
+    "duplicate_iou": 0.5,
+    "correct": 865,
+    "images": 996,
+    "edits": 240,
+    "gt_characters": 7967
+  },
+  "validation_reference": {
+    "imgsz": 640,
+    "conf": 0.25,
+    "duplicate_iou": null,
+    "correct": 851,
+    "images": 996,
+    "edits": 280,
+    "gt_characters": 7967
+  }
+}

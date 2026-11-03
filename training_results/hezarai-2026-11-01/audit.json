@@ -1,0 +1,29 @@
+{
+  "dataset": "hezarai/persian-license-plate-v1",
+  "rows": 9953,
+  "splits": {
+    "test": 995,
+    "validation": 996,
+    "train": 7962
+  },
+  "prior_match_images": {
+    "train": 0,
+    "val": 0,
+    "test": 0
+  },
+  "ambiguous_labels": 29,
+  "duplicate_pixel_rows": 0,
+  "overlap_method": "SHA256 of image bytes or exact decoded RGB pixels and dimensions; resized/recompressed/near-duplicate images can evade these checks. No claim of complete independence.",
+  "environment": {
+    "torch": "2.7.1+cu118",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "settings": {
+    "imgsz": 640,
+    "batch": 8,
+    "conf": 0.25,
+    "iou": 0.7,
+    "half": false,
+    "decoder": "sort all detections by horizontal box center; no forced length, label-dependent filtering or grammar correction; normalize digits and equivalent Arabic/Persian letters; الف -> ا; disability class -> ژ; + and # meanings are unverified"
+  }
+}

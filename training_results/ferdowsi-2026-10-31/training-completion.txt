@@ -1,0 +1,4 @@
+[34m[1mEarlyStopping: [0mTraining stopped early as no improvement observed in last 5 epochs. Best results observed at epoch 2, best model saved as best.pt.
+To update EarlyStopping(patience=5) pass a new patience value, i.e. `patience=300` or use `patience=0` to disable EarlyStopping.
+7 epochs completed in 0.404 hours.
+TRAINING_COMPLETE /opt/plate-training/iranian-plate-results.zip

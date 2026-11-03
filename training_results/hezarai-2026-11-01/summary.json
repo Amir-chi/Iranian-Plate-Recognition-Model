@@ -1,0 +1,202 @@
+{
+  "baseline": {
+    "weights_sha256": "dc8e83b4442d6d88a47083c69cf9c65c99fb0fc37162e64e941088e35821ffa5",
+    "seconds": 45.46900000000005,
+    "all": {
+      "images": 9953,
+      "correct_plates": 8285,
+      "exact_plate_accuracy": 0.8324123379885462,
+      "character_edit_rate": 0.038964954151488505,
+      "edit_distance": 3102,
+      "gt_characters": 79610,
+      "empty_predictions": 13
+    },
+    "by_split": {
+      "test": {
+        "images": 995,
+        "correct_plates": 827,
+        "exact_plate_accuracy": 0.8311557788944723,
+        "character_edit_rate": 0.037567533609749966,
+        "edit_distance": 299,
+        "gt_characters": 7959,
+        "empty_predictions": 1
+      },
+      "validation": {
+        "images": 996,
+        "correct_plates": 839,
+        "exact_plate_accuracy": 0.8423694779116466,
+        "character_edit_rate": 0.04229948537718087,
+        "edit_distance": 337,
+        "gt_characters": 7967,
+        "empty_predictions": 0
+      },
+      "train": {
+        "images": 7962,
+        "correct_plates": 6619,
+        "exact_plate_accuracy": 0.8313237879929666,
+        "character_edit_rate": 0.03872244205765969,
+        "edit_distance": 2466,
+        "gt_characters": 63684,
+        "empty_predictions": 12
+      }
+    },
+    "nonoverlap_mappable_by_split": {
+      "test": {
+        "images": 993,
+        "correct_plates": 827,
+        "exact_plate_accuracy": 0.8328298086606244,
+        "character_edit_rate": 0.03726551680725167,
+        "edit_distance": 296,
+        "gt_characters": 7943,
+        "empty_predictions": 1
+      },
+      "validation": {
+        "images": 994,
+        "correct_plates": 839,
+        "exact_plate_accuracy": 0.8440643863179075,
+        "character_edit_rate": 0.04200729467991448,
+        "edit_distance": 334,
+        "gt_characters": 7951,
+        "empty_predictions": 0
+      },
+      "train": {
+        "images": 7937,
+        "correct_plates": 6619,
+        "exact_plate_accuracy": 0.8339422955776742,
+        "character_edit_rate": 0.03819860122235524,
+        "edit_distance": 2425,
+        "gt_characters": 63484,
+        "empty_predictions": 12
+      }
+    },
+    "mappable_by_split": {
+      "test": {
+        "images": 993,
+        "correct_plates": 827,
+        "exact_plate_accuracy": 0.8328298086606244,
+        "character_edit_rate": 0.03726551680725167,
+        "edit_distance": 296,
+        "gt_characters": 7943,
+        "empty_predictions": 1
+      },
+      "validation": {
+        "images": 994,
+        "correct_plates": 839,
+        "exact_plate_accuracy": 0.8440643863179075,
+        "character_edit_rate": 0.04200729467991448,
+        "edit_distance": 334,
+        "gt_characters": 7951,
+        "empty_predictions": 0
+      },
+      "train": {
+        "images": 7937,
+        "correct_plates": 6619,
+        "exact_plate_accuracy": 0.8339422955776742,
+        "character_edit_rate": 0.03819860122235524,
+        "edit_distance": 2425,
+        "gt_characters": 63484,
+        "empty_predictions": 12
+      }
+    }
+  },
+  "candidate": {
+    "weights_sha256": "5ab6da27dedafc06f6c69d29c297d9f270c24fa5f0130d1d15fff40ebe9d56c8",
+    "seconds": 73.0630000000001,
+    "all": {
+      "images": 9953,
+      "correct_plates": 8446,
+      "exact_plate_accuracy": 0.8485883653169899,
+      "character_edit_rate": 0.034128878281622914,
+      "edit_distance": 2717,
+      "gt_characters": 79610,
+      "empty_predictions": 11
+    },
+    "by_split": {
+      "test": {
+        "images": 995,
+        "correct_plates": 849,
+        "exact_plate_accuracy": 0.8532663316582915,
+        "character_edit_rate": 0.03153662520417138,
+        "edit_distance": 251,
+        "gt_characters": 7959,
+        "empty_predictions": 1
+      },
+      "validation": {
+        "images": 996,
+        "correct_plates": 851,
+        "exact_plate_accuracy": 0.8544176706827309,
+        "character_edit_rate": 0.035144973013681434,
+        "edit_distance": 280,
+        "gt_characters": 7967,
+        "empty_predictions": 0
+      },
+      "train": {
+        "images": 7962,
+        "correct_plates": 6746,
+        "exact_plate_accuracy": 0.8472745541321276,
+        "character_edit_rate": 0.03432573330820928,
+        "edit_distance": 2186,
+        "gt_characters": 63684,
+        "empty_predictions": 10
+      }
+    },
+    "nonoverlap_mappable_by_split": {
+      "test": {
+        "images": 993,
+        "correct_plates": 849,
+        "exact_plate_accuracy": 0.8549848942598187,
+        "character_edit_rate": 0.03134835704393806,
+        "edit_distance": 249,
+        "gt_characters": 7943,
+        "empty_predictions": 1
+      },
+      "validation": {
+        "images": 994,
+        "correct_plates": 851,
+        "exact_plate_accuracy": 0.8561368209255533,
+        "character_edit_rate": 0.03496415545214438,
+        "edit_distance": 278,
+        "gt_characters": 7951,
+        "empty_predictions": 0
+      },
+      "train": {
+        "images": 7937,
+        "correct_plates": 6746,
+        "exact_plate_accuracy": 0.8499433035151821,
+        "character_edit_rate": 0.03381954508222544,
+        "edit_distance": 2147,
+        "gt_characters": 63484,
+        "empty_predictions": 10
+      }
+    },
+    "mappable_by_split": {
+      "test": {
+        "images": 993,
+        "correct_plates": 849,
+        "exact_plate_accuracy": 0.8549848942598187,
+        "character_edit_rate": 0.03134835704393806,
+        "edit_distance": 249,
+        "gt_characters": 7943,
+        "empty_predictions": 1
+      },
+      "validation": {
+        "images": 994,
+        "correct_plates": 851,
+        "exact_plate_accuracy": 0.8561368209255533,
+        "character_edit_rate": 0.03496415545214438,
+        "edit_distance": 278,
+        "gt_characters": 7951,
+        "empty_predictions": 0
+      },
+      "train": {
+        "images": 7937,
+        "correct_plates": 6746,
+        "exact_plate_accuracy": 0.8499433035151821,
+        "character_edit_rate": 0.03381954508222544,
+        "edit_distance": 2147,
+        "gt_characters": 63484,
+        "empty_predictions": 10
+      }
+    }
+  }
+}

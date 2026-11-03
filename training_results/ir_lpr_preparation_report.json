@@ -1,0 +1,1733 @@
+{
+  "source": "https://github.com/mut-deep/IR-LPR",
+  "names": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "الف",
+    "ب",
+    "ت",
+    "ث",
+    "ج",
+    "د",
+    "ز",
+    "س",
+    "ش",
+    "ص",
+    "ط",
+    "ع",
+    "ق",
+    "ل",
+    "م",
+    "ن",
+    "ه‍",
+    "و",
+    "پ",
+    "ژ (معلولین و جانبازان)",
+    "ی",
+    "D",
+    "S",
+    "ف",
+    "ک",
+    "گ",
+    "تشریفات"
+  ],
+  "archives_sha256": {
+    "test": "7d3318431d41f44ce1324bbf273816f530580ff7b8463af14d0a09b43ee3c0fa",
+    "val": "e60af7d4b6571f5bfbe1e7b712c23f84b1d5dfcdc5900d00c4b978fe530393e6",
+    "train": "6547c15f2aa7a234ca140e1f67be722667cd88da509ac2308d7d542cb42b195a"
+  },
+  "excluded": [
+    {
+      "archive": "test",
+      "xml": "test/01310.xml",
+      "reason": "box outside 462x109: [308.0, 27.0, 355.0, 111.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/01590.xml",
+      "reason": "box outside 566x119: [503.0, 35.0, 558.0, 121.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/02847.xml",
+      "reason": "box outside 369x116: [78.0, 33.0, 110.0, 120.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/02867.xml",
+      "reason": "box outside 696x207: [634.0, 65.0, 703.0, 187.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/02987.xml",
+      "reason": "box outside 243x102: [226.0, 22.0, 246.0, 63.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/04543.xml",
+      "reason": "box outside 166x60: [144.0, 14.0, 164.0, 61.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/06210.xml",
+      "reason": "box outside 184x80: [10.0, 29.0, 40.0, 85.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/06270.xml",
+      "reason": "box outside 139x37: [13.0, 8.0, 28.0, 38.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/06339.xml",
+      "reason": "box outside 401x94: [44.0, 16.0, 76.0, 95.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/07968.xml",
+      "reason": "box outside 748x201: [684.0, 61.0, 753.0, 181.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/08128.xml",
+      "reason": "box outside 805x226: [736.0, 38.0, 838.0, 193.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/09547.xml",
+      "reason": "box outside 106x26: [93.0, 5.0, 107.0, 24.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/09607.xml",
+      "reason": "box outside 539x155: [497.0, 63.0, 542.0, 152.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/11601.xml",
+      "reason": "box outside 113x33: [85.0, 1.0, 98.0, 34.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/11690.xml",
+      "reason": "box outside 464x146: [54.0, 55.0, 111.0, 147.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/13909.xml",
+      "reason": "box outside 448x100: [398.0, 35.0, 441.0, 104.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/13910.xml",
+      "reason": "box outside 198x108: [162.0, 25.0, 199.0, 83.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/14049.xml",
+      "reason": "box outside 675x154: [535.0, 30.0, 599.0, 155.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/15813.xml",
+      "reason": "box outside 394x152: [348.0, 63.0, 385.0, 157.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/15923.xml",
+      "reason": "box outside 615x159: [550.0, 68.0, 606.0, 161.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/15942.xml",
+      "reason": "box outside 304x61: [246.0, 16.0, 269.0, 65.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/16092.xml",
+      "reason": "box outside 1197x250: [763.0, 27.0, 891.0, 261.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/17607.xml",
+      "reason": "box outside 484x123: [374.0, 38.0, 430.0, 129.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/17996.xml",
+      "reason": "box outside 561x103: [59.0, 11.0, 104.0, 109.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/18297.xml",
+      "reason": "box outside 1772x278: [207.0, 30.0, 372.0, 293.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/20193.xml",
+      "reason": "box outside 652x161: [56.0, 35.0, 135.0, 162.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/20424.xml",
+      "reason": "box outside 400x86: [75.0, 17.0, 133.0, 106.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/22498.xml",
+      "reason": "box outside 167x48: [2022.0, 228.0, 2049.0, 282.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/22758.xml",
+      "reason": "box outside 124x55: [101.0, 17.0, 116.0, 62.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/22789.xml",
+      "reason": "box outside 827x336: [160.0, 191.0, 265.0, 345.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/24818.xml",
+      "reason": "box outside 588x179: [530.0, 41.0, 592.0, 135.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/24898.xml",
+      "reason": "box outside 173x35: [19.0, 8.0, 37.0, 38.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/24918.xml",
+      "reason": "box outside 148x34: [30.0, 13.0, 45.0, 35.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/24928.xml",
+      "reason": "box outside 314x52: [185.0, 10.0, 215.0, 54.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/24988.xml",
+      "reason": "box outside 321x75: [91.0, 9.0, 151.0, 77.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/25197.xml",
+      "reason": "box outside 1698x235: [976.0, 13.0, 1124.0, 239.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/25208.xml",
+      "reason": "box outside 1589x271: [478.0, 41.0, 757.0, 274.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/26793.xml",
+      "reason": "box outside 566x138: [269.0, 19.0, 322.0, 147.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/27313.xml",
+      "reason": "box outside 460x134: [292.0, 24.0, 339.0, 137.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/27503.xml",
+      "reason": "box outside 307x73: [156.0, 13.0, 183.0, 75.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/27514.xml",
+      "reason": "box outside 245x65: [195.0, 25.0, 218.0, 66.0]"
+    },
+    {
+      "archive": "test",
+      "xml": "test/27533.xml",
+      "reason": "box outside 232x45: [184.0, 12.0, 207.0, 47.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/00005.xml",
+      "reason": "unsupported class: '\\u0638'"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/00028.xml",
+      "reason": "box outside 611x216: [435.0, 89.0, 495.0, 220.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/03025.xml",
+      "reason": "box outside 271x53: [29.0, 10.0, 57.0, 56.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/03035.xml",
+      "reason": "box outside 649x118: [139.0, 8.0, 196.0, 120.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/04472.xml",
+      "reason": "box outside 437x104: [393.0, 29.0, 438.0, 98.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/04482.xml",
+      "reason": "box outside 1123x258: [481.0, 38.0, 593.0, 268.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/04522.xml",
+      "reason": "box outside 254x124: [227.0, 73.0, 257.0, 113.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/06208.xml",
+      "reason": "box outside 500x180: [439.0, 84.0, 503.0, 168.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/06338.xml",
+      "reason": "box outside 193x42: [92.0, 3.0, 111.0, 44.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/06368.xml",
+      "reason": "box outside 102x22: [90.0, 6.0, 100.0, 23.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/07797.xml",
+      "reason": "box outside 597x237: [527.0, 128.0, 586.0, 248.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/09926.xml",
+      "reason": "box outside 936x231: [759.0, 108.0, 820.0, 236.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/10046.xml",
+      "reason": "box outside 485x118: [50.0, 25.0, 94.0, 119.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/11779.xml",
+      "reason": "box outside 117x33: [366.0, 215.0, 390.0, 255.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/11839.xml",
+      "reason": "box outside 114x33: [101.0, 9.0, 115.0, 32.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/14048.xml",
+      "reason": "box outside 469x106: [368.0, 33.0, 414.0, 111.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/15841.xml",
+      "reason": "box outside 295x112: [270.0, 18.0, 297.0, 60.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/18125.xml",
+      "reason": "box outside 137x38: [122.0, 18.0, 135.0, 39.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/18392.xml",
+      "reason": "box outside 353x90: [315.0, 7.0, 355.0, 75.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/20522.xml",
+      "reason": "box outside 1566x319: [764.0, 28.0, 939.0, 322.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/22447.xml",
+      "reason": "box outside 488x116: [440.0, 38.0, 489.0, 113.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/22820.xml",
+      "reason": "box outside 108x42: [85.0, 7.0, 110.0, 36.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/24996.xml",
+      "reason": "box outside 173x36: [18.0, 6.0, 36.0, 42.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/25006.xml",
+      "reason": "box outside 335x99: [266.0, 49.0, 297.0, 102.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/25186.xml",
+      "reason": "box outside 1752x256: [831.0, 50.0, 996.0, 265.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/27242.xml",
+      "reason": "box outside 242x175: [508.0, 1355.0, 571.0, 1488.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/27532.xml",
+      "reason": "box outside 135x27: [66.0, 4.0, 79.0, 28.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/27632.xml",
+      "reason": "box outside 278x106: [1247.0, 275.0, 1279.0, 346.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/27652.xml",
+      "reason": "box outside 1411x386: [1264.0, 153.0, 1416.0, 367.0]"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/27832.xml",
+      "reason": "box outside 451x232: [68.0, 122.0, 121.0, 233.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/00004.xml",
+      "reason": "unsupported class: '\\u0638'"
+    },
+    {
+      "archive": "train",
+      "xml": "train/00006.xml",
+      "reason": "box outside 398x152: [134.0, 57.0, 200.0, 153.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/00119.xml",
+      "reason": "box outside 133x36: [23.0, 2.0, 40.0, 37.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/00706.xml",
+      "reason": "box outside 519x139: [413.0, 65.0, 457.0, 140.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/01537.xml",
+      "reason": "box outside 242x175: [508.0, 1355.0, 571.0, 1488.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/01573.xml",
+      "reason": "box outside 244x63: [156.0, 7.0, 185.0, 65.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/01627.xml",
+      "reason": "box outside 1136x278: [900.0, 98.0, 981.0, 279.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02780.xml",
+      "reason": "box outside 236x54: [201.0, 19.0, 226.0, 56.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02801.xml",
+      "reason": "box outside 642x193: [193.0, 36.0, 293.0, 203.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02803.xml",
+      "reason": "box outside 576x213: [125.0, 46.0, 200.0, 214.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02853.xml",
+      "reason": "box outside 352x184: [311.0, 106.0, 360.0, 176.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02864.xml",
+      "reason": "box outside 853x598: [798.0, 148.0, 860.0, 236.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02913.xml",
+      "reason": "box outside 293x70: [53.0, 7.0, 89.0, 75.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/02929.xml",
+      "reason": "box outside 496x144: [439.0, 55.0, 486.0, 147.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/03050.xml",
+      "reason": "box outside 758x157: [451.0, 11.0, 521.0, 162.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/03060.xml",
+      "reason": "box outside 663x130: [441.0, 16.0, 515.0, 134.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/03152.xml",
+      "reason": "box outside 126x45: [100.0, 21.0, 114.0, 47.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/04459.xml",
+      "reason": "box outside 474x178: [430.0, 33.0, 479.0, 122.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/04521.xml",
+      "reason": "box outside 216x80: [189.0, 20.0, 217.0, 44.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/04540.xml",
+      "reason": "box outside 194x58: [163.0, 15.0, 196.0, 49.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/04618.xml",
+      "reason": "box outside 358x65: [111.0, 22.0, 167.0, 67.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/04659.xml",
+      "reason": "box outside 160x47: [140.0, 22.0, 157.0, 48.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/04677.xml",
+      "reason": "box outside 174x40: [133.0, 3.0, 151.0, 42.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/05951.xml",
+      "reason": "box outside 552x145: [441.0, 55.0, 487.0, 152.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06151.xml",
+      "reason": "box outside 333x74: [98.0, 6.0, 156.0, 77.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06152.xml",
+      "reason": "box outside 1672x412: [1276.0, 192.0, 1460.0, 424.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06175.xml",
+      "reason": "box outside 476x120: [429.0, 28.0, 480.0, 99.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06181.xml",
+      "reason": "box outside 617x157: [542.0, 55.0, 606.0, 158.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06206.xml",
+      "reason": "box outside 558x177: [504.0, 39.0, 561.0, 123.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06257.xml",
+      "reason": "box outside 264x67: [30.0, 23.0, 60.0, 69.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06355.xml",
+      "reason": "box outside 673x159: [602.0, 54.0, 666.0, 160.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06372.xml",
+      "reason": "box outside 103x24: [92.0, 8.0, 105.0, 24.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06382.xml",
+      "reason": "box outside 421x155: [376.0, 63.0, 412.0, 156.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06404.xml",
+      "reason": "box outside 77x18: [11.0, 5.0, 18.0, 19.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07532.xml",
+      "reason": "box outside 490x139: [445.0, 28.0, 502.0, 122.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07534.xml",
+      "reason": "box outside 545x114: [377.0, 16.0, 430.0, 119.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07756.xml",
+      "reason": "box outside 499x187: [459.0, 39.0, 500.0, 125.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07796.xml",
+      "reason": "box outside 278x69: [153.0, 20.0, 181.0, 70.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07812.xml",
+      "reason": "box outside 569x160: [504.0, 60.0, 571.0, 151.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07875.xml",
+      "reason": "box outside 247x110: [195.0, 50.0, 224.0, 113.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07895.xml",
+      "reason": "box outside 625x144: [72.0, 30.0, 143.0, 151.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07905.xml",
+      "reason": "box outside 164x36: [14.0, 10.0, 32.0, 37.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07975.xml",
+      "reason": "box outside 472x126: [362.0, 40.0, 424.0, 129.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/08155.xml",
+      "reason": "box outside 190x68: [30.0, 17.0, 51.0, 74.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09194.xml",
+      "reason": "box outside 450x114: [60.0, 30.0, 96.0, 115.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09543.xml",
+      "reason": "box outside 629x150: [77.0, 28.0, 154.0, 160.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09544.xml",
+      "reason": "box outside 419x95: [288.0, 9.0, 326.0, 97.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09545.xml",
+      "reason": "box outside 133x33: [11.0, 5.0, 23.0, 34.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09560.xml",
+      "reason": "box outside 633x210: [160.0, 65.0, 224.0, 216.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09604.xml",
+      "reason": "box outside 368x98: [331.0, 40.0, 365.0, 102.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09624.xml",
+      "reason": "box outside 167x48: [2022.0, 228.0, 2049.0, 282.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09693.xml",
+      "reason": "box outside 87x24: [2220.0, 643.0, 2252.0, 670.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09714.xml",
+      "reason": "box outside 99x26: [86.0, 11.0, 97.0, 27.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09743.xml",
+      "reason": "box outside 145x41: [4035.0, 1318.0, 4085.0, 1429.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09781.xml",
+      "reason": "box outside 94x26: [1111.0, 133.0, 1128.0, 160.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09784.xml",
+      "reason": "box outside 1358x276: [1097.0, 83.0, 1191.0, 279.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09790.xml",
+      "reason": "box outside 875x216: [793.0, 61.0, 887.0, 192.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09822.xml",
+      "reason": "box outside 606x155: [208.0, 46.0, 279.0, 157.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09882.xml",
+      "reason": "box outside 215x58: [191.0, 22.0, 212.0, 59.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09883.xml",
+      "reason": "box outside 452x103: [355.0, 30.0, 391.0, 106.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09922.xml",
+      "reason": "box outside 872x147: [99.0, 26.0, 179.0, 148.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09923.xml",
+      "reason": "box outside 1853x363: [936.0, 66.0, 1117.0, 369.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/10003.xml",
+      "reason": "box outside 1598x268: [507.0, 23.0, 754.0, 271.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/10012.xml",
+      "reason": "box outside 2523x508: [2242.0, 217.0, 2461.0, 514.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/10073.xml",
+      "reason": "box outside 557x111: [460.0, 29.0, 497.0, 112.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11602.xml",
+      "reason": "box outside 175x57: [154.0, 15.0, 176.0, 55.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11647.xml",
+      "reason": "box outside 391x78: [265.0, 7.0, 304.0, 79.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11774.xml",
+      "reason": "box outside 265x80: [23.0, 34.0, 58.0, 85.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11796.xml",
+      "reason": "box outside 669x134: [594.0, 37.0, 655.0, 140.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11803.xml",
+      "reason": "box outside 510x115: [348.0, 16.0, 391.0, 117.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11838.xml",
+      "reason": "box outside 443x119: [392.0, 43.0, 433.0, 122.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11846.xml",
+      "reason": "box outside 1222x330: [1011.0, 104.0, 1115.0, 341.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11857.xml",
+      "reason": "box outside 634x175: [560.0, 76.0, 621.0, 179.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11863.xml",
+      "reason": "box outside 1211x433: [1749.0, 1081.0, 1858.0, 1404.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11905.xml",
+      "reason": "box outside 278x106: [1247.0, 275.0, 1279.0, 346.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11942.xml",
+      "reason": "box outside 478x110: [103.0, 10.0, 140.0, 114.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/11954.xml",
+      "reason": "box outside 1328x231: [164.0, 22.0, 242.0, 236.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/12006.xml",
+      "reason": "box outside 2181x469: [1942.0, 161.0, 2135.0, 473.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/12022.xml",
+      "reason": "box outside 1503x231: [716.0, 7.0, 887.0, 233.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/13862.xml",
+      "reason": "box outside 545x127: [500.0, 31.0, 547.0, 113.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/13896.xml",
+      "reason": "box outside 435x178: [53.0, 82.0, 97.0, 179.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/13903.xml",
+      "reason": "box outside 444x117: [399.0, 42.0, 449.0, 108.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/13962.xml",
+      "reason": "box outside 74x24: [34.0, 3.0, 50.0, 25.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/13997.xml",
+      "reason": "box outside 227x134: [208.0, 14.0, 228.0, 59.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/14061.xml",
+      "reason": "box outside 170x36: [152.0, 12.0, 167.0, 37.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/14081.xml",
+      "reason": "box outside 289x73: [2229.0, 237.0, 2271.0, 304.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15350.xml",
+      "reason": "box outside 151x47: [136.0, 11.0, 152.0, 38.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15367.xml",
+      "reason": "box outside 265x74: [209.0, 24.0, 232.0, 75.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15675.xml",
+      "reason": "box outside 834x296: [765.0, 49.0, 839.0, 198.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15746.xml",
+      "reason": "box outside 237x77: [84.0, 20.0, 119.0, 79.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15810.xml",
+      "reason": "box outside 1200x1000: [1089.0, 61.0, 1212.0, 253.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15914.xml",
+      "reason": "box outside 460x116: [249.0, 15.0, 294.0, 118.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15939.xml",
+      "reason": "box outside 338x134: [292.0, 72.0, 328.0, 135.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/15985.xml",
+      "reason": "box outside 679x161: [602.0, 61.0, 665.0, 162.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/16086.xml",
+      "reason": "box outside 546x118: [263.0, 19.0, 320.0, 120.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/16095.xml",
+      "reason": "box outside 1539x259: [706.0, 25.0, 870.0, 270.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/16150.xml",
+      "reason": "box outside 1607x276: [300.0, 26.0, 468.0, 278.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17859.xml",
+      "reason": "box outside 585x193: [515.0, 73.0, 578.0, 202.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17873.xml",
+      "reason": "box outside 461x172: [426.0, 41.0, 463.0, 100.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17909.xml",
+      "reason": "box outside 300x71: [267.0, 16.0, 303.0, 68.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17914.xml",
+      "reason": "box outside 655x202: [577.0, 101.0, 659.0, 188.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17923.xml",
+      "reason": "box outside 471x128: [63.0, 41.0, 115.0, 143.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18019.xml",
+      "reason": "box outside 424x113: [336.0, 32.0, 367.0, 114.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18058.xml",
+      "reason": "box outside 87x24: [2220.0, 643.0, 2252.0, 670.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18063.xml",
+      "reason": "box outside 68x21: [2114.0, 589.0, 2171.0, 645.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18099.xml",
+      "reason": "box outside 247x55: [219.0, 15.0, 238.0, 57.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18112.xml",
+      "reason": "box outside 966x253: [869.0, 74.0, 967.0, 226.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18222.xml",
+      "reason": "box outside 496x95: [286.0, 7.0, 333.0, 97.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18341.xml",
+      "reason": "box outside 951x188: [116.0, 31.0, 186.0, 189.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20189.xml",
+      "reason": "box outside 126x50: [113.0, 5.0, 127.0, 30.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20209.xml",
+      "reason": "box outside 109x26: [32.0, 1.0, 46.0, 27.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20210.xml",
+      "reason": "box outside 224x62: [62.0, 2.0, 95.0, 64.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20329.xml",
+      "reason": "box outside 132x23: [25.0, 3.0, 40.0, 24.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20337.xml",
+      "reason": "box outside 333x121: [302.0, 24.0, 334.0, 72.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20389.xml",
+      "reason": "box outside 526x272: [478.0, 46.0, 531.0, 142.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20398.xml",
+      "reason": "box outside 179x37: [37.0, 3.0, 56.0, 38.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20417.xml",
+      "reason": "box outside 407x90: [363.0, 19.0, 398.0, 96.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22440.xml",
+      "reason": "box outside 158x42: [118.0, 14.0, 131.0, 43.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22450.xml",
+      "reason": "box outside 638x311: [582.0, 49.0, 640.0, 163.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22546.xml",
+      "reason": "box outside 298x76: [156.0, 5.0, 193.0, 79.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22606.xml",
+      "reason": "box outside 126x24: [60.0, 2.0, 73.0, 25.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22622.xml",
+      "reason": "box outside 330x83: [290.0, 21.0, 323.0, 84.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22646.xml",
+      "reason": "box outside 605x130: [121.0, 15.0, 175.0, 132.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22670.xml",
+      "reason": "box outside 1097x269: [131.0, 73.0, 248.0, 271.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22674.xml",
+      "reason": "box outside 120x32: [101.0, 9.0, 113.0, 33.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22676.xml",
+      "reason": "box outside 485x115: [393.0, 37.0, 430.0, 122.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22751.xml",
+      "reason": "box outside 90x29: [464.0, 96.0, 486.0, 112.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22782.xml",
+      "reason": "box outside 110x27: [63.0, 4.0, 73.0, 28.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22791.xml",
+      "reason": "box outside 1681x280: [1137.0, 69.0, 1281.0, 285.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/24774.xml",
+      "reason": "box outside 556x126: [363.0, 21.0, 415.0, 129.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/24799.xml",
+      "reason": "box outside 301x129: [248.0, 53.0, 285.0, 134.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/24824.xml",
+      "reason": "box outside 421x129: [364.0, 43.0, 424.0, 114.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/24922.xml",
+      "reason": "box outside 508x242: [462.0, 37.0, 513.0, 141.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/24925.xml",
+      "reason": "box outside 353x66: [75.0, 11.0, 115.0, 68.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/24930.xml",
+      "reason": "box outside 358x76: [323.0, 26.0, 356.0, 78.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25005.xml",
+      "reason": "box outside 519x106: [360.0, 12.0, 406.0, 109.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25011.xml",
+      "reason": "box outside 636x172: [573.0, 65.0, 637.0, 164.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25034.xml",
+      "reason": "box outside 1236x275: [869.0, 42.0, 986.0, 281.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25049.xml",
+      "reason": "box outside 1211x433: [1749.0, 1081.0, 1858.0, 1404.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25054.xml",
+      "reason": "box outside 289x73: [2229.0, 237.0, 2271.0, 304.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25104.xml",
+      "reason": "box outside 563x122: [447.0, 27.0, 487.0, 124.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25162.xml",
+      "reason": "box outside 1324x200: [632.0, 66.0, 763.0, 214.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25183.xml",
+      "reason": "box outside 198x61: [159.0, 20.0, 181.0, 65.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25185.xml",
+      "reason": "box outside 1856x342: [1500.0, 119.0, 1620.0, 347.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25232.xml",
+      "reason": "box outside 602x131: [70.0, 33.0, 124.0, 136.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25241.xml",
+      "reason": "box outside 222x46: [26.0, 9.0, 44.0, 47.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/25283.xml",
+      "reason": "box outside 404x143: [76.0, 52.0, 122.0, 150.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/26506.xml",
+      "reason": "box outside 421x122: [92.0, 42.0, 139.0, 129.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27261.xml",
+      "reason": "box outside 537x251: [85.0, 137.0, 137.0, 263.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27298.xml",
+      "reason": "box outside 554x192: [495.0, 34.0, 562.0, 124.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27307.xml",
+      "reason": "box outside 427x155: [393.0, 84.0, 430.0, 148.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27426.xml",
+      "reason": "box outside 345x62: [222.0, 18.0, 263.0, 65.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27445.xml",
+      "reason": "box outside 68x21: [2114.0, 589.0, 2171.0, 645.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27487.xml",
+      "reason": "box outside 619x236: [568.0, 36.0, 625.0, 147.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27488.xml",
+      "reason": "box outside 125x37: [69.0, 2.0, 84.0, 38.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27489.xml",
+      "reason": "box outside 145x41: [4035.0, 1318.0, 4085.0, 1429.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27546.xml",
+      "reason": "box outside 1092x225: [233.0, 54.0, 350.0, 234.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27675.xml",
+      "reason": "box outside 519x104: [104.0, 8.0, 144.0, 105.0]"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27798.xml",
+      "reason": "box outside 183x59: [2253.0, 131.0, 2275.0, 175.0]"
+    }
+  ],
+  "duplicates": [
+    {
+      "archive": "test",
+      "xml": "test/00723.xml",
+      "sha256": "c36ce00b8996fe02c27eedf0f81f1dd471548f3a5077fe9250f873af2b1218a2"
+    },
+    {
+      "archive": "test",
+      "xml": "test/01640.xml",
+      "sha256": "7fa0d1c747e8eb83c15e3e183ef988958d22ba8b26ec3fcb78fe5689834ed578"
+    },
+    {
+      "archive": "test",
+      "xml": "test/03157.xml",
+      "sha256": "f3413e9ddd5e62105eedaf7080540aae432490f4c48b0794dc300d5ba05658e6"
+    },
+    {
+      "archive": "test",
+      "xml": "test/04793.xml",
+      "sha256": "f5b06c1587fadf8fce03401e38c34ed018ef4cb1bdddccab1a0af1090058e84b"
+    },
+    {
+      "archive": "test",
+      "xml": "test/06442.xml",
+      "sha256": "ad773019607a1d3193100e354cca54bd764b8eb01fea9db51a20748e850c7ee4"
+    },
+    {
+      "archive": "test",
+      "xml": "test/06448.xml",
+      "sha256": "64c65532eebcfa538a4f22fa8b8f0d7406a0613f9ebcb10b8c9ce2d8d413c088"
+    },
+    {
+      "archive": "test",
+      "xml": "test/06449.xml",
+      "sha256": "c1c70fee7cc0cd13bca314be9e954726d7e8ca5416bd4b4120fb314260225ee5"
+    },
+    {
+      "archive": "test",
+      "xml": "test/10114.xml",
+      "sha256": "4dda57d252e79468c57fc49647437388272f0150613d6d77a1fee800ae37b193"
+    },
+    {
+      "archive": "test",
+      "xml": "test/12083.xml",
+      "sha256": "e74db4f39f0c4006aa904bf7946e0c030ff97f51b6fb2a5109b1403cde0eee65"
+    },
+    {
+      "archive": "test",
+      "xml": "test/14126.xml",
+      "sha256": "1a1ada322bc8b5d5ab783e4f7c69b8fbe9ed0c6b67b51318b9d3ccf51588168d"
+    },
+    {
+      "archive": "test",
+      "xml": "test/16250.xml",
+      "sha256": "3299a030f729699aa1a5cdcbfc0b0b190e0d827d1a2499c726bde5e76ce99f45"
+    },
+    {
+      "archive": "test",
+      "xml": "test/16256.xml",
+      "sha256": "9cb8cba4ff79f34bf73bd1f578e5a17f3106823ad5f6f16e4afebabbed8902f3"
+    },
+    {
+      "archive": "test",
+      "xml": "test/16257.xml",
+      "sha256": "c2027092be6049850951b94120ec95795740795d6b6c213f75082e4de925526e"
+    },
+    {
+      "archive": "test",
+      "xml": "test/18387.xml",
+      "sha256": "cd64b3c1a4ef6a1a9518b927ee96f429c16c7a36fe45fffc0783b9513bfa07e6"
+    },
+    {
+      "archive": "test",
+      "xml": "test/20562.xml",
+      "sha256": "7518b8756869410ec0af23d843aa220e6de9e2963b160b32b988955077e20e11"
+    },
+    {
+      "archive": "test",
+      "xml": "test/25287.xml",
+      "sha256": "f19b00b870d1437167523b3077844ec786bfb6e3ebf7e0d385c900d0ef34571e"
+    },
+    {
+      "archive": "test",
+      "xml": "test/25293.xml",
+      "sha256": "93379859a62323fcf5724f54df173d324b27905b6de23621af58ae86e8eb439a"
+    },
+    {
+      "archive": "test",
+      "xml": "test/25294.xml",
+      "sha256": "3595ee153135ce180add7fb62d8ed816c7e527b8cb714f2e23a745edb93e375a"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/00125.xml",
+      "sha256": "68a0515d48d8b3a81b34a88d1e241589c8f2af598b0640bb5072e321faf43980"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/00722.xml",
+      "sha256": "cae166c7f57714c0cd672ee2049d5c0210c27eefe15f1e10ef7b38f7239d3de8"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/01639.xml",
+      "sha256": "0812a7fd212d2a90a2536bb52b0e91b1e754170da4ec24d4adf3dc47de081f01"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/04112.xml",
+      "sha256": "28b68ee3dbbce99642e737680fcd1c5730e5eb1290350abab0f430ade640e3bd"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/04352.xml",
+      "sha256": "bcbca05681d058e2a7a3917c5776a0c53710d4b32f4558d4d95455e12197a5ac"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/04792.xml",
+      "sha256": "915221f0474a1d2aa720d26e52d3a16fd68f0436772286383c92248aad0115c2"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/06441.xml",
+      "sha256": "af3665dcb7e496705b7192f5ac45a0c794987f570128faf26f96d3bfbb9c88c8"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/06447.xml",
+      "sha256": "ef42e0366b3515244cfb0aa024e5b1f3325493a9440b38d1bc7d611afc696061"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/10113.xml",
+      "sha256": "26fcfcae34e4ee356d3b4399c6525f7c952ba9dd28f16c9dfda21c845403afa6"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/12082.xml",
+      "sha256": "3af0ac694df6f9ef0d17a2f68abd7f384c6aeb08284eda5e0d885cf55717e649"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/14125.xml",
+      "sha256": "6864bd7d44c859535d01b6b7192b858418b9d7a5da574e4acfe0d54c8d3b8598"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/16249.xml",
+      "sha256": "8188a533c3be0abc613f9b9036bfa906140cbe6cb0d90d2e4fd613d17c2ea2ab"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/16255.xml",
+      "sha256": "6a5e18db3da29979c5875c89929238a5ee34059948f83d2f3597dda91f8ef116"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/18386.xml",
+      "sha256": "03820ec4d45ead42541934ab0ea8e32a15db0b4ad2e77947f6e3c63fb99c28b3"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/20072.xml",
+      "sha256": "de1a153a3f5d67244e4b4631242a3e95d4be768ac0e8bd3874a4d76eb5971077"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/20561.xml",
+      "sha256": "f43689e800c39bd2b49d47359a3fe40778199cbc05f49807c38cd5df105490a1"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/20567.xml",
+      "sha256": "40b864e0ac164c13f93ab2bd27d877efada3d3570eb8c74a53010e0bf8e86998"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/22826.xml",
+      "sha256": "4773c3deb0cacc7a6351d422ab4f0bd98bcd0fa6d5c20d5b1e17857dacd11f5b"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/25286.xml",
+      "sha256": "ab61e0f43545d0622515bf0a3083767f9cc65c1356c726b884dc15d7e4d16274"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/25292.xml",
+      "sha256": "458bf9e511077429a4bdb634e9cf2b0c2bcdacf93a5b75840075e62ca8d95a97"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/25462.xml",
+      "sha256": "67ced1ad85f939ab4ffd07748a84da461cb27a5d86c97bd960ee2824b4afd3e8"
+    },
+    {
+      "archive": "val",
+      "xml": "validation/26622.xml",
+      "sha256": "66b55de6d957f68190ccd304c8e84e3e0fb09aaf89f101ccedca161744abc32b"
+    },
+    {
+      "archive": "train",
+      "xml": "train/01207.xml",
+      "sha256": "c6d36aa874ba1124cb2336584c2e994fdb0b457fc24319971400cc77f75df139"
+    },
+    {
+      "archive": "train",
+      "xml": "train/03381.xml",
+      "sha256": "b40c0403d437ad4aef2f61c874f724df7e51d967e75d1be928bd6a517a90b033"
+    },
+    {
+      "archive": "train",
+      "xml": "train/03699.xml",
+      "sha256": "319eac9e7af7a226cd19d1b54ff38a9d9697677b8ee124471042c9ce22b48e12"
+    },
+    {
+      "archive": "train",
+      "xml": "train/06696.xml",
+      "sha256": "57b1bcda22383cc38abbc3d4afee30ef7ac8049b65dd7e68aab3353fead65bd0"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07185.xml",
+      "sha256": "ccb5c2776938e5f2d5471c0349fe09a9cfa6a25922486ce4c212f7ccb624b1b1"
+    },
+    {
+      "archive": "train",
+      "xml": "train/07524.xml",
+      "sha256": "455bf12f1d3b394186cc3029a129ce88032d543a97e7d722cfbf554c1199da46"
+    },
+    {
+      "archive": "train",
+      "xml": "train/08405.xml",
+      "sha256": "1f128e7cc8ed400029c023b3480675da63a2608b10a051e6908425b3a6e477c1"
+    },
+    {
+      "archive": "train",
+      "xml": "train/08472.xml",
+      "sha256": "efeac776f8afa24e99a1126b1eb8dedc0a537214debf011793e24ccc9a6bd394"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09312.xml",
+      "sha256": "9e122cd02ea9547e64309b62557c13ad563625532496c2425cc74bce66626a46"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09462.xml",
+      "sha256": "155960ffeaa056c7ac183a46db3c4fadea052c2caff91c5ee53d73eda2cfbbe0"
+    },
+    {
+      "archive": "train",
+      "xml": "train/09490.xml",
+      "sha256": "35aef7881d275d8d26e23d96c31fa4cf685c72826bf29cf33ee51bfc5f68ddc6"
+    },
+    {
+      "archive": "train",
+      "xml": "train/12241.xml",
+      "sha256": "9996a3fb793decf21d593792a5e90e89386fcb551cf9f19681e831db80affe86"
+    },
+    {
+      "archive": "train",
+      "xml": "train/14786.xml",
+      "sha256": "589085523c27d78d81de46a2eec4101a615e6b18f78b442f2922a9e2638f60fc"
+    },
+    {
+      "archive": "train",
+      "xml": "train/16360.xml",
+      "sha256": "9f0990d0c7de749e90cca6400bf132f47eefb34d0adef49357e7eb7377d356f9"
+    },
+    {
+      "archive": "train",
+      "xml": "train/16540.xml",
+      "sha256": "d250284f10b3909a451844e63d13c948ce4ea76cf6c5416125cc6b8da6d4fbc3"
+    },
+    {
+      "archive": "train",
+      "xml": "train/16710.xml",
+      "sha256": "b2244786616f633ecdfee14e550b32ac80d7238393744d76373611c72726929c"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17234.xml",
+      "sha256": "7aab844794892df9583513eab1577ce5f3b7024e87fee692ac6db4c3918eaf23"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17710.xml",
+      "sha256": "976fe5d81086aec2ca0c2de269bf0c6fe9285ac63d3b5ea3bd0a3c4eb5a54c68"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17729.xml",
+      "sha256": "a1ae684c5f6b2df69b4ea49a491bbeb5adc134bd3b1b0451e40a69ad4e4e1695"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17730.xml",
+      "sha256": "a1ae684c5f6b2df69b4ea49a491bbeb5adc134bd3b1b0451e40a69ad4e4e1695"
+    },
+    {
+      "archive": "train",
+      "xml": "train/17762.xml",
+      "sha256": "7e7ed464495b5cb5b4e6ed50d97bf4d1bea0eeafee3401ab5b0d49a5b9dd08d8"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18546.xml",
+      "sha256": "3dce8abd94515590b9d8ff3bf2a3b4a956de7e88ecb50b2017e2f11aa03e37d7"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18647.xml",
+      "sha256": "6523c6d31c404a2a3bcd0a7e97cb2c082f7e18d25c59772d153403f18be66cab"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18656.xml",
+      "sha256": "c4b33425c3f9ecc0b8b0a663e0246700a9cde28c54d98144cb988000f7824a15"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18685.xml",
+      "sha256": "13aaba4e5c0e44f2df854bec47fdd558d3a8902438ce1cce769a0ac62062e3e1"
+    },
+    {
+      "archive": "train",
+      "xml": "train/18696.xml",
+      "sha256": "efeac776f8afa24e99a1126b1eb8dedc0a537214debf011793e24ccc9a6bd394"
+    },
+    {
+      "archive": "train",
+      "xml": "train/19046.xml",
+      "sha256": "343ca17551cd634f7eb4e8bbe83fc416c672b038d7294fb25d9d1c74e491dd4f"
+    },
+    {
+      "archive": "train",
+      "xml": "train/19606.xml",
+      "sha256": "9f8992fdf330bad2ea86582d607fdcf94984a792a507934d6d592fd80e689d6e"
+    },
+    {
+      "archive": "train",
+      "xml": "train/20700.xml",
+      "sha256": "8c4ae7b3726502ecfa0a7b1bde7e9fa7e28d6aa1bb1ff797f690a6d22433d373"
+    },
+    {
+      "archive": "train",
+      "xml": "train/21583.xml",
+      "sha256": "268e3a4be10176b62f75e1935e7bff4551a02104553bf1fa17e2ff656a75236f"
+    },
+    {
+      "archive": "train",
+      "xml": "train/21621.xml",
+      "sha256": "4b8f010c78da9c42123e6f0c137eb245edbef7391fefe73f7be98ed3bf3fb99d"
+    },
+    {
+      "archive": "train",
+      "xml": "train/22520.xml",
+      "sha256": "dc3d8d4d5188b616271b22d775632bcb0eae9550b801336cf342580679a108a2"
+    },
+    {
+      "archive": "train",
+      "xml": "train/23281.xml",
+      "sha256": "420dcfcf90e806e174b28f2cce339c66fd9e3adbfec2a0c565771e8d43d4d4be"
+    },
+    {
+      "archive": "train",
+      "xml": "train/26339.xml",
+      "sha256": "f099ac8f0a3831c8a646950842f70b778c1f3a06ab97a3a85080af185c396a3f"
+    },
+    {
+      "archive": "train",
+      "xml": "train/26346.xml",
+      "sha256": "10a8cc176c0492c430302ad6a22bf9f71e1eb156270f95f14fcc71fbd8a6b9fd"
+    },
+    {
+      "archive": "train",
+      "xml": "train/26561.xml",
+      "sha256": "cc79374bb417c3c4ad8a4db7cb852d1a13c559479a68bb6eef49009024ecb00f"
+    },
+    {
+      "archive": "train",
+      "xml": "train/27108.xml",
+      "sha256": "f052d2fba86eb81451ed94d688a13ea43e9a642898c7e37ca4f5504c29036071"
+    }
+  ],
+  "splits": {
+    "train": {
+      "images": 45273,
+      "real": 19273,
+      "synthetic": 26000,
+      "original_real_eval": 19190,
+      "boxes_per_class": {
+        "0": 12715,
+        "1": 36976,
+        "2": 34025,
+        "3": 32225,
+        "4": 33027,
+        "5": 31900,
+        "6": 33766,
+        "7": 32378,
+        "8": 33998,
+        "9": 33188,
+        "الف": 1053,
+        "ب": 2481,
+        "ت": 1638,
+        "ث": 1001,
+        "ج": 2475,
+        "د": 2770,
+        "ز": 1001,
+        "س": 2363,
+        "ش": 1001,
+        "ص": 2708,
+        "ط": 2335,
+        "ع": 1417,
+        "ق": 2568,
+        "ل": 2198,
+        "م": 2512,
+        "ن": 1142,
+        "ه‍": 2139,
+        "و": 2421,
+        "پ": 1000,
+        "ژ (معلولین و جانبازان)": 1023,
+        "ی": 2052,
+        "D": 1000,
+        "S": 1000,
+        "ف": 1000,
+        "ک": 1000,
+        "گ": 1000,
+        "تشریفات": 1000
+      }
+    },
+    "val": {
+      "images": 5363,
+      "real": 2763,
+      "synthetic": 2600,
+      "original_real_eval": 2755,
+      "boxes_per_class": {
+        "0": 1324,
+        "1": 4522,
+        "2": 4064,
+        "3": 3655,
+        "4": 3850,
+        "5": 3843,
+        "6": 4085,
+        "7": 3769,
+        "8": 4004,
+        "9": 3960,
+        "الف": 109,
+        "ب": 313,
+        "ت": 192,
+        "ث": 101,
+        "ج": 312,
+        "د": 349,
+        "ز": 100,
+        "س": 296,
+        "ش": 101,
+        "ص": 343,
+        "ط": 294,
+        "ع": 160,
+        "ق": 326,
+        "ل": 273,
+        "م": 315,
+        "ن": 163,
+        "ه‍": 259,
+        "و": 304,
+        "پ": 101,
+        "ژ (معلولین و جانبازان)": 103,
+        "ی": 250,
+        "D": 100,
+        "S": 100,
+        "ف": 100,
+        "ک": 100,
+        "گ": 100,
+        "تشریفات": 100
+      }
+    },
+    "test": {
+      "images": 5542,
+      "real": 5542,
+      "original_real_eval": 5499,
+      "boxes_per_class": {
+        "0": 553,
+        "1": 5118,
+        "2": 4255,
+        "3": 3782,
+        "4": 4069,
+        "5": 3614,
+        "6": 4159,
+        "7": 3831,
+        "8": 4286,
+        "9": 4084,
+        "الف": 16,
+        "ب": 427,
+        "ت": 182,
+        "ث": 4,
+        "ج": 421,
+        "د": 507,
+        "ز": 2,
+        "س": 392,
+        "ش": 2,
+        "ص": 486,
+        "ط": 389,
+        "ع": 119,
+        "ق": 449,
+        "ل": 345,
+        "م": 436,
+        "ن": 327,
+        "ه‍": 328,
+        "و": 407,
+        "پ": 5,
+        "ژ (معلولین و جانبازان)": 7,
+        "ی": 300,
+        "D": 1,
+        "S": 1,
+        "ف": 2,
+        "ک": 1,
+        "گ": 1,
+        "تشریفات": 1
+      }
+    }
+  },
+  "additional_verification": {
+    "cross_split_exact_image_overlap": 0,
+    "duplicate_annotation_conflicts": 0,
+    "synthetic_identification": "source filename prefix dummy_",
+    "real_evaluation_identification": "raw image SHA256 matches the original dataset and only original class IDs occur"
+  }
+}

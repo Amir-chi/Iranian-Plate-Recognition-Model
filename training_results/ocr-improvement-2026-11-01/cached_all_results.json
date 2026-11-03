@@ -1,0 +1,34 @@
+{
+  "test": {
+    "images": 995,
+    "correct": 865,
+    "edits": 223,
+    "gt_characters": 7959,
+    "newly_correct": 16,
+    "regressions": 0
+  },
+  "validation": {
+    "images": 996,
+    "correct": 865,
+    "edits": 240,
+    "gt_characters": 7967,
+    "newly_correct": 14,
+    "regressions": 0
+  },
+  "train": {
+    "images": 7962,
+    "correct": 6850,
+    "edits": 1938,
+    "gt_characters": 63684,
+    "newly_correct": 104,
+    "regressions": 0
+  },
+  "all": {
+    "images": 9953,
+    "correct": 8580,
+    "edits": 2401,
+    "gt_characters": 79610,
+    "newly_correct": 134,
+    "regressions": 0
+  }
+}

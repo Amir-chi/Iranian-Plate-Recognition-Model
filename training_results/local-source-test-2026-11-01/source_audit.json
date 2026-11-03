@@ -1,0 +1,303 @@
+{
+  "source_sha256": "7d3318431d41f44ce1324bbf273816f530580ff7b8463af14d0a09b43ee3c0fa",
+  "same_as_previous_source_test": true,
+  "source_annotations": 5602,
+  "accepted": 5541,
+  "common31_images": 5534,
+  "synthetic_images": 0,
+  "boxes_per_class": {
+    "9": 4084,
+    "5": 3614,
+    "ت": 182,
+    "3": 3782,
+    "8": 4286,
+    "6": 4159,
+    "4": 4069,
+    "ه‍": 328,
+    "7": 3831,
+    "ث": 4,
+    "1": 5117,
+    "2": 4254,
+    "ج": 421,
+    "ژ (معلولین و جانبازان)": 7,
+    "س": 392,
+    "ی": 300,
+    "م": 436,
+    "0": 553,
+    "ن": 327,
+    "و": 407,
+    "الف": 16,
+    "ق": 449,
+    "ل": 345,
+    "ب": 426,
+    "د": 507,
+    "ع": 119,
+    "ط": 389,
+    "پ": 5,
+    "ز": 2,
+    "ش": 2,
+    "ف": 2,
+    "D": 1,
+    "S": 1,
+    "تشریفات": 1,
+    "گ": 1,
+    "ک": 1,
+    "ص": 486
+  },
+  "excluded": [
+    {
+      "xml": "test/00723.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/01310.xml",
+      "reason": "box outside 462x109: [308.0, 27.0, 355.0, 111.0]"
+    },
+    {
+      "xml": "test/01590.xml",
+      "reason": "box outside 566x119: [503.0, 35.0, 558.0, 121.0]"
+    },
+    {
+      "xml": "test/01640.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/02847.xml",
+      "reason": "box outside 369x116: [78.0, 33.0, 110.0, 120.0]"
+    },
+    {
+      "xml": "test/02867.xml",
+      "reason": "box outside 696x207: [634.0, 65.0, 703.0, 187.0]"
+    },
+    {
+      "xml": "test/02987.xml",
+      "reason": "box outside 243x102: [226.0, 22.0, 246.0, 63.0]"
+    },
+    {
+      "xml": "test/03157.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/04543.xml",
+      "reason": "box outside 166x60: [144.0, 14.0, 164.0, 61.0]"
+    },
+    {
+      "xml": "test/04793.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/06210.xml",
+      "reason": "box outside 184x80: [10.0, 29.0, 40.0, 85.0]"
+    },
+    {
+      "xml": "test/06270.xml",
+      "reason": "box outside 139x37: [13.0, 8.0, 28.0, 38.0]"
+    },
+    {
+      "xml": "test/06339.xml",
+      "reason": "box outside 401x94: [44.0, 16.0, 76.0, 95.0]"
+    },
+    {
+      "xml": "test/06442.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/06448.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/06449.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/07968.xml",
+      "reason": "box outside 748x201: [684.0, 61.0, 753.0, 181.0]"
+    },
+    {
+      "xml": "test/08128.xml",
+      "reason": "box outside 805x226: [736.0, 38.0, 838.0, 193.0]"
+    },
+    {
+      "xml": "test/09547.xml",
+      "reason": "box outside 106x26: [93.0, 5.0, 107.0, 24.0]"
+    },
+    {
+      "xml": "test/09607.xml",
+      "reason": "box outside 539x155: [497.0, 63.0, 542.0, 152.0]"
+    },
+    {
+      "xml": "test/10114.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/11601.xml",
+      "reason": "box outside 113x33: [85.0, 1.0, 98.0, 34.0]"
+    },
+    {
+      "xml": "test/11690.xml",
+      "reason": "box outside 464x146: [54.0, 55.0, 111.0, 147.0]"
+    },
+    {
+      "xml": "test/12083.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/13909.xml",
+      "reason": "box outside 448x100: [398.0, 35.0, 441.0, 104.0]"
+    },
+    {
+      "xml": "test/13910.xml",
+      "reason": "box outside 198x108: [162.0, 25.0, 199.0, 83.0]"
+    },
+    {
+      "xml": "test/14049.xml",
+      "reason": "box outside 675x154: [535.0, 30.0, 599.0, 155.0]"
+    },
+    {
+      "xml": "test/14126.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/15813.xml",
+      "reason": "box outside 394x152: [348.0, 63.0, 385.0, 157.0]"
+    },
+    {
+      "xml": "test/15923.xml",
+      "reason": "box outside 615x159: [550.0, 68.0, 606.0, 161.0]"
+    },
+    {
+      "xml": "test/15942.xml",
+      "reason": "box outside 304x61: [246.0, 16.0, 269.0, 65.0]"
+    },
+    {
+      "xml": "test/16092.xml",
+      "reason": "box outside 1197x250: [763.0, 27.0, 891.0, 261.0]"
+    },
+    {
+      "xml": "test/16250.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/16256.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/16257.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/16536.xml",
+      "reason": "Image dimension below Ultralytics 10-pixel minimum"
+    },
+    {
+      "xml": "test/17607.xml",
+      "reason": "box outside 484x123: [374.0, 38.0, 430.0, 129.0]"
+    },
+    {
+      "xml": "test/17996.xml",
+      "reason": "box outside 561x103: [59.0, 11.0, 104.0, 109.0]"
+    },
+    {
+      "xml": "test/18297.xml",
+      "reason": "box outside 1772x278: [207.0, 30.0, 372.0, 293.0]"
+    },
+    {
+      "xml": "test/18387.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/20193.xml",
+      "reason": "box outside 652x161: [56.0, 35.0, 135.0, 162.0]"
+    },
+    {
+      "xml": "test/20424.xml",
+      "reason": "box outside 400x86: [75.0, 17.0, 133.0, 106.0]"
+    },
+    {
+      "xml": "test/20562.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/22498.xml",
+      "reason": "box outside 167x48: [2022.0, 228.0, 2049.0, 282.0]"
+    },
+    {
+      "xml": "test/22758.xml",
+      "reason": "box outside 124x55: [101.0, 17.0, 116.0, 62.0]"
+    },
+    {
+      "xml": "test/22789.xml",
+      "reason": "box outside 827x336: [160.0, 191.0, 265.0, 345.0]"
+    },
+    {
+      "xml": "test/24818.xml",
+      "reason": "box outside 588x179: [530.0, 41.0, 592.0, 135.0]"
+    },
+    {
+      "xml": "test/24898.xml",
+      "reason": "box outside 173x35: [19.0, 8.0, 37.0, 38.0]"
+    },
+    {
+      "xml": "test/24918.xml",
+      "reason": "box outside 148x34: [30.0, 13.0, 45.0, 35.0]"
+    },
+    {
+      "xml": "test/24928.xml",
+      "reason": "box outside 314x52: [185.0, 10.0, 215.0, 54.0]"
+    },
+    {
+      "xml": "test/24988.xml",
+      "reason": "box outside 321x75: [91.0, 9.0, 151.0, 77.0]"
+    },
+    {
+      "xml": "test/25197.xml",
+      "reason": "box outside 1698x235: [976.0, 13.0, 1124.0, 239.0]"
+    },
+    {
+      "xml": "test/25208.xml",
+      "reason": "box outside 1589x271: [478.0, 41.0, 757.0, 274.0]"
+    },
+    {
+      "xml": "test/25287.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/25293.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/25294.xml",
+      "reason": "Duplicate image bytes"
+    },
+    {
+      "xml": "test/26793.xml",
+      "reason": "box outside 566x138: [269.0, 19.0, 322.0, 147.0]"
+    },
+    {
+      "xml": "test/27313.xml",
+      "reason": "box outside 460x134: [292.0, 24.0, 339.0, 137.0]"
+    },
+    {
+      "xml": "test/27503.xml",
+      "reason": "box outside 307x73: [156.0, 13.0, 183.0, 75.0]"
+    },
+    {
+      "xml": "test/27514.xml",
+      "reason": "box outside 245x65: [195.0, 25.0, 218.0, 66.0]"
+    },
+    {
+      "xml": "test/27533.xml",
+      "reason": "box outside 232x45: [184.0, 12.0, 207.0, 47.0]"
+    }
+  ],
+  "settings": {
+    "imgsz": 640,
+    "batch": 8,
+    "workers": 0,
+    "device": 0,
+    "split": "test",
+    "conf": 0.001,
+    "iou": 0.7,
+    "half": false
+  }
+}

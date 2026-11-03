@@ -1,0 +1,39 @@
+{
+  "selected_test": {
+    "correct": 865,
+    "images": 995,
+    "edits": 223,
+    "gt_characters": 7959
+  },
+  "previous_candidate_test": {
+    "images": 995,
+    "correct_plates": 849,
+    "exact_plate_accuracy": 0.8532663316582915,
+    "character_edit_rate": 0.03153662520417138,
+    "edit_distance": 251,
+    "gt_characters": 7959,
+    "empty_predictions": 1
+  },
+  "selection": {
+    "weights_sha256": "5ab6da27dedafc06f6c69d29c297d9f270c24fa5f0130d1d15fff40ebe9d56c8",
+    "selection_split": "validation",
+    "selected": {
+      "imgsz": 640,
+      "conf": 0.25,
+      "duplicate_iou": 0.5,
+      "correct": 865,
+      "images": 996,
+      "edits": 240,
+      "gt_characters": 7967
+    },
+    "validation_reference": {
+      "imgsz": 640,
+      "conf": 0.25,
+      "duplicate_iou": null,
+      "correct": 851,
+      "images": 996,
+      "edits": 280,
+      "gt_characters": 7967
+    }
+  }
+}
