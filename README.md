@@ -29,6 +29,16 @@ All 9,953 HezarAI images were evaluated; its train and validation splits are rep
 
 Read the [changelog](CHANGELOG.md), [model card](MODEL_CARD.md) and [experiment index](training_results/README.md) for evidence and limitations.
 
+### Previous vs new: actual predictions on the same images
+
+Left: original 31-class model and decoder. Right: v0.2.0 37-class model with the validated decoder. Both columns use the **same four HezarAI test crops**. Green means the entire predicted text matches the dataset reference; red means at least one character differs. Boxes show retained character detections, not full-frame plate localization.
+
+![Previous and new model predictions on identical plate crops](training_results/model-comparison-2026-11-04/comparison.png)
+
+These are illustrative examples: the first test image in each category (both correct, new version corrects an error, previous model better, both wrong). They are not a random sample or a replacement for the 995-image benchmark. The new version improves the aggregate score while still failing on some plates.
+
+[Previous-model image](training_results/model-comparison-2026-11-04/previous-predictions.png) · [New-version image](training_results/model-comparison-2026-11-04/new-predictions.png) · [Example selection and provenance](training_results/model-comparison-2026-11-04/README.md)
+
 ## 🏗️ Architecture & Methodology
 
 1. **Plate localization:** the existing `models/plate_detector.pt` locates a plate in a full frame. Its source is [SMSajadi99/Custom-Data-YOLOv8-Iranian-license-plates](https://github.com/SMSajadi99/Custom-Data-YOLOv8-Iranian-license-plates).
@@ -87,9 +97,7 @@ The 37-class training run completed **7 epochs**, selected **epoch 2**, and stop
 
 The original repository's 30-epoch baseline artifacts remain at their original paths. Its reported mAP50 was 88.592%, precision 91.555% and recall 86.389%. These historical detection metrics are not directly comparable to the new full-plate text exact-match percentages.
 
-![Original baseline sample predictions](training_results/val_batch0_pred.jpg)
-
-*Original baseline validation predictions; not a v0.2.0 sample or a live-camera measurement.*
+[Original baseline validation predictions](training_results/val_batch0_pred.jpg) are retained as historical evidence. For the previous/new visual comparison, use the matched examples above.
 
 ![Original baseline training metrics](training_results/metrics.png)
 

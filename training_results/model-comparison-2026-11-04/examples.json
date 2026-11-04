@@ -1,0 +1,54 @@
+{
+  "selection": "First test index in each of four correctness categories, using existing frozen predictions. Illustrative selection, not a random sample or a new benchmark.",
+  "source": "hezarai/persian-license-plate-v1, designated test split",
+  "baseline_cache": "baseline-predictions.jsonl",
+  "candidate_cache": "test-640-detections.json",
+  "confidence": 0.25,
+  "candidate_duplicate_iou": 0.5,
+  "examples": [
+    {
+      "category": "Both correct",
+      "test_index": 0,
+      "source_path": "3066_۹۷ی۷۵۵۵۵.jpg",
+      "image_sha256": "6e319d4ffedd6c628f29a755a7118167fb9999c51c3f17f3cbbf733ed855a7de",
+      "reference": "۹۷ی۷۵۵۵۵",
+      "previous_prediction": "۹۷ی۷۵۵۵۵",
+      "new_prediction": "۹۷ی۷۵۵۵۵",
+      "previous_correct": true,
+      "new_correct": true
+    },
+    {
+      "category": "New version corrects an error",
+      "test_index": 40,
+      "source_path": "318_۱۶ق۷۸۸۷۷.jpg",
+      "image_sha256": "907b847eccad304bf73187a370111f45a2f20e18161e10662c774e21bd4a014d",
+      "reference": "۱۶ق۷۸۸۷۷",
+      "previous_prediction": "۱۶ق۷۸۸۷۷م",
+      "new_prediction": "۱۶ق۷۸۸۷۷",
+      "previous_correct": false,
+      "new_correct": true
+    },
+    {
+      "category": "Previous model performs better",
+      "test_index": 80,
+      "source_path": "3700_۶۴ط۳۸۷۲۸.jpg",
+      "image_sha256": "ff917830e465a3666ef39e4636216ae253142c3ac369b5308f90607f17f18dfc",
+      "reference": "۶۴ط۳۸۷۲۸",
+      "previous_prediction": "۶۴ط۳۸۷۲۸",
+      "new_prediction": "۶۲ط۳۸۷۲۸",
+      "previous_correct": true,
+      "new_correct": false
+    },
+    {
+      "category": "Both still make errors",
+      "test_index": 1,
+      "source_path": "4466_۲۴م۶۹۱۱۳.jpg",
+      "image_sha256": "3bff037d801d4d83cce412af956011df91a23a78d0090e200c556d8ccc0c4d2c",
+      "reference": "۲۴م۶۹۱۱۳",
+      "previous_prediction": "۲۴م۶۹۱۱۲۹",
+      "new_prediction": "۲۴م۶۹۱۱۲۹",
+      "previous_correct": false,
+      "new_correct": false
+    }
+  ]
+}

@@ -12,6 +12,8 @@ This folder preserves the original baseline artifacts and adds separate, dated e
 
 ## Main interpretation
 
+Matched visual examples are available in the [previous/new prediction comparison](model-comparison-2026-11-04/README.md), including an improvement, a regression, a shared success and a shared failure on identical crops.
+
 The v0.2.0 weight plus decoder improves HezarAI test full-plate exact match from **83.12% to 86.93%**, a gain of **3.82 percentage points**. This includes a network change and a separately measured decoding change. The earlier real-only IR-LPR box metric regressed, so neither universal superiority nor performance on every rare class is claimed.
 
 ![HezarAI original-decoder comparison](hezarai-2026-11-01/exact_match.png)
