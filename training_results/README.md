@@ -4,6 +4,8 @@ This folder preserves the original baseline artifacts and adds separate, dated e
 
 For the displayed cropped product output, see [detected plate crops and character recognition](cropped-output-2026-11-04/README.md): five actual full-frame → crop → character-reading examples using the released weights.
 
+Additional evidence: [eight further improvements plus regressions](additional-comparison-2026-11-04/README.md), and [NCNN mobile export validation](mobile-export-2026-11-04/summary.json) with its [Android integration guide](../docs/ANDROID.md).
+
 | Experiment | Task / scope | Key finding | Evidence |
 |---|---|---|---|
 | Original baseline, 30 epochs | Character-box detection, original validation | Reported mAP50 88.592%; historical provenance only | [CSV](results.csv), [curves](metrics.png), [sample](val_batch0_pred.jpg) |

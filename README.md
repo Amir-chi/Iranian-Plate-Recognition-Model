@@ -51,6 +51,14 @@ These are illustrative examples: the first test image in each category (both cor
 
 [Previous-model image](training_results/model-comparison-2026-11-04/previous-predictions.png) · [New-version image](training_results/model-comparison-2026-11-04/new-predictions.png) · [Example selection and provenance](training_results/model-comparison-2026-11-04/README.md)
 
+### More examples where the released version improves
+
+On all 995 matched test crops, the release corrects **49 previous errors** and introduces **11 regressions**, for a net gain of 38 complete correct plates. The following preview shows two additional improvements; the linked gallery includes eight improvements, two regressions and two shared failures. These are selected illustrations from the same test, not a new holdout or a random sample.
+
+![Additional previous/released model comparisons](training_results/additional-comparison-2026-11-04/preview.png)
+
+[Eight additional improvements and remaining failures](training_results/additional-comparison-2026-11-04/README.md)
+
 ## 🏗️ Architecture & Methodology
 
 1. **Plate localization:** the existing `models/plate_detector.pt` locates a plate in a full frame. Its source is [SMSajadi99/Custom-Data-YOLOv8-Iranian-license-plates](https://github.com/SMSajadi99/Custom-Data-YOLOv8-Iranian-license-plates).
@@ -147,6 +155,12 @@ python read_image.py path/to/car.jpg --output runs/image-inference
 The image command and camera demo share `plate_pipeline.read_plates`. Character boxes in `results.json` are relative to the clean crop; add the crop offsets to map them onto the full frame. No detected plate is recorded as an empty plate list. No character count is forced.
 
 The demo uses camera index 0, requires a graphical desktop and exits with `q`. Camera inference and target-site behavior still require validation; existing OpenCV overlays are not a full Persian GUI renderer.
+
+## Android model assets
+
+The same released models are available as [NCNN FP16 assets](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/v0.2.0/v0.2.0-android-ncnn-fp16.zip) for native Android integration. Both model payloads total **28.54 MB**; this is a format conversion, not a new trained model or an APK. The character export matched all 995 PyTorch test strings on the desktop CPU. The full NCNN pipeline also matched the five earlier demonstration readings.
+
+Smaller character inputs reduced validation full-plate accuracy and were not adopted. **Phone latency, memory and battery use remain unmeasured.** See the [Android guide and measured limits](docs/ANDROID.md) and [export evidence](training_results/mobile-export-2026-11-04/summary.json).
 
 ## Training & Verification
 

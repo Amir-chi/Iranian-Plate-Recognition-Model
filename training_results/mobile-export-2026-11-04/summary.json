@@ -1,0 +1,167 @@
+{
+  "selected_shape": [
+    640,
+    640
+  ],
+  "validation": [
+    {
+      "shape": [
+        640,
+        640
+      ],
+      "images": 996,
+      "correct": 865,
+      "extra_characters": 40,
+      "seconds": 10.209170200000699
+    },
+    {
+      "shape": [
+        256,
+        640
+      ],
+      "images": 996,
+      "correct": 840,
+      "extra_characters": 14,
+      "seconds": 7.760137600000235
+    },
+    {
+      "shape": [
+        192,
+        640
+      ],
+      "images": 996,
+      "correct": 796,
+      "extra_characters": 5,
+      "seconds": 6.951427399999375
+    },
+    {
+      "shape": [
+        384,
+        640
+      ],
+      "images": 996,
+      "correct": 858,
+      "extra_characters": 19,
+      "seconds": 6.826557000000321
+    },
+    {
+      "shape": [
+        512,
+        512
+      ],
+      "images": 996,
+      "correct": 856,
+      "extra_characters": 29,
+      "seconds": 8.026452099999915
+    }
+  ],
+  "test": {
+    "square": {
+      "images": 995,
+      "correct": 865,
+      "extra_characters": 28,
+      "seconds": 6.039592399999492
+    },
+    "selected": {
+      "images": 995,
+      "correct": 865,
+      "extra_characters": 28,
+      "seconds": 11.431039399999463
+    },
+    "ncnn_fp16_cpu": {
+      "images": 995,
+      "correct": 865,
+      "extra_characters": 28,
+      "seconds": 63.85988929999985
+    }
+  },
+  "all_test_strings_match": true,
+  "native_pipeline_parity": [
+    {
+      "source": "000001.jpg",
+      "same_texts": true,
+      "plate_box_ious": [
+        0.9997669280823676
+      ]
+    },
+    {
+      "source": "000002.jpg",
+      "same_texts": true,
+      "plate_box_ious": [
+        0.9998844698416216
+      ]
+    },
+    {
+      "source": "000003.jpg",
+      "same_texts": true,
+      "plate_box_ious": [
+        0.9997269740154499
+      ]
+    },
+    {
+      "source": "000004.jpg",
+      "same_texts": true,
+      "plate_box_ious": [
+        0.9996647543708789
+      ]
+    },
+    {
+      "source": "000005.jpg",
+      "same_texts": true,
+      "plate_box_ious": [
+        0.9998052167192634
+      ]
+    }
+  ],
+  "native_frame_times_ms": [
+    646.938,
+    230.372,
+    234.52,
+    228.615,
+    232.595
+  ],
+  "bundle": {
+    "filename": "v0.2.0-android-ncnn-fp16.zip",
+    "bytes": 26280909,
+    "sha256": "7e250105e22b629e01d00b05bec847c2b01d193782e425dea5f648f243473e40",
+    "models": {
+      "characters": {
+        "input": "in0",
+        "output": "out0",
+        "input_shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "raw_output_shape": [
+          41,
+          8400
+        ],
+        "class_count": 37,
+        "source_sha256": "5ab6da27dedafc06f6c69d29c297d9f270c24fa5f0130d1d15fff40ebe9d56c8",
+        "parameters": 3018063,
+        "payload_bytes": 6154281
+      },
+      "plate_detector": {
+        "input": "in0",
+        "output": "out0",
+        "input_shape": [
+          1,
+          3,
+          640,
+          640
+        ],
+        "raw_output_shape": [
+          5,
+          8400
+        ],
+        "class_count": 1,
+        "source_sha256": "a79fdc9a0013b15e9196822623834d9abb572f4e76d19bf9128d4fa48b76c69f",
+        "parameters": 11135987,
+        "payload_bytes": 22390026
+      }
+    }
+  },
+  "scope": "Desktop Windows CPU validation only. Unknown Android phone; no APK or sustained phone speed/memory/power measurements."
+}

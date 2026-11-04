@@ -1,5 +1,8 @@
 # Unreleased — diagnostic output and shared image pipeline
 
+- Add eight additional corrected examples and explicit paired-test accounting (49 corrections, 11 regressions), with a separate limitations gallery.
+- Provide native Android NCNN FP16 assets for the unchanged released models. Desktop character-output parity is 995/995 strings; five full-frame demonstration readings also match. Smaller-input accuracy regressions and unmeasured phone performance are documented in `docs/ANDROID.md`.
+
 - Add character-count/layout status to the existing four-example comparison without changing raw predictions or benchmark scores. Reference-assisted orange boxes explain extra detections; they are not automatic removal decisions.
 - Mark unsupported camera reads as `unverified layout` while preserving OCR text. Matching layout does not verify recognition.
 - Share full-frame plate detection and clean-crop character recognition between the camera demo and `read_image.py`; save intermediate images, character boxes and JSON output.
