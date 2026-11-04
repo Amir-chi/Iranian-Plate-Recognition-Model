@@ -134,8 +134,8 @@ public class NativePipelineTest {
     }
     private static void waitForZoom(ActivityScenario<MainActivity> scenario,boolean increased) throws Exception {
         AtomicBoolean applied=new AtomicBoolean(false);
-        for(int i=0;i<60&&!applied.get();i++){
-            scenario.onActivity(activity->applied.set(increased?activity.cameraZoomRatio()>1.01f:Math.abs(activity.cameraZoomRatio()-1f)<.01f));
+        for(int i=0;i<120&&!applied.get();i++){
+            scenario.onActivity(activity->applied.set(activity.hasAnalyzedFrame()&&(increased?activity.cameraZoomRatio()>1.01f:Math.abs(activity.cameraZoomRatio()-1f)<.01f)));
             Thread.sleep(100);
         }
         assertTrue("CameraX must apply requested zoom",applied.get());

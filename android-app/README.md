@@ -2,7 +2,7 @@
 
 A native Android app that opens the rear camera, locates plates, recognizes characters on clean crops, and displays Persian tokens in physical plate order. It bundles the released NCNN FP16 models and requires only camera permission. The application declares no Internet, microphone, location or shared-storage permission.
 
-[Download the installable preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.1-preview/PlateLens-0.1.1-preview.apk) · [Checksums and build evidence](../training_results/android-gpu-2026-11-04/REPORT.md)
+[Download the installable preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.2-preview/PlateLens-0.1.2-preview.apk) · [Checksums and build evidence](../training_results/android-gpu-2026-11-04/REPORT.md)
 
 ## First use
 
@@ -11,6 +11,12 @@ Install the debug APK produced by the **Android live camera APK** workflow, open
 The lower card shows the actual detected crop and character sequence. A standard layout is not confirmation of correctness. Nonstandard counts/layouts are explicitly marked uncertain; characters are not truncated, invented or silently replaced. Cropped/full-frame camera images are not saved, uploaded or added to a history database. Copying a plate writes only the user-selected text to the system clipboard.
 
 The timing card reports the actual backend, total analysis duration, detector time and cumulative character-reader time. The first GPU model load and inference may include shader setup; compare warmed-up readings on the same static scene. The processing-mode button is disabled during model changes. A backend change releases the camera and invalidates earlier queued results before reopening.
+
+## Camera zoom
+
+Spread/pinch two fingers on the live preview, or use **+ / −**. The middle button displays the observed zoom ratio; tap it to reset to 1×. Limits come from the attached camera, and unsupported/limit controls are disabled. The requested ratio is restored when restarting the camera or switching processing backend during the same activity.
+
+Zoom uses CameraX `CameraControl.setZoomRatio`, affecting the shared preview and analysis camera outputs; no `View` scale transform or separate fake enlarged preview is used. While a zoom request is pending, analysis pauses and previous readings are cleared. Session generations reject older results. The analysis resumes after the latest camera request completes. Digital zoom is camera-dependent and cannot restore missing image detail; optical zoom or a guaranteed accuracy improvement is not claimed.
 
 ## Pipeline and limits
 
