@@ -1,0 +1,7 @@
+.gradle/
+.deps/
+local.properties
+**/build/
+app/src/main/assets/models/
+app/src/main/cpp/generated/
+app/src/androidTest/assets/fixtures/

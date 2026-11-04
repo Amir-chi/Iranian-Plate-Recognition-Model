@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">پلاک‌خوان</string>
+    <string name="title">پلاک‌خوان زنده</string>
+    <string name="offline">پردازش روی گوشی • آفلاین</string>
+    <string name="loading">در حال آماده‌سازی مدل‌ها…</string>
+    <string name="permission_needed">برای دیدن و خواندن پلاک، دسترسی دوربین را فعال کنید.</string>
+    <string name="permission_denied">دسترسی دوربین داده نشد. برای فعال‌کردن، تنظیمات برنامه را باز کنید.</string>
+    <string name="ready">پلاک را نزدیک و واضح در کادر قرار دهید.</string>
+    <string name="start">شروع دوربین</string>
+    <string name="pause">توقف دوربین</string>
+    <string name="paused">دوربین متوقف است؛ آخرین نتیجه نمایش داده می‌شود.</string>
+    <string name="torch">چراغ</string>
+    <string name="torch_on">خاموش‌کردن چراغ</string>
+    <string name="copy">کپی متن خام</string>
+    <string name="copied">متن پلاک کپی شد</string>
+    <string name="no_plate">هنوز پلاکی پیدا نشده</string>
+    <string name="standard">قالب استاندارد • صحت متن را بررسی کنید</string>
+    <string name="uncertain">نامطمئن • تعداد یا چیدمان کاراکترها غیرمعمول است</string>
+    <string name="preview_description">پیش‌نمایش زندهٔ دوربین عقب</string>
+    <string name="crop_description">برش واقعی آخرین پلاک تشخیص‌داده‌شده</string>
+    <string name="timing">پردازش: %1$d میلی‌ثانیه · %2$d پلاک در قاب</string>
+    <string name="camera_error">دوربین در دسترس نیست. دوباره شروع کنید.</string>
+    <string name="model_error">مدل‌ها بارگذاری نشدند. برنامه را ببندید و دوباره باز کنید.</string>
+    <string name="processing_error">این قاب پردازش نشد؛ دوربین را ثابت نگه دارید.</string>
+</resources>

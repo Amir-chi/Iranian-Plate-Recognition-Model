@@ -1,0 +1,59 @@
+name: Android live camera APK
+on:
+  push:
+    branches: [main, codex/live-camera-app]
+    paths: ['android-app/**', '.github/workflows/android-camera.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Prepare verified models, native SDK and test images
+        run: python3 android-app/scripts/prepare_assets.py --fixtures
+      - name: Android build components
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0' 'ndk;27.0.12077973' 'cmake;3.22.1'
+      - name: Build APK and run unit/lint checks
+        run: gradle -p android-app --no-daemon assembleDebug testDebugUnitTest lintDebug
+      - name: Upload installable APK
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PlateLens-debug-apk
+          path: android-app/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: warn
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Native inference and camera lifecycle tests on Android
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_5
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated
+          script: |
+            gradle -p android-app --no-daemon connectedDebugAndroidTest
+            adb exec-out run-as ir.platelens.app cat files/preview.png > android-app/preview.png
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-test-evidence
+          path: |
+            android-app/app/build/reports/
+            android-app/app/build/outputs/androidTest-results/
+            android-app/preview.png
