@@ -48,7 +48,7 @@ jobs:
           arch: x86_64
           profile: pixel_5
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated -camera-front emulated
           script: |
             bash -c 'gradle -p android-app --no-daemon connectedDebugAndroidTest; task_exit=$?; adb exec-out run-as ir.platelens.app cat files/preview.png > android-app/preview.png; adb logcat -d -s PlateLens:E AndroidRuntime:E > android-app/camera-errors.log; exit $task_exit'
       - name: Upload test evidence
