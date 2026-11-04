@@ -1,7 +1,7 @@
 name: Android live camera APK
 on:
   push:
-    branches: [main, codex/live-camera-app, codex/android-gpu-latency]
+    branches: [main, codex/live-camera-app, codex/android-gpu-latency, codex/android-camera-zoom]
     paths: ['android-app/**', '.github/workflows/android-camera.yml']
   workflow_dispatch:
 permissions:

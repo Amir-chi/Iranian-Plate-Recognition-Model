@@ -13,6 +13,16 @@
             android:layout_height="match_parent" android:contentDescription="@string/preview_description" />
         <ir.platelens.app.PlateOverlay android:id="@+id/overlay" android:layout_width="match_parent"
             android:layout_height="match_parent" android:importantForAccessibility="no" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="56dp"
+            android:layout_gravity="bottom|center_horizontal" android:layout_margin="8dp"
+            android:orientation="horizontal" android:layoutDirection="ltr" android:padding="4dp" android:background="@drawable/card">
+            <Button android:id="@+id/zoom_out" style="@style/ActionButton" android:layout_width="52dp"
+                android:layout_height="48dp" android:minHeight="48dp" android:text="−" android:contentDescription="@string/zoom_out" android:enabled="false" />
+            <Button android:id="@+id/zoom_reset" style="@style/ActionButton" android:layout_width="88dp"
+                android:layout_height="48dp" android:minHeight="48dp" android:text="1.0×" android:contentDescription="@string/zoom_reset" android:enabled="false" />
+            <Button android:id="@+id/zoom_in" style="@style/ActionButton" android:layout_width="52dp"
+                android:layout_height="48dp" android:minHeight="48dp" android:text="+" android:contentDescription="@string/zoom_in" android:enabled="false" />
+        </LinearLayout>
     </FrameLayout>
     <Button android:id="@+id/backend" style="@style/ActionButton" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="@string/loading" android:enabled="false" />

@@ -24,4 +24,10 @@
     <string name="camera_error">دوربین در دسترس نیست. دوباره شروع کنید.</string>
     <string name="model_error">مدل‌ها بارگذاری نشدند. برنامه را ببندید و دوباره باز کنید.</string>
     <string name="processing_error">این قاب پردازش نشد؛ دوربین را ثابت نگه دارید.</string>
+    <string name="zoom_in">بیشتر کردن زوم دوربین</string>
+    <string name="zoom_out">کمتر کردن زوم دوربین</string>
+    <string name="zoom_reset">بازگشت زوم به یک برابر</string>
+    <string name="zoom_reset_description">زوم %1$.1f برابر؛ لمس برای بازگشت به یک برابر</string>
+    <string name="zoom_error">زوم تغییر نکرد؛ دوباره امتحان کنید.</string>
+    <string name="zoom_changing">در حال تنظیم زوم دوربین…</string>
 </resources>

@@ -8,6 +8,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import java.util.ArrayList;
 import org.json.JSONObject;
 import androidx.test.core.app.ActivityScenario;
@@ -91,6 +93,22 @@ public class NativePipelineTest {
                 scenario.onActivity(activity->started.set(activity.hasAnalyzedFrame()&&activity.getString(R.string.pause).equals(((android.widget.Button)activity.findViewById(R.id.toggle)).getText().toString())));
                 Thread.sleep(250);
             }
+            AtomicBoolean supportsZoom=new AtomicBoolean(false);
+            scenario.onActivity(activity->supportsZoom.set(activity.maximumCameraZoom()>1.01f));
+            if(supportsZoom.get()){
+                scenario.onActivity(activity->activity.findViewById(R.id.zoom_in).performClick());
+                waitForZoom(scenario,true);
+                scenario.onActivity(activity->activity.findViewById(R.id.zoom_reset).performClick());
+                waitForZoom(scenario,false);
+                scenario.onActivity(activity->pinchOut(activity.findViewById(R.id.preview)));
+                waitForZoom(scenario,true);
+                scenario.onActivity(activity->activity.findViewById(R.id.zoom_reset).performClick());
+                waitForZoom(scenario,false);
+                Log.i("PlateLensBenchmark","cameraZoom=button,pinch,reset applied to CameraX ZoomState");
+            }else{
+                scenario.onActivity(activity->assertFalse(activity.findViewById(R.id.zoom_in).isEnabled()));
+                Log.i("PlateLensBenchmark","cameraZoom=unsupported by emulator; controls disabled");
+            }
             Bitmap screenshot=InstrumentationRegistry.getInstrumentation().getUiAutomation().takeScreenshot();
             if(screenshot!=null){
                 Context app=InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -101,6 +119,8 @@ public class NativePipelineTest {
             scenario.onActivity(activity->{
                 activity.findViewById(R.id.toggle).performClick();
                 assertEquals(activity.getString(R.string.start),((android.widget.Button)activity.findViewById(R.id.toggle)).getText().toString());
+                assertFalse(activity.findViewById(R.id.zoom_in).isEnabled());
+                assertFalse(activity.findViewById(R.id.zoom_out).isEnabled());
             });
             scenario.onActivity(activity->activity.findViewById(R.id.backend).performClick());
             AtomicBoolean switched=new AtomicBoolean(false);
@@ -112,4 +132,30 @@ public class NativePipelineTest {
             scenario.onActivity(activity->activity.findViewById(R.id.toggle).performClick());
         }
     }
+    private static void waitForZoom(ActivityScenario<MainActivity> scenario,boolean increased) throws Exception {
+        AtomicBoolean applied=new AtomicBoolean(false);
+        for(int i=0;i<60&&!applied.get();i++){
+            scenario.onActivity(activity->applied.set(increased?activity.cameraZoomRatio()>1.01f:Math.abs(activity.cameraZoomRatio()-1f)<.01f));
+            Thread.sleep(100);
+        }
+        assertTrue("CameraX must apply requested zoom",applied.get());
+    }
+    private static void pinchOut(View view){
+        long start=SystemClock.uptimeMillis();
+        MotionEvent.PointerProperties[] properties=new MotionEvent.PointerProperties[2];
+        MotionEvent.PointerCoords[] coordinates=new MotionEvent.PointerCoords[2];
+        for(int i=0;i<2;i++){
+            properties[i]=new MotionEvent.PointerProperties();properties[i].id=i;properties[i].toolType=MotionEvent.TOOL_TYPE_FINGER;
+            coordinates[i]=new MotionEvent.PointerCoords();coordinates[i].pressure=1;coordinates[i].size=1;coordinates[i].y=view.getHeight()/2f;
+        }
+        int[] actions={MotionEvent.ACTION_DOWN,MotionEvent.ACTION_POINTER_DOWN|(1<<MotionEvent.ACTION_POINTER_INDEX_SHIFT),MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_POINTER_UP|(1<<MotionEvent.ACTION_POINTER_INDEX_SHIFT),MotionEvent.ACTION_UP};
+        for(int j=0;j<actions.length;j++){
+            float span=80+Math.min(Math.max(j-1,0),4)*60;
+            coordinates[0].x=view.getWidth()/2f-span/2;coordinates[1].x=view.getWidth()/2f+span/2;
+            int count=j==0||j==actions.length-1?1:2;
+            MotionEvent event=MotionEvent.obtain(start,start+j*30,actions[j],count,properties,coordinates,0,0,1,1,0,0,android.view.InputDevice.SOURCE_TOUCHSCREEN,0);
+            view.dispatchTouchEvent(event);event.recycle();
+        }
+    }
+
 }

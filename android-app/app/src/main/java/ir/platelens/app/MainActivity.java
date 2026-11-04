@@ -15,6 +15,10 @@ import android.provider.Settings;
 import android.util.Size;
 import android.util.Log;
 import android.view.View;
+import android.view.ScaleGestureDetector;
+import android.view.MotionEvent;
+import androidx.camera.core.ZoomState;
+import androidx.lifecycle.LiveData;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +53,11 @@ public final class MainActivity extends ComponentActivity {
     private PlateTextView plateText;
     private ImageView cropView;
     private TextView status,quality,timing;
-    private Button toggle,torch,copy,backend;
+    private Button toggle,torch,copy,backend,zoomIn,zoomOut,zoomReset;
+    private float requestedZoom=1f,minZoom=1f,maxZoom=1f;
+    private int zoomRequest=0;
+    private volatile boolean zoomChanging=false;
+    private LiveData<ZoomState> zoomState;
     private Bitmap displayedCrop;
     private final AtomicInteger session=new AtomicInteger();
     private boolean preferGpu=true;
@@ -80,6 +88,18 @@ public final class MainActivity extends ComponentActivity {
         overlay=findViewById(R.id.overlay);plateText=findViewById(R.id.plate_text);cropView=findViewById(R.id.crop);
         status=findViewById(R.id.status);quality=findViewById(R.id.quality);timing=findViewById(R.id.timing);
         backend=findViewById(R.id.backend);toggle=findViewById(R.id.toggle);torch=findViewById(R.id.torch);copy=findViewById(R.id.copy);
+        zoomIn=findViewById(R.id.zoom_in);zoomOut=findViewById(R.id.zoom_out);zoomReset=findViewById(R.id.zoom_reset);
+        zoomIn.setOnClickListener(v->setZoom(requestedZoom*1.25f));
+        zoomOut.setOnClickListener(v->setZoom(requestedZoom/1.25f));
+        zoomReset.setOnClickListener(v->setZoom(1f));
+        ScaleGestureDetector pinch=new ScaleGestureDetector(this,new ScaleGestureDetector.SimpleOnScaleGestureListener(){
+            @Override public boolean onScale(ScaleGestureDetector detector){setZoom(requestedZoom*detector.getScaleFactor());return true;}
+        });
+        preview.setOnTouchListener((view,event)->{
+            pinch.onTouchEvent(event);
+            if(event.getActionMasked()==MotionEvent.ACTION_UP)view.performClick();
+            return true;
+        });
         toggle.setOnClickListener(v->{
             if(!ready)return;
             if(running){stopCamera();return;}
@@ -126,7 +146,7 @@ public final class MainActivity extends ComponentActivity {
         future.addListener(()->{
             if(isDestroyed()||session.get()!=requestedSession)return;
             try {
-                provider=future.get();provider.unbindAll();
+                detachZoom();provider=future.get();provider.unbindAll();
                 Preview stream=new Preview.Builder().setTargetResolution(new Size(1280,960)).build();
                 stream.setSurfaceProvider(preview.getSurfaceProvider());
                 ImageAnalysis analysis=new ImageAnalysis.Builder().setTargetResolution(new Size(1280,960))
@@ -137,12 +157,60 @@ public final class MainActivity extends ComponentActivity {
                 ViewPort viewport=preview.getViewPort();if(viewport!=null)group.setViewPort(viewport);
                 camera=provider.bindToLifecycle(this,CameraSelector.DEFAULT_BACK_CAMERA,group.build());
                 analyzedFrame=false;running=true;toggle.setText(R.string.pause);status.setText(R.string.ready);
+                attachZoom();
                 torch.setEnabled(camera.getCameraInfo().hasFlashUnit());
             } catch(Exception error){Log.e("PlateLens","Camera initialization failed",error);running=false;status.setText(R.string.camera_error);toggle.setText(R.string.start);}
         },ContextCompat.getMainExecutor(this));
     }
+    private void attachZoom(){
+        final Camera attached=camera;zoomState=attached.getCameraInfo().getZoomState();
+        zoomState.observe(this,state->{
+            if(camera!=attached)return;
+            minZoom=state.getMinZoomRatio();maxZoom=state.getMaxZoomRatio();
+            zoomReset.setText(String.format(java.util.Locale.ROOT,"%.1f×",state.getZoomRatio()));
+            zoomReset.setContentDescription(getString(R.string.zoom_reset_description,state.getZoomRatio()));
+            updateZoomControls();
+        });
+        ZoomState state=zoomState.getValue();
+        if(state!=null){minZoom=state.getMinZoomRatio();maxZoom=state.getMaxZoomRatio();}
+        setZoom(requestedZoom);
+    }
+    private void detachZoom(){
+        zoomRequest++;zoomChanging=false;
+        if(zoomState!=null){zoomState.removeObservers(this);zoomState=null;}
+        zoomIn.setEnabled(false);zoomOut.setEnabled(false);zoomReset.setEnabled(false);
+    }
+    private void updateZoomControls(){
+        boolean active=camera!=null&&running&&maxZoom>minZoom;
+        zoomIn.setEnabled(active&&requestedZoom<maxZoom-.001f);
+        zoomOut.setEnabled(active&&requestedZoom>minZoom+.001f);
+        zoomReset.setEnabled(active);
+    }
+    private void setZoom(float ratio){
+        if(camera==null||!running||!Float.isFinite(ratio))return;
+        requestedZoom=Math.max(minZoom,Math.min(maxZoom,ratio));updateZoomControls();
+        session.incrementAndGet();analyzedFrame=false;overlay.clear();zoomChanging=true;
+        latestText="";copy.setEnabled(false);plateText.setTokens(Collections.emptyList(),getString(R.string.no_plate));
+        cropView.setImageDrawable(null);cropView.setVisibility(View.GONE);
+        if(displayedCrop!=null){displayedCrop.recycle();displayedCrop=null;}
+        quality.setText(R.string.no_plate);status.setText(R.string.zoom_changing);
+        final Camera attached=camera;final int request=++zoomRequest;
+        ListenableFuture<Void> change=attached.getCameraControl().setZoomRatio(requestedZoom);
+        change.addListener(()->{
+            if(camera!=attached||request!=zoomRequest)return;
+            try{change.get();}
+            catch(Exception error){
+                ZoomState state=attached.getCameraInfo().getZoomState().getValue();
+                if(state!=null)requestedZoom=state.getZoomRatio();
+                Toast.makeText(this,R.string.zoom_error,Toast.LENGTH_SHORT).show();
+            }
+            zoomChanging=false;updateZoomControls();status.setText(R.string.ready);
+        },ContextCompat.getMainExecutor(this));
+    }
+    float cameraZoomRatio(){ZoomState state=zoomState==null?null:zoomState.getValue();return state==null?1f:state.getZoomRatio();}
+    float maximumCameraZoom(){return maxZoom;}
     private void stopCamera(){
-        session.incrementAndGet();running=false;analyzedFrame=false;if(provider!=null)provider.unbindAll();camera=null;lightOn=false;
+        detachZoom();session.incrementAndGet();running=false;analyzedFrame=false;if(provider!=null)provider.unbindAll();camera=null;lightOn=false;
         torch.setEnabled(false);torch.setText(R.string.torch);toggle.setText(R.string.start);
         overlay.clear();status.setText(R.string.paused);
     }
@@ -150,7 +218,7 @@ public final class MainActivity extends ComponentActivity {
         Bitmap raw=null,cropped=null,rotated=null;
         try {
             long now=SystemClock.elapsedRealtime();
-            if(!running||now-lastAnalysis<100)return;
+            if(!running||zoomChanging||now-lastAnalysis<100)return;
             final int frameSession=session.get();
             lastAnalysis=now;long started=SystemClock.elapsedRealtime();
             raw=image.toBitmap();Rect r=image.getCropRect();
@@ -210,7 +278,7 @@ public final class MainActivity extends ComponentActivity {
         }catch(Exception error){Log.e("PlateLens","Result decoding failed",error);}
     }
     @Override protected void onDestroy(){
-        session.incrementAndGet();running=false;if(provider!=null)provider.unbindAll();
+        detachZoom();session.incrementAndGet();running=false;if(provider!=null)provider.unbindAll();
         if(displayedCrop!=null){cropView.setImageDrawable(null);displayedCrop.recycle();displayedCrop=null;}
         worker.execute(()->{if(engine!=null)engine.close();});worker.shutdown();super.onDestroy();
     }
