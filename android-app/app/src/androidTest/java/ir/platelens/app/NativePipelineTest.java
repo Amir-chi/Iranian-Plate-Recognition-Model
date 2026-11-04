@@ -98,6 +98,14 @@ public class NativePipelineTest {
                 activity.findViewById(R.id.toggle).performClick();
                 assertEquals(activity.getString(R.string.start),((android.widget.Button)activity.findViewById(R.id.toggle)).getText().toString());
             });
+            scenario.onActivity(activity->activity.findViewById(R.id.backend).performClick());
+            AtomicBoolean switched=new AtomicBoolean(false);
+            for(int i=0;i<120&&!switched.get();i++){
+                scenario.onActivity(activity->switched.set(activity.hasAnalyzedFrame()&&((android.widget.Button)activity.findViewById(R.id.backend)).getText().toString().startsWith("CPU")));
+                Thread.sleep(250);
+            }
+            assertTrue("Mode switch must restart with a fresh CPU camera result",switched.get());
+            scenario.onActivity(activity->activity.findViewById(R.id.toggle).performClick());
         }
     }
 }
