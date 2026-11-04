@@ -92,4 +92,5 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 AndroidX libraries: Apache License 2.0, https://www.apache.org/licenses/LICENSE-2.0
 
 Ultralytics model/software notices are retained in models/*/metadata.yaml. Source and model provenance: https://github.com/Amir-chi/Iranian-Plate-Recognition-Model
-App source: android-app directory, branch codex/live-camera-app.
+App source: android-app directory in this repository.
+Vulkan shader compiler: see bundled GLSLANG_LICENSE.txt for the full upstream terms.
