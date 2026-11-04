@@ -53,6 +53,7 @@ public final class MainActivity extends ComponentActivity {
     private NativeEngine engine;
     private final ExecutorService worker=Executors.newSingleThreadExecutor();
     private volatile boolean running=false;
+    private volatile boolean analyzedFrame=false;
     private boolean ready=false,lightOn=false,denied=false;
     private long lastAnalysis=0;
     private String latestText="";
@@ -103,6 +104,7 @@ public final class MainActivity extends ComponentActivity {
         });
     }
     private int dp(int value){return Math.round(value*getResources().getDisplayMetrics().density);}
+    boolean hasAnalyzedFrame(){return analyzedFrame;}
     private void startCamera(){
         if(!ready||isDestroyed())return;
         if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED)return;
@@ -120,13 +122,13 @@ public final class MainActivity extends ComponentActivity {
                 UseCaseGroup.Builder group=new UseCaseGroup.Builder().addUseCase(stream).addUseCase(analysis);
                 ViewPort viewport=preview.getViewPort();if(viewport!=null)group.setViewPort(viewport);
                 camera=provider.bindToLifecycle(this,CameraSelector.DEFAULT_BACK_CAMERA,group.build());
-                running=true;toggle.setText(R.string.pause);status.setText(R.string.ready);
+                analyzedFrame=false;running=true;toggle.setText(R.string.pause);status.setText(R.string.ready);
                 torch.setEnabled(camera.getCameraInfo().hasFlashUnit());
             } catch(Exception error){Log.e("PlateLens","Camera initialization failed",error);running=false;status.setText(R.string.camera_error);toggle.setText(R.string.start);}
         },ContextCompat.getMainExecutor(this));
     }
     private void stopCamera(){
-        running=false;if(provider!=null)provider.unbindAll();camera=null;lightOn=false;
+        running=false;analyzedFrame=false;if(provider!=null)provider.unbindAll();camera=null;lightOn=false;
         torch.setEnabled(false);torch.setText(R.string.torch);toggle.setText(R.string.start);
         overlay.clear();status.setText(R.string.paused);
     }
@@ -142,6 +144,7 @@ public final class MainActivity extends ComponentActivity {
             rotated=Bitmap.createBitmap(cropped,0,0,cropped.getWidth(),cropped.getHeight(),rotation,true);
             if(rotated.getConfig()!=Bitmap.Config.ARGB_8888)rotated=rotated.copy(Bitmap.Config.ARGB_8888,false);
             List<Recognition.Plate> plates=Recognition.parse(engine.detect(rotated));
+            analyzedFrame=true;
             Bitmap thumbnail=null;
             if(!plates.isEmpty()){
                 float[] b=plates.get(0).box;
@@ -165,7 +168,7 @@ public final class MainActivity extends ComponentActivity {
                 }
                 if(!status.getText().toString().equals(getString(R.string.ready)))status.setText(R.string.ready);
             });
-        }catch(Exception error){runOnUiThread(()->{if(running)status.setText(R.string.processing_error);});}
+        }catch(Exception error){Log.e("PlateLens","Frame processing failed",error);runOnUiThread(()->{if(running)status.setText(R.string.processing_error);});}
         finally {
             image.close();
             if(rotated!=null&&rotated!=cropped&&rotated!=raw)rotated.recycle();
