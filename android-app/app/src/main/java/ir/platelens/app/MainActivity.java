@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Size;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -121,7 +122,7 @@ public final class MainActivity extends ComponentActivity {
                 camera=provider.bindToLifecycle(this,CameraSelector.DEFAULT_BACK_CAMERA,group.build());
                 running=true;toggle.setText(R.string.pause);status.setText(R.string.ready);
                 torch.setEnabled(camera.getCameraInfo().hasFlashUnit());
-            } catch(Exception error){running=false;status.setText(R.string.camera_error);toggle.setText(R.string.start);}
+            } catch(Exception error){Log.e("PlateLens","Camera initialization failed",error);running=false;status.setText(R.string.camera_error);toggle.setText(R.string.start);}
         },ContextCompat.getMainExecutor(this));
     }
     private void stopCamera(){

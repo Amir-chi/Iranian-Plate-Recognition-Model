@@ -47,16 +47,19 @@ public class NativePipelineTest {
                 scenario.onActivity(activity->ready.set(activity.findViewById(R.id.toggle).isEnabled()));
                 Thread.sleep(250);
             }
-            assertTrue("Bundled models must load",ready.get());Thread.sleep(2500);
-            scenario.onActivity(activity->{
-                assertEquals(activity.getString(R.string.pause),((android.widget.Button)activity.findViewById(R.id.toggle)).getText().toString());
-            });
+            assertTrue("Bundled models must load",ready.get());
+            AtomicBoolean started=new AtomicBoolean(false);
+            for(int i=0;i<80&&!started.get();i++){
+                scenario.onActivity(activity->started.set(activity.getString(R.string.pause).equals(((android.widget.Button)activity.findViewById(R.id.toggle)).getText().toString())));
+                Thread.sleep(250);
+            }
             Bitmap screenshot=InstrumentationRegistry.getInstrumentation().getUiAutomation().takeScreenshot();
             if(screenshot!=null){
                 Context app=InstrumentationRegistry.getInstrumentation().getTargetContext();
                 try(FileOutputStream stream=new FileOutputStream(new File(app.getFilesDir(),"preview.png"))){screenshot.compress(Bitmap.CompressFormat.PNG,100,stream);}
                 screenshot.recycle();
             }
+            scenario.onActivity(activity->assertTrue("Camera must start; status: "+((android.widget.TextView)activity.findViewById(R.id.status)).getText(),started.get()));
             scenario.onActivity(activity->{
                 activity.findViewById(R.id.toggle).performClick();
                 assertEquals(activity.getString(R.string.start),((android.widget.Button)activity.findViewById(R.id.toggle)).getText().toString());
