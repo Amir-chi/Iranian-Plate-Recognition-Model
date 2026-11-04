@@ -4,6 +4,21 @@
 
 Separate full-resolution panels: [previous model](previous-predictions.png) and [new model + decoder](new-predictions.png).
 
+## Character count and layout diagnostics
+
+The same eight panels now show the retained detection count and the supported text-shape check: **two digits, one letter, five digits**. This check flags uncertainty; it never drops a ninth character or guesses a replacement. Raw readings, model scores and reference-match labels are unchanged.
+
+| Test image | Previous model | New model + decoder | What the check explains |
+|---|---|---|---|
+| #0 | 8 detections; shape matches | 8 detections; shape matches | Both readings match the reference. |
+| #40 | 9 detections; unverified layout | 8 detections; shape matches | Previous model adds a final `م` at the right edge. |
+| #80 | 8 detections; shape matches | 8 detections; shape matches | New model reads the second digit as `۲` instead of `۴`. Count/layout cannot catch this substitution. |
+| #1 | 9 detections; unverified layout | 9 detections; unverified layout | Both add a final `۹` and read the final real digit as `۲` instead of `۳`. Flagging the extra character does not repair the remaining digit error. |
+
+Orange outlines identify the extra edge detections **using the known reference and visual inspection**. They are diagnostic annotations, not evidence that the runtime automatically knows which box to remove. The runtime status uses predicted text only; it does not see the reference. A matching layout does not establish a correct reading, and other plate formats/incomplete crops need separate validation.
+
+[layout_diagnostics.json](layout_diagnostics.json) preserves the exact raw strings, retained boxes, counts, runtime status and reference-assisted explanations for every panel.
+
 ## What is shown
 
 Four identical plate crops from the designated test split of [HezarAI Persian License Plate v1](https://huggingface.co/datasets/hezarai/persian-license-plate-v1), revision `3ca8609f245f0aab2c4f1d93986ecebc6b923081`. Images and reference labels remain attributed to the upstream dataset; no new license is asserted for them.

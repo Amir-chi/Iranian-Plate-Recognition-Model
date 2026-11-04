@@ -1,3 +1,10 @@
+# Unreleased — diagnostic output and shared image pipeline
+
+- Add character-count/layout status to the existing four-example comparison without changing raw predictions or benchmark scores. Reference-assisted orange boxes explain extra detections; they are not automatic removal decisions.
+- Mark unsupported camera reads as `unverified layout` while preserving OCR text. Matching layout does not verify recognition.
+- Share full-frame plate detection and clean-crop character recognition between the camera demo and `read_image.py`; save intermediate images, character boxes and JSON output.
+- Pass 20 unit tests, including clean crop boundaries and layout warnings. Live-camera operation remains unverified. Released model weights are unchanged.
+
 # v0.2.0 — 37-class model and improved plate-text decoding
 
 ## Improvements

@@ -45,6 +45,8 @@ Left: original 31-class model and decoder. Right: v0.2.0 37-class model with the
 
 ![Previous and new model predictions on identical plate crops](training_results/model-comparison-2026-11-04/comparison.png)
 
+Each panel now includes the character count and layout status. **9 detections** flag the extra-character cases; **8 detections can still contain a wrong digit**, as test #80 shows. Orange edge boxes are reference-assisted explanations of extra detections; the runtime check flags uncertainty and does not automatically remove them. [Per-image diagnosis](training_results/model-comparison-2026-11-04/README.md#character-count-and-layout-diagnostics).
+
 These are illustrative examples: the first test image in each category (both correct, new version corrects an error, previous model better, both wrong). They are not a random sample or a replacement for the 995-image benchmark. The new version improves the aggregate score while still failing on some plates.
 
 [Previous-model image](training_results/model-comparison-2026-11-04/previous-predictions.png) · [New-version image](training_results/model-comparison-2026-11-04/new-predictions.png) · [Example selection and provenance](training_results/model-comparison-2026-11-04/README.md)
@@ -56,11 +58,15 @@ These are illustrative examples: the first test image in each category (both cor
 
 The new default, when its separate asset is installed, is `models/chars37-best.pt`. Otherwise the app falls back to `models/best.pt` and prints the selected path. Input size remains **640**, confidence **0.25**, duplicate IoU **0.5**; larger inputs at 800/960 did not improve the validation winner. Display overlays are drawn after extracting clean input pixels.
 
+The camera demo marks unsupported two-digits / one-letter / five-digits text shapes in orange as **unverified layout**. It preserves raw OCR text; a matching shape is not proof of correct recognition. Other plate types and incomplete crops require separate validation. This uncertainty check does not change the raw benchmark scores above.
+
 ## 📂 Repository structure
 
 ```text
 main.py                         Camera demo and model selection
 plate_ocr.py                    Shared character-to-text decoding
+plate_pipeline.py               Shared full-frame detection, clean crop and character recognition
+read_image.py                   Save both inference stages and JSON results for image files
 models/
   plate_detector.pt             Existing full-frame plate locator
   best.pt                       Original 31-class character baseline
@@ -131,6 +137,14 @@ Download `chars37-best.pt` from [v0.2.0](https://github.com/Amir-chi/Iranian-Pla
 ```bash
 python main.py
 ```
+
+For an image or directory, save the actual detected crop, character boxes, text and full-frame localization:
+
+```bash
+python read_image.py path/to/car.jpg --output runs/image-inference
+```
+
+The image command and camera demo share `plate_pipeline.read_plates`. Character boxes in `results.json` are relative to the clean crop; add the crop offsets to map them onto the full frame. No detected plate is recorded as an empty plate list. No character count is forced.
 
 The demo uses camera index 0, requires a graphical desktop and exits with `q`. Camera inference and target-site behavior still require validation; existing OpenCV overlays are not a full Persian GUI renderer.
 

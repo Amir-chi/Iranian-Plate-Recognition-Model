@@ -1,6 +1,6 @@
 import unittest
 
-from plate_ocr import decode_characters, normalize_text
+from plate_ocr import decode_characters, normalize_text, has_standard_plate_shape
 
 
 class DecodeTests(unittest.TestCase):
@@ -22,6 +22,15 @@ class DecodeTests(unittest.TestCase):
     def test_equivalent_persian_forms(self):
         self.assertEqual(normalize_text("1٢ي ك ه\u200d"), "۱۲یکه")
         self.assertEqual(decode_characters([{"box": [0, 0, 10, 20], "confidence": .9, "class": "الف"}]), "ا")
+
+    def test_standard_shape_flags_extra_characters_without_repairing_text(self):
+        text = "۲۴م۶۹۱۱۳"
+        self.assertTrue(has_standard_plate_shape(text))
+        self.assertTrue(has_standard_plate_shape("24م69113"))
+        self.assertFalse(has_standard_plate_shape(text + "۹"))
+        self.assertFalse(has_standard_plate_shape("۲۴۶م۹۱۱۳"))
+        self.assertFalse(has_standard_plate_shape(""))
+        self.assertFalse(has_standard_plate_shape("تشریفات"))
 
 
 if __name__ == "__main__":

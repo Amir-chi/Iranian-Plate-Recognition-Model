@@ -2,7 +2,7 @@ import cv2
 import os
 from pathlib import Path
 from ultralytics import YOLO
-from plate_ocr import recognize_plate
+from plate_pipeline import read_plates
 
 # ==========================================
 # Model settings
@@ -38,41 +38,20 @@ def start_smart_detection():
     while True:
         ret, frame = cap.read()
         if not ret: break
-        clean_frame = frame.copy()
-
-        # ---------------------------------------
-        # Step 1: find plate location (Plate Detection)
-        # ---------------------------------------
-        plate_results = plate_model(frame, verbose=False)
-
-        for p_res in plate_results:
-            for p_box in p_res.boxes:
-                # Skip if confidence is less than 50%
-                if p_box.conf[0] < 0.5: continue
-
-                # Plate coordinates
-                px1, py1, px2, py2 = map(int, p_box.xyxy[0])
-
-                # ---------------------------------------
-                # Step 2: crop plate and recognize characters
-                # ---------------------------------------
-                # Crop with a small safety margin
-                h, w, _ = frame.shape
-                # Copy clean pixels before adding overlays to the displayed frame.
-                crop = clean_frame[max(0, py1 - 5):min(h, py2 + 5), max(0, px1 - 5):min(w, px2 + 5)].copy()
-
-                if crop.size > 0:
-                    # Send cropped plate to character model
-                    final_text = recognize_plate(char_model, crop, CHAR_IMAGE_SIZE,
-                                                 CHAR_CONFIDENCE, CHAR_DUPLICATE_IOU)
-                    cv2.rectangle(frame, (px1, py1), (px2, py2), (255, 0, 0), 3)
-
-                    if final_text:
-
-                        # Draw plate text on the image
-                        cv2.putText(frame, final_text, (px1, py1 - 15),
-                                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                        print(f"Plate detected: {final_text}")
+        plates = read_plates(frame, plate_model, char_model,
+                             char_imgsz=CHAR_IMAGE_SIZE, char_confidence=CHAR_CONFIDENCE,
+                             duplicate_iou=CHAR_DUPLICATE_IOU)
+        for plate in plates:
+            px1, py1, px2, py2 = map(int, plate['plate_box'])
+            cv2.rectangle(frame, (px1, py1), (px2, py2), (255, 0, 0), 3)
+            if plate['text']:
+                color = (0, 255, 0) if plate['standard_shape'] else (0, 165, 255)
+                status = "standard layout" if plate['standard_shape'] else "unverified layout"
+                cv2.putText(frame, plate['text'], (px1, py1 - 15),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
+                cv2.putText(frame, status, (px1, py2 + 22),
+                            cv2.FONT_HERSHEY_SIMPLEX, .55, color, 1)
+                print(f"Plate candidate ({status}): {plate['text']}")
 
         cv2.imshow('2-Stage LPR System', frame)
 
