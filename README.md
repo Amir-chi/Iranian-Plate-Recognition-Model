@@ -9,6 +9,12 @@
 
 A two-stage Persian license plate recognition prototype for a broader **weighbridge (Baskool) automation** project: locate a plate in a camera frame, crop it, detect its characters and decode the text. Benchmark results below measure recognition on already-cropped plates; they do not certify the full camera pipeline for industrial use.
 
+## Android app — live phone camera
+
+[Download the Android preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.0-preview/PlateLens-0.1.0-preview.apk) · [App source and instructions](android-app/README.md) · [Build and test evidence](training_results/android-camera-2026-11-04/REPORT.md)
+
+Install **پلاک‌خوان** on Android 8.0 or later, grant camera access and point the rear camera at a plate. The app locates the plate, reads its clean crop and displays the crop and Persian characters on the phone. Both models run offline using NCNN CPU; no account, cloud server or Internet permission is required. This development-signed preview has passed Android emulator integration tests; performance and camera alignment on the target physical phone still need testing.
+
 ## Sample output — detected plate crop and character reading
 
 **Left:** the clean plate crop produced by `plate_detector.pt` from a full vehicle image. **Right:** retained character boxes and text from the released `chars37-best.pt` model on that exact crop. This is the cropped output of the two-stage pipeline; the character model receives the crop, not the full vehicle frame.

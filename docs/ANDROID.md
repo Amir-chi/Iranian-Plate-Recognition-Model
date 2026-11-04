@@ -1,10 +1,10 @@
-# Android model assets — NCNN FP16
+# Android deployment — app and NCNN FP16 assets
 
 Download [v0.2.0-android-ncnn-fp16.zip](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/v0.2.0/v0.2.0-android-ncnn-fp16.zip) for the same released weights converted to native NCNN graphs with FP16 weight storage. This is an integration asset bundle, **not an APK or an on-phone performance certification**.
 
 [Download checksum](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/v0.2.0/v0.2.0-android-ncnn-fp16.zip.sha256) · [Aggregate validation/export evidence](../training_results/mobile-export-2026-11-04/summary.json)
 
-NCNN supports native Android CPU deployment and Vulkan acceleration where available; see [Ultralytics NCNN integration](https://docs.ultralytics.com/integrations/ncnn/) and [Tencent's Android build instructions](https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-android). A native app can use these models without shipping Python/PyTorch. No Android application was built in this experiment.
+NCNN supports native Android CPU deployment and Vulkan acceleration where available; see [Ultralytics NCNN integration](https://docs.ultralytics.com/integrations/ncnn/) and [Tencent's Android build instructions](https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-android). A native app can use these models without shipping Python/PyTorch. The original export experiment did not build an app. A subsequent [native live-camera app](../android-app/README.md) now bundles these models; see its [Android build/test report](../training_results/android-camera-2026-11-04/REPORT.md).
 
 ## Model payload and accuracy preservation
 

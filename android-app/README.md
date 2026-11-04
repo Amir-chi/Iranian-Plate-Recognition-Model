@@ -2,6 +2,8 @@
 
 A native Android app that opens the rear camera, locates plates, recognizes characters on clean crops, and displays Persian tokens in physical plate order. It bundles the released NCNN FP16 models and requires only camera permission. The application declares no Internet, microphone, location or shared-storage permission.
 
+[Download the installable preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.0-preview/PlateLens-0.1.0-preview.apk) · [Checksums and build evidence](../training_results/android-camera-2026-11-04/REPORT.md)
+
 ## First use
 
 Install the debug APK produced by the **Android live camera APK** workflow, open **پلاک‌خوان**, and tap **شروع دوربین** to grant camera access. After the first grant, the app opens the camera automatically on later launches. Use **توقف دوربین** to unbind and release the camera, **چراغ** to toggle the rear light if available, and **کپی متن خام** to copy the raw reading.

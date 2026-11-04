@@ -14,6 +14,8 @@ Additional evidence: [eight further improvements plus regressions](additional-co
 | HezarAI OCR | 9,953 cropped plate images, all upstream splits | On test, original decoder: baseline 827/995 vs candidate 849/995 correct complete plates | [Report](hezarai-2026-11-01/REPORT.md), [metrics](hezarai-2026-11-01/summary.json), [paired uncertainty](hezarai-2026-11-01/paired_comparison.json), [source hashes](hezarai-2026-11-01/provenance.json) |
 | Decoder calibration | 63 validation configurations, then fixed test evaluation | Candidate 849/995 → 865/995; CER 3.15% → 2.80%; input remains 640 | [Report](ocr-improvement-2026-11-01/REPORT.md), [selection](ocr-improvement-2026-11-01/selection.json), [test result](ocr-improvement-2026-11-01/test_result.json) |
 
+[Android live-camera app build and emulator evidence](android-camera-2026-11-04/REPORT.md) documents the installable offline preview separately from model benchmarks.
+
 ## Main interpretation
 
 Matched visual examples are available in the [previous/new prediction comparison](model-comparison-2026-11-04/README.md), including an improvement, a regression, a shared success and a shared failure on identical crops.
