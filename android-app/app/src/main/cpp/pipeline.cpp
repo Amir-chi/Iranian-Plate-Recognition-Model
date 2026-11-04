@@ -49,11 +49,13 @@ std::vector<Box> infer(ncnn::Net& model,const ncnn::Mat& rgb,int classes,float c
         if(score<confidence) continue;
         float cx=output.row(0)[j],cy=output.row(1)[j],w=output.row(2)[j],h=output.row(3)[j];
         if(!std::isfinite(cx+cy+w+h+score)||w<=0||h<=0) continue;
-        Box b{std::clamp((cx-w/2-left)/scale,0.f,(float)rgb.w),std::clamp((cy-h/2-top)/scale,0.f,(float)rgb.h),
-              std::clamp((cx+w/2-left)/scale,0.f,(float)rgb.w),std::clamp((cy+h/2-top)/scale,0.f,(float)rgb.h),score,cls};
+        Box b{(cx-w/2-left)/scale,(cy-h/2-top)/scale,(cx+w/2-left)/scale,(cy+h/2-top)/scale,score,cls};
         if(b.x2>b.x1&&b.y2>b.y1) boxes.push_back(b);
     }
-    return suppress(boxes,.7f,true);
+    auto kept=suppress(boxes,.7f,true);
+    for(auto& b:kept){b.x1=std::clamp(b.x1,0.f,(float)rgb.w);b.x2=std::clamp(b.x2,0.f,(float)rgb.w);b.y1=std::clamp(b.y1,0.f,(float)rgb.h);b.y2=std::clamp(b.y2,0.f,(float)rgb.h);}
+    kept.erase(std::remove_if(kept.begin(),kept.end(),[](auto& b){return b.x2<=b.x1||b.y2<=b.y1;}),kept.end());
+    return kept;
 }
 void throwJava(JNIEnv* env,const char* message) {env->ThrowNew(env->FindClass("java/lang/IllegalStateException"),message);}
 std::unique_ptr<ncnn::Net> load(AAssetManager* assets,const char* folder) {
