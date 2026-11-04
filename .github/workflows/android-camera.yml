@@ -50,7 +50,7 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated -camera-front emulated
           script: |
-            bash -c 'gradle -p android-app --no-daemon connectedDebugAndroidTest; task_exit=$?; adb exec-out run-as ir.platelens.app cat files/preview.png > android-app/preview.png; adb logcat -d -s PlateLens:E AndroidRuntime:E > android-app/camera-errors.log; exit $task_exit'
+            bash -c 'gradle -p android-app --no-daemon connectedDebugAndroidTest; task_exit=$?; adb install -r android-app/app/build/outputs/apk/debug/app-debug.apk && adb shell pm grant ir.platelens.app android.permission.CAMERA && adb shell am start -W -n ir.platelens.app/.MainActivity && sleep 15 && adb exec-out screencap -p > android-app/preview.png; adb logcat -d -s PlateLens:E AndroidRuntime:E > android-app/camera-errors.log; exit $task_exit'
       - name: Upload test evidence
         if: always()
         uses: actions/upload-artifact@v4
