@@ -9,6 +9,16 @@
 
 A two-stage Persian license plate recognition prototype for a broader **weighbridge (Baskool) automation** project: locate a plate in a camera frame, crop it, detect its characters and decode the text. Benchmark results below measure recognition on already-cropped plates; they do not certify the full camera pipeline for industrial use.
 
+## Sample output — detected plate crop and character reading
+
+**Left:** the clean plate crop produced by `plate_detector.pt` from a full vehicle image. **Right:** retained character boxes and text from the released `chars37-best.pt` model on that exact crop. This is the cropped output of the two-stage pipeline; the character model receives the crop, not the full vehicle frame.
+
+![Detected plate crop and character recognition output](training_results/cropped-output-2026-11-04/sample-output.png)
+
+These are actual inference outputs, enlarged only for display. No fixed character count or guessed characters were used. The image is a demonstration, not a new accuracy measurement; "Standard shape only" checks text layout and does not certify the reading.
+
+[View all five cropped outputs](training_results/cropped-output-2026-11-04/all-cropped-outputs.png) · [Source images, settings and results](training_results/cropped-output-2026-11-04/README.md)
+
 ## 🆕 v0.2.0 — model and OCR decoding improvements
 
 Download [v0.2.0 and its character weights](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/tag/v0.2.0). The updated model has 37 output classes. A validation-selected decoder removes competing overlapping character detections before composing the plate string.
