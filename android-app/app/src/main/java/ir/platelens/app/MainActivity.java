@@ -95,7 +95,7 @@ public final class MainActivity extends ComponentActivity {
         ScaleGestureDetector pinch=new ScaleGestureDetector(this,new ScaleGestureDetector.SimpleOnScaleGestureListener(){
             @Override public boolean onScale(ScaleGestureDetector detector){setZoom(requestedZoom*detector.getScaleFactor());return true;}
         });
-        preview.setOnTouchListener((view,event)->{
+        overlay.setOnTouchListener((view,event)->{
             pinch.onTouchEvent(event);
             if(event.getActionMasked()==MotionEvent.ACTION_UP)view.performClick();
             return true;
@@ -163,17 +163,19 @@ public final class MainActivity extends ComponentActivity {
         },ContextCompat.getMainExecutor(this));
     }
     private void attachZoom(){
+        final float restoreZoom=requestedZoom;
         final Camera attached=camera;zoomState=attached.getCameraInfo().getZoomState();
         zoomState.observe(this,state->{
             if(camera!=attached)return;
             minZoom=state.getMinZoomRatio();maxZoom=state.getMaxZoomRatio();
+            if(!zoomChanging)requestedZoom=state.getZoomRatio();
             zoomReset.setText(String.format(java.util.Locale.ROOT,"%.1f×",state.getZoomRatio()));
             zoomReset.setContentDescription(getString(R.string.zoom_reset_description,state.getZoomRatio()));
             updateZoomControls();
         });
         ZoomState state=zoomState.getValue();
         if(state!=null){minZoom=state.getMinZoomRatio();maxZoom=state.getMaxZoomRatio();}
-        setZoom(requestedZoom);
+        setZoom(restoreZoom);
     }
     private void detachZoom(){
         zoomRequest++;zoomChanging=false;

@@ -100,7 +100,7 @@ public class NativePipelineTest {
                 waitForZoom(scenario,true);
                 scenario.onActivity(activity->activity.findViewById(R.id.zoom_reset).performClick());
                 waitForZoom(scenario,false);
-                scenario.onActivity(activity->pinchOut(activity.findViewById(R.id.preview)));
+                scenario.onActivity(activity->pinchOut(activity.findViewById(R.id.overlay)));
                 waitForZoom(scenario,true);
                 scenario.onActivity(activity->activity.findViewById(R.id.zoom_reset).performClick());
                 waitForZoom(scenario,false);
@@ -148,12 +148,13 @@ public class NativePipelineTest {
             properties[i]=new MotionEvent.PointerProperties();properties[i].id=i;properties[i].toolType=MotionEvent.TOOL_TYPE_FINGER;
             coordinates[i]=new MotionEvent.PointerCoords();coordinates[i].pressure=1;coordinates[i].size=1;coordinates[i].y=view.getHeight()/2f;
         }
-        int[] actions={MotionEvent.ACTION_DOWN,MotionEvent.ACTION_POINTER_DOWN|(1<<MotionEvent.ACTION_POINTER_INDEX_SHIFT),MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_POINTER_UP|(1<<MotionEvent.ACTION_POINTER_INDEX_SHIFT),MotionEvent.ACTION_UP};
+        // Span and duration exceed the device's gesture thresholds; the preview is not a fixed DPI.
+        int[] actions={MotionEvent.ACTION_DOWN,MotionEvent.ACTION_POINTER_DOWN|(1<<MotionEvent.ACTION_POINTER_INDEX_SHIFT),MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_MOVE,MotionEvent.ACTION_POINTER_UP|(1<<MotionEvent.ACTION_POINTER_INDEX_SHIFT),MotionEvent.ACTION_UP};
         for(int j=0;j<actions.length;j++){
-            float span=80+Math.min(Math.max(j-1,0),4)*60;
+            float span=view.getWidth()*(.2f+Math.min(Math.max(j-1,0),8)*.075f);
             coordinates[0].x=view.getWidth()/2f-span/2;coordinates[1].x=view.getWidth()/2f+span/2;
             int count=j==0||j==actions.length-1?1:2;
-            MotionEvent event=MotionEvent.obtain(start,start+j*30,actions[j],count,properties,coordinates,0,0,1,1,0,0,android.view.InputDevice.SOURCE_TOUCHSCREEN,0);
+            MotionEvent event=MotionEvent.obtain(start,start+j*80,actions[j],count,properties,coordinates,0,0,1,1,0,0,android.view.InputDevice.SOURCE_TOUCHSCREEN,0);
             view.dispatchTouchEvent(event);event.recycle();
         }
     }
