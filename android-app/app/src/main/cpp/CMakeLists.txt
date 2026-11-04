@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22.1)
 project(platelens)
 set(CMAKE_CXX_STANDARD 17)
-set(ncnn_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../.deps/sdk/ncnn-20261020-android/${ANDROID_ABI}/lib/cmake/ncnn")
+set(ncnn_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../.deps/sdk/ncnn-20261020-android-vulkan/${ANDROID_ABI}/lib/cmake/ncnn")
 find_package(ncnn REQUIRED)
 add_library(platelens SHARED pipeline.cpp)
 set_source_files_properties(pipeline.cpp PROPERTIES COMPILE_OPTIONS "-fexceptions")

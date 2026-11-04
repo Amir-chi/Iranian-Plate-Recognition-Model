@@ -14,6 +14,8 @@
         <ir.platelens.app.PlateOverlay android:id="@+id/overlay" android:layout_width="match_parent"
             android:layout_height="match_parent" android:importantForAccessibility="no" />
     </FrameLayout>
+    <Button android:id="@+id/backend" style="@style/ActionButton" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="@string/loading" android:enabled="false" />
     <TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content"
         android:text="@string/loading" android:textColor="@color/muted" android:textSize="14sp"
         android:gravity="center" android:padding="10dp" android:accessibilityLiveRegion="polite" />

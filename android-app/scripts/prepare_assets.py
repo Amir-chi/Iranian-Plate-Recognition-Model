@@ -3,7 +3,7 @@ from pathlib import Path, PurePosixPath
 import hashlib, json, urllib.request, zipfile, shutil, unicodedata, sys
 ROOT=Path(__file__).resolve().parents[1]
 DEPS=ROOT/'.deps';DEPS.mkdir(exist_ok=True)
-PACKAGES=[('models.zip','https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/v0.2.0/v0.2.0-android-ncnn-fp16.zip','7e250105e22b629e01d00b05bec847c2b01d193782e425dea5f648f243473e40'),('ncnn.zip','https://github.com/Tencent/ncnn/releases/download/20261020/ncnn-20261020-android.zip','62a9edb493ceb42a5c9cbf2d3a79b3f44bff06c625134ffb64d183dcc42c25fc')]
+PACKAGES=[('models.zip','https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/v0.2.0/v0.2.0-android-ncnn-fp16.zip','7e250105e22b629e01d00b05bec847c2b01d193782e425dea5f648f243473e40'),('ncnn-vulkan.zip','https://github.com/Tencent/ncnn/releases/download/20261020/ncnn-20261020-android-vulkan.zip','6e0c5f9b397faf32b923de2ef6210af9bf375851869dceff06a8005331981086')]
 for name,url,digest in PACKAGES:
     path=DEPS/name
     if not path.exists():urllib.request.urlretrieve(url,path)
@@ -25,7 +25,7 @@ for i in range(37):
     tokens.append(token.translate(str.maketrans('0123456789','۰۱۲۳۴۵۶۷۸۹')))
 generated=ROOT/'app/src/main/cpp/generated';generated.mkdir(exist_ok=True)
 (generated/'model_labels.h').write_text('#pragma once\nstatic const char* CHARACTER_TOKENS[] = {'+','.join(json.dumps(t,ensure_ascii=False) for t in tokens)+'};\n',encoding='utf-8')
-assert (DEPS/'sdk/ncnn-20261020-android/arm64-v8a/lib/cmake/ncnn/ncnnConfig.cmake').exists()
+assert (DEPS/'sdk/ncnn-20261020-android-vulkan/arm64-v8a/lib/cmake/ncnn/ncnnConfig.cmake').exists()
 print('Verified model/SDK hashes and generated 37 class tokens')
 if '--fixtures' in sys.argv:
     data=json.loads((ROOT.parent/'training_results/cropped-output-2026-11-04/results.json').read_text(encoding='utf-8'))

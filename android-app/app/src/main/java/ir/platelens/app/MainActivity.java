@@ -40,6 +40,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.json.JSONObject;
 
 public final class MainActivity extends ComponentActivity {
     private PreviewView preview;
@@ -47,7 +49,10 @@ public final class MainActivity extends ComponentActivity {
     private PlateTextView plateText;
     private ImageView cropView;
     private TextView status,quality,timing;
-    private Button toggle,torch,copy;
+    private Button toggle,torch,copy,backend;
+    private Bitmap displayedCrop;
+    private final AtomicInteger session=new AtomicInteger();
+    private boolean preferGpu=true;
     private ProcessCameraProvider provider;
     private Camera camera;
     private NativeEngine engine;
@@ -74,7 +79,7 @@ public final class MainActivity extends ComponentActivity {
         preview.setImplementationMode(PreviewView.ImplementationMode.COMPATIBLE);
         overlay=findViewById(R.id.overlay);plateText=findViewById(R.id.plate_text);cropView=findViewById(R.id.crop);
         status=findViewById(R.id.status);quality=findViewById(R.id.quality);timing=findViewById(R.id.timing);
-        toggle=findViewById(R.id.toggle);torch=findViewById(R.id.torch);copy=findViewById(R.id.copy);
+        backend=findViewById(R.id.backend);toggle=findViewById(R.id.toggle);torch=findViewById(R.id.torch);copy=findViewById(R.id.copy);
         toggle.setOnClickListener(v->{
             if(!ready)return;
             if(running){stopCamera();return;}
@@ -92,15 +97,23 @@ public final class MainActivity extends ComponentActivity {
             ((ClipboardManager)getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name),latestText));
             Toast.makeText(this,R.string.copied,Toast.LENGTH_SHORT).show();
         });
+        backend.setOnClickListener(v->{stopCamera();preferGpu=!preferGpu;loadEngine();});
+        loadEngine();
+    }
+    private void loadEngine(){
+        ready=false;toggle.setEnabled(false);backend.setEnabled(false);status.setText(R.string.loading);
+        final boolean requested=preferGpu;
         worker.execute(()->{
             try {
-                engine=new NativeEngine(getAssets());
+                if(engine!=null)engine.close();
+                engine=new NativeEngine(getAssets(),requested);final String actual=engine.backend();
                 runOnUiThread(()->{
-                    if(isDestroyed())return;ready=true;toggle.setEnabled(true);
+                    if(isDestroyed())return;ready=true;toggle.setEnabled(true);backend.setEnabled(true);
+                    backend.setText(getString(R.string.backend_switch,actual));
                     status.setText(R.string.permission_needed);
                     if(checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED)preview.post(this::startCamera);
                 });
-            }catch(RuntimeException|LinkageError error){runOnUiThread(()->status.setText(R.string.model_error));}
+            }catch(RuntimeException|LinkageError error){runOnUiThread(()->{if(!isDestroyed()){status.setText(R.string.model_error);backend.setEnabled(true);}});}
         });
     }
     private int dp(int value){return Math.round(value*getResources().getDisplayMetrics().density);}
@@ -108,9 +121,10 @@ public final class MainActivity extends ComponentActivity {
     private void startCamera(){
         if(!ready||isDestroyed())return;
         if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED)return;
+        final int requestedSession=session.incrementAndGet();
         ListenableFuture<ProcessCameraProvider> future=ProcessCameraProvider.getInstance(this);
         future.addListener(()->{
-            if(isDestroyed())return;
+            if(isDestroyed()||session.get()!=requestedSession)return;
             try {
                 provider=future.get();provider.unbindAll();
                 Preview stream=new Preview.Builder().setTargetResolution(new Size(1280,960)).build();
@@ -128,7 +142,7 @@ public final class MainActivity extends ComponentActivity {
         },ContextCompat.getMainExecutor(this));
     }
     private void stopCamera(){
-        running=false;analyzedFrame=false;if(provider!=null)provider.unbindAll();camera=null;lightOn=false;
+        session.incrementAndGet();running=false;analyzedFrame=false;if(provider!=null)provider.unbindAll();camera=null;lightOn=false;
         torch.setEnabled(false);torch.setText(R.string.torch);toggle.setText(R.string.start);
         overlay.clear();status.setText(R.string.paused);
     }
@@ -136,38 +150,18 @@ public final class MainActivity extends ComponentActivity {
         Bitmap raw=null,cropped=null,rotated=null;
         try {
             long now=SystemClock.elapsedRealtime();
-            if(!running||now-lastAnalysis<350)return;
+            if(!running||now-lastAnalysis<100)return;
+            final int frameSession=session.get();
             lastAnalysis=now;long started=SystemClock.elapsedRealtime();
             raw=image.toBitmap();Rect r=image.getCropRect();
             cropped=Bitmap.createBitmap(raw,r.left,r.top,r.width(),r.height());
             Matrix rotation=new Matrix();rotation.postRotate(image.getImageInfo().getRotationDegrees());
             rotated=Bitmap.createBitmap(cropped,0,0,cropped.getWidth(),cropped.getHeight(),rotation,true);
             if(rotated.getConfig()!=Bitmap.Config.ARGB_8888)rotated=rotated.copy(Bitmap.Config.ARGB_8888,false);
-            List<Recognition.Plate> plates=Recognition.parse(engine.detect(rotated));
-            analyzedFrame=true;
-            Bitmap thumbnail=null;
-            if(!plates.isEmpty()){
-                float[] b=plates.get(0).box;
-                int x=Math.max(0,(int)Math.floor(b[0])-5),y=Math.max(0,(int)Math.floor(b[1])-5);
-                int right=Math.min(rotated.getWidth(),(int)Math.ceil(b[2])+5),bottom=Math.min(rotated.getHeight(),(int)Math.ceil(b[3])+5);
-                if(right>x&&bottom>y){Bitmap region=Bitmap.createBitmap(rotated,x,y,right-x,bottom-y);
-                    int width=Math.min(600,region.getWidth());thumbnail=Bitmap.createScaledBitmap(region,width,Math.max(1,Math.round((float)region.getHeight()*width/region.getWidth())),true).copy(Bitmap.Config.ARGB_8888,false);}
-            }
-            final Bitmap crop=thumbnail;final int width=rotated.getWidth(),height=rotated.getHeight();final long elapsed=SystemClock.elapsedRealtime()-started;
-            runOnUiThread(()->{
-                if(isDestroyed()||!running)return;
-                overlay.setPlates(plates,width,height);timing.setText(getString(R.string.timing,elapsed,plates.size()));
-                if(plates.isEmpty()){
-                    latestText="";copy.setEnabled(false);plateText.setTokens(Collections.emptyList(),getString(R.string.no_plate));
-                    cropView.setImageDrawable(null);cropView.setVisibility(View.GONE);quality.setText(R.string.no_plate);quality.setTextColor(getColor(R.color.muted));
-                }else{
-                    Recognition.Plate plate=plates.get(0);latestText=plate.text;copy.setEnabled(!latestText.isEmpty());
-                    plateText.setTokens(plate.tokens,plate.text);boolean standard=PlateFormat.isStandard(plate.text);
-                    quality.setText(standard?R.string.standard:R.string.uncertain);quality.setTextColor(getColor(standard?R.color.accent:R.color.warning));
-                    cropView.setImageBitmap(crop);cropView.setVisibility(crop==null?View.GONE:View.VISIBLE);
-                }
-                if(!status.getText().toString().equals(getString(R.string.ready)))status.setText(R.string.ready);
-            });
+            final Bitmap frame=rotated;
+            String result=engine.detect(frame,partial->publish(partial,frame,started,frameSession));
+            if(running&&session.get()==frameSession)analyzedFrame=true;
+            publish(result,frame,started,frameSession);
         }catch(Exception error){Log.e("PlateLens","Frame processing failed",error);runOnUiThread(()->{if(running)status.setText(R.string.processing_error);});}
         finally {
             image.close();
@@ -176,8 +170,48 @@ public final class MainActivity extends ComponentActivity {
             if(raw!=null)raw.recycle();
         }
     }
+    private void publish(String result,Bitmap frame,long started,int frameSession){
+        if(!running||session.get()!=frameSession)return;
+        try {
+            JSONObject metadata=new JSONObject(result);List<Recognition.Plate> plates=Recognition.parse(result);
+            int completed=metadata.getInt("completed");
+            Bitmap thumbnail=null;
+            if(completed>0&&!plates.isEmpty()){
+                float[] b=plates.get(0).box;
+                int x=Math.max(0,(int)Math.floor(b[0])-5),y=Math.max(0,(int)Math.floor(b[1])-5);
+                int right=Math.min(frame.getWidth(),(int)Math.ceil(b[2])+5),bottom=Math.min(frame.getHeight(),(int)Math.ceil(b[3])+5);
+                if(right>x&&bottom>y){
+                    Bitmap region=Bitmap.createBitmap(frame,x,y,right-x,bottom-y);int width=Math.min(600,region.getWidth());
+                    Bitmap scaled=Bitmap.createScaledBitmap(region,width,Math.max(1,Math.round((float)region.getHeight()*width/region.getWidth())),true);
+                    thumbnail=scaled.copy(Bitmap.Config.ARGB_8888,false);
+                    if(scaled!=region&&scaled!=frame)scaled.recycle();if(region!=frame)region.recycle();
+                }
+            }
+            final Bitmap crop=thumbnail;final int width=frame.getWidth(),height=frame.getHeight();
+            final long elapsed=SystemClock.elapsedRealtime()-started,detector=metadata.getLong("detector_ms"),reader=metadata.getLong("reader_ms");
+            final String actual=metadata.getString("backend");
+            runOnUiThread(()->{
+                if(isDestroyed()||!running||session.get()!=frameSession){if(crop!=null)crop.recycle();return;}
+                overlay.setPlates(plates,width,height);
+                timing.setText(getString(R.string.timing,elapsed,completed,plates.size(),actual,detector,reader));
+                backend.setText(getString(R.string.backend_switch,actual));
+                cropView.setImageBitmap(crop);if(displayedCrop!=null)displayedCrop.recycle();displayedCrop=crop;
+                cropView.setVisibility(crop==null?View.GONE:View.VISIBLE);
+                if(plates.isEmpty()){
+                    latestText="";copy.setEnabled(false);plateText.setTokens(Collections.emptyList(),getString(R.string.no_plate));
+                    quality.setText(R.string.no_plate);quality.setTextColor(getColor(R.color.muted));
+                }else{
+                    Recognition.Plate plate=plates.get(0);latestText=plate.text;copy.setEnabled(!latestText.isEmpty());
+                    plateText.setTokens(plate.tokens,plate.text);boolean standard=PlateFormat.isStandard(plate.text);
+                    quality.setText(standard?R.string.standard:R.string.uncertain);quality.setTextColor(getColor(standard?R.color.accent:R.color.warning));
+                }
+                status.setText(completed<plates.size()?getString(R.string.progress,completed,plates.size()):getString(R.string.ready));
+            });
+        }catch(Exception error){Log.e("PlateLens","Result decoding failed",error);}
+    }
     @Override protected void onDestroy(){
-        running=false;if(provider!=null)provider.unbindAll();
+        session.incrementAndGet();running=false;if(provider!=null)provider.unbindAll();
+        if(displayedCrop!=null){cropView.setImageDrawable(null);displayedCrop.recycle();displayedCrop=null;}
         worker.execute(()->{if(engine!=null)engine.close();});worker.shutdown();super.onDestroy();
     }
 }

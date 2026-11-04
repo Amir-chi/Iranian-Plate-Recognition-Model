@@ -18,7 +18,9 @@
     <string name="uncertain">نامطمئن • تعداد یا چیدمان کاراکترها غیرمعمول است</string>
     <string name="preview_description">پیش‌نمایش زندهٔ دوربین عقب</string>
     <string name="crop_description">برش واقعی آخرین پلاک تشخیص‌داده‌شده</string>
-    <string name="timing">پردازش: %1$d میلی‌ثانیه · %2$d پلاک در قاب</string>
+    <string name="timing">%4$s · کل: %1$d ms · %2$d/%3$d پلاک\nقاب: %5$d ms · کاراکترها: %6$d ms</string>
+    <string name="backend_switch">%1$s • تغییر حالت پردازش</string>
+    <string name="progress">خواندن پلاک‌ها: %1$d از %2$d</string>
     <string name="camera_error">دوربین در دسترس نیست. دوباره شروع کنید.</string>
     <string name="model_error">مدل‌ها بارگذاری نشدند. برنامه را ببندید و دوباره باز کنید.</string>
     <string name="processing_error">این قاب پردازش نشد؛ دوربین را ثابت نگه دارید.</string>
