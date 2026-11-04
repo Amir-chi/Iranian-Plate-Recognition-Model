@@ -1,0 +1,16 @@
+{
+  "source_commit": "a0a4df184d2d426482d6f8b482bf5c0c723c6a2f",
+  "ci_run": 41832651163,
+  "tests": {
+    "name": "ir.platelens.app.NativePipelineTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "20.349",
+    "timestamp": "2026-11-04T12:53:46",
+    "hostname": "localhost"
+  },
+  "camera_zoom": "Button, pinch and reset changed CameraX ZoomState; fresh analyzed frame required after each operation. Zoom controls disabled after stopping camera.",
+  "scope": "Android 15/API35 x86_64 emulator; not physical A52s quality/performance validation."
+}
