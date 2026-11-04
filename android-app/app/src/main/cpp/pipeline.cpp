@@ -21,6 +21,7 @@ struct Engine {
     std::unique_ptr<ncnn::Net> locator, reader;
     AAssetManager* assets=nullptr;
     bool gpu=false;
+    int gpuIndex=0;
 };
 using Clock=std::chrono::steady_clock;
 long milliseconds(Clock::time_point start){return std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now()-start).count();}
@@ -67,10 +68,11 @@ std::vector<Box> infer(ncnn::Net& model,const ncnn::Mat& rgb,int classes,float c
     return kept;
 }
 void throwJava(JNIEnv* env,const char* message) {env->ThrowNew(env->FindClass("java/lang/IllegalStateException"),message);}
-std::unique_ptr<ncnn::Net> load(AAssetManager* assets,const char* folder,bool gpu) {
+std::unique_ptr<ncnn::Net> load(AAssetManager* assets,const char* folder,bool gpu,int deviceIndex) {
     auto net=std::make_unique<ncnn::Net>();
     net->opt.num_threads=std::max(1,std::min(4,ncnn::get_big_cpu_count()));
     net->opt.use_vulkan_compute=gpu;
+    if(gpu)net->set_vulkan_device(deviceIndex);
     net->opt.use_fp16_arithmetic=false;
     std::string prefix=std::string("models/")+folder+"/model.ncnn";
     if(net->load_param(assets,(prefix+".param").c_str())!=0||net->load_model(assets,(prefix+".bin").c_str())!=0)
@@ -80,7 +82,7 @@ std::unique_ptr<ncnn::Net> load(AAssetManager* assets,const char* folder,bool gp
 }
 
 void loadModels(Engine& engine,bool gpu) {
-    auto locator=load(engine.assets,"plate_detector",gpu),reader=load(engine.assets,"characters",gpu);
+    auto locator=load(engine.assets,"plate_detector",gpu,engine.gpuIndex),reader=load(engine.assets,"characters",gpu,engine.gpuIndex);
     engine.locator=std::move(locator);engine.reader=std::move(reader);engine.gpu=gpu;
 }
 std::string encode(const std::vector<Box>& plates,const std::vector<std::vector<Box>>& readings,long detectorMs,long readerMs,bool gpu) {
@@ -101,7 +103,12 @@ extern "C" JNIEXPORT jlong JNICALL Java_ir_platelens_app_NativeEngine_nativeLoad
         static std::once_flag initialized;
         std::call_once(initialized,[]{ncnn::create_gpu_instance();});
         auto engine=std::make_unique<Engine>();engine->assets=AAssetManager_fromJava(env,manager);
-        bool gpu=preferGpu&&ncnn::get_gpu_count()>0;
+        bool gpu=false;
+        if(preferGpu)for(int i=0;i<ncnn::get_gpu_count();i++){
+            // Software Vulkan/virtual devices are not accelerators and can exhaust an emulator host.
+            int type=ncnn::get_gpu_info(i).type();
+            if(type==0||type==1){engine->gpuIndex=i;gpu=true;break;}
+        }
         try {loadModels(*engine,gpu);} catch(const std::exception&){if(!gpu)throw;loadModels(*engine,false);}
         return reinterpret_cast<jlong>(engine.release());
     } catch(const std::exception& ex){throwJava(env,ex.what());return 0;}

@@ -39,3 +39,5 @@ The emulator tests exercise native full-frame inference on the five earlier publ
 ## Distribution
 
 This is a development-signed preview APK for sideload testing, not a Play Store release. A device may require allowing installation from the source used to open the APK. Signing/release management, Play deployment and testing on a real Android phone remain separate steps. Source and build evidence are available in this repository and its Actions artifacts.
+
+Software/virtual Vulkan devices are excluded from accelerator selection. The first software-Vulkan emulator attempt lost the entire emulator after five successful CPU fixture readings, before completing the GPU pass; it is not a passed GPU test. The corrected selection uses integrated/discrete hardware devices and keeps CPU execution for the emulator. Hardware Vulkan predictions and speed still require physical-phone testing.
