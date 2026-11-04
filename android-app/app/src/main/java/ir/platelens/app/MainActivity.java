@@ -162,7 +162,7 @@ public final class MainActivity extends ComponentActivity {
                     quality.setText(standard?R.string.standard:R.string.uncertain);quality.setTextColor(getColor(standard?R.color.accent:R.color.warning));
                     cropView.setImageBitmap(crop);cropView.setVisibility(crop==null?View.GONE:View.VISIBLE);
                 }
-                status.setText(R.string.ready);
+                if(!status.getText().toString().equals(getString(R.string.ready)))status.setText(R.string.ready);
             });
         }catch(Exception error){runOnUiThread(()->{if(running)status.setText(R.string.processing_error);});}
         finally {
