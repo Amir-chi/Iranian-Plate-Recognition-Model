@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +19,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
+      - uses: android-actions/setup-android@v3
       - name: Prepare verified models, native SDK and test images
         run: python3 android-app/scripts/prepare_assets.py --fixtures
       - name: Android build components
