@@ -1,0 +1,377 @@
+{
+  "ci_run": 41824073836,
+  "source_commit": "17eb9be60d0f76b5418a32f139731514ecae582b",
+  "scope": "Android 15 x86_64 emulator; software Vulkan excluded; CPU execution and fallback only. Not A52s timing or physical GPU parity.",
+  "instrumented_tests": {
+    "name": "ir.platelens.app.NativePipelineTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "16.682",
+    "timestamp": "2026-11-04T11:53:42",
+    "hostname": "localhost"
+  },
+  "fixture_executions": [
+    {
+      "requested_gpu": false,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 213,
+        "reader_ms": 81,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              213.71,
+              407.594,
+              386.981,
+              441.327
+            ],
+            "confidence": 0.83435,
+            "text": "۹۹ل۵۴۵۳۳",
+            "tokens": [
+              "۹",
+              "۹",
+              "ل",
+              "۵",
+              "۴",
+              "۵",
+              "۳",
+              "۳"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": false,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 211,
+        "reader_ms": 73,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              370.881,
+              268.428,
+              487.942,
+              308.009
+            ],
+            "confidence": 0.872633,
+            "text": "۸۱ص۹۹۹۲۲",
+            "tokens": [
+              "۸",
+              "۱",
+              "ص",
+              "۹",
+              "۹",
+              "۹",
+              "۲",
+              "۲"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": false,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 188,
+        "reader_ms": 71,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              401.979,
+              350.373,
+              512.271,
+              385.084
+            ],
+            "confidence": 0.860577,
+            "text": "۸۱ص۹۹۹۲۲",
+            "tokens": [
+              "۸",
+              "۱",
+              "ص",
+              "۹",
+              "۹",
+              "۹",
+              "۲",
+              "۲"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": false,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 179,
+        "reader_ms": 65,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              114.562,
+              258.373,
+              240.781,
+              305.89
+            ],
+            "confidence": 0.878426,
+            "text": "۸۱ص۹۹۹۲۲",
+            "tokens": [
+              "۸",
+              "۱",
+              "ص",
+              "۹",
+              "۹",
+              "۹",
+              "۲",
+              "۲"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": false,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 181,
+        "reader_ms": 67,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              224.275,
+              476.855,
+              420.331,
+              515.619
+            ],
+            "confidence": 0.838405,
+            "text": "۳۱ن۸۸۲۱۰",
+            "tokens": [
+              "۳",
+              "۱",
+              "ن",
+              "۸",
+              "۸",
+              "۲",
+              "۱",
+              "۰"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": true,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 209,
+        "reader_ms": 77,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              213.71,
+              407.594,
+              386.981,
+              441.327
+            ],
+            "confidence": 0.83435,
+            "text": "۹۹ل۵۴۵۳۳",
+            "tokens": [
+              "۹",
+              "۹",
+              "ل",
+              "۵",
+              "۴",
+              "۵",
+              "۳",
+              "۳"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": true,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 188,
+        "reader_ms": 70,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              370.881,
+              268.428,
+              487.942,
+              308.009
+            ],
+            "confidence": 0.872633,
+            "text": "۸۱ص۹۹۹۲۲",
+            "tokens": [
+              "۸",
+              "۱",
+              "ص",
+              "۹",
+              "۹",
+              "۹",
+              "۲",
+              "۲"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": true,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 182,
+        "reader_ms": 70,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              401.979,
+              350.373,
+              512.271,
+              385.084
+            ],
+            "confidence": 0.860577,
+            "text": "۸۱ص۹۹۹۲۲",
+            "tokens": [
+              "۸",
+              "۱",
+              "ص",
+              "۹",
+              "۹",
+              "۹",
+              "۲",
+              "۲"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": true,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 175,
+        "reader_ms": 65,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              114.562,
+              258.373,
+              240.781,
+              305.89
+            ],
+            "confidence": 0.878426,
+            "text": "۸۱ص۹۹۹۲۲",
+            "tokens": [
+              "۸",
+              "۱",
+              "ص",
+              "۹",
+              "۹",
+              "۹",
+              "۲",
+              "۲"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "requested_gpu": true,
+      "result": {
+        "backend": "CPU",
+        "detector_ms": 176,
+        "reader_ms": 68,
+        "completed": 1,
+        "plates": [
+          {
+            "box": [
+              224.275,
+              476.855,
+              420.331,
+              515.619
+            ],
+            "confidence": 0.838405,
+            "text": "۳۱ن۸۸۲۱۰",
+            "tokens": [
+              "۳",
+              "۱",
+              "ن",
+              "۸",
+              "۸",
+              "۲",
+              "۱",
+              "۰"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "synthetic_two_plate_result": {
+    "backend": "CPU",
+    "detector_ms": 204,
+    "reader_ms": 148,
+    "completed": 2,
+    "plates": [
+      {
+        "box": [
+          75.7958,
+          401.58,
+          550.39,
+          489.395
+        ],
+        "confidence": 0.783684,
+        "text": "۳۱ن۸۸۲۱۰",
+        "tokens": [
+          "۳",
+          "۱",
+          "ن",
+          "۸",
+          "۸",
+          "۲",
+          "۱",
+          "۰"
+        ]
+      },
+      {
+        "box": [
+          89.6279,
+          89.4263,
+          566.801,
+          190.544
+        ],
+        "confidence": 0.778038,
+        "text": "۹۹ل۵۴۵۳۳",
+        "tokens": [
+          "۹",
+          "۹",
+          "ل",
+          "۵",
+          "۴",
+          "۵",
+          "۳",
+          "۳"
+        ]
+      }
+    ]
+  },
+  "hardware_vulkan_validated": false,
+  "physical_phone_speedup_measured": false
+}

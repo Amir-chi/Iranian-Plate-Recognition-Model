@@ -34,3 +34,5 @@ The v0.2.0 weight plus decoder improves HezarAI test full-plate exact match from
 - Test sets have now been inspected. Future model/threshold selection needs validation and a fresh final camera holdout.
 - Near-duplicate independence, full-camera performance and adequate support for all 37 classes are not established.
 - Large raw datasets and row-level transcripts are retained locally rather than added to this repository.
+
+[Android GPU/progressive-result correction](android-gpu-2026-11-04/REPORT.md) follows the user-reported 2,500 ms CPU-only phone latency; physical-device retesting is pending.
