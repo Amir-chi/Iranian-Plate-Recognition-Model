@@ -63,6 +63,10 @@ public class NativePipelineTest {
                 }
             }
             List<Recognition.Plate> baseline=Recognition.parse(cpu.detect(montage));assertEquals("Synthetic two-plate scene",2,baseline.size());
+            java.util.Set<String> expected=new java.util.HashSet<>(java.util.Arrays.asList("۹۹ل۵۴۵۳۳","۳۱ن۸۸۲۱۰"));
+            java.util.Set<String> observed=new java.util.HashSet<>();
+            for(Recognition.Plate plate:baseline)observed.add(plate.text);
+            assertEquals("Both plates must be read, not merely located",expected,observed);
             try(NativeEngine automatic=new NativeEngine(app.getAssets(),true)){
                 List<String> progress=new ArrayList<>();String result=automatic.detect(montage,progress::add);
                 List<Recognition.Plate> actual=Recognition.parse(result);assertEquals(2,actual.size());

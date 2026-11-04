@@ -48,6 +48,9 @@ std::vector<Box> infer(ncnn::Net& model,const ncnn::Mat& rgb,int classes,float c
     ncnn::Mat resized,input,output;
     ncnn::resize_bilinear(rgb,resized,rw,rh);
     ncnn::copy_make_border(resized,input,top,640-rh-top,left,640-rw-left,ncnn::BORDER_CONSTANT,114.f);
+    // NCNN can return a shallow alias when both resize and padding are no-ops.
+    // Normalizing that alias corrupts the full frame before downstream plate crops.
+    if(input.data==rgb.data)input=input.clone();
     const float norm[]={1.f/255,1.f/255,1.f/255};input.substract_mean_normalize(nullptr,norm);
     auto extractor=model.create_extractor();
     if(extractor.input("in0",input)!=0||extractor.extract("out0",output)!=0) throw std::runtime_error("Inference failed");
