@@ -1,0 +1,25 @@
+{
+  "apk_bytes": 79893722,
+  "sha256": "90ce93f4e8a89cd6410cebbabf32da1e5422033f715f1c699fdaba7934120593",
+  "requested_permissions": [
+    "android.permission.CAMERA",
+    "ir.platelens.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "platform_requested_permissions": [
+    "android.permission.CAMERA"
+  ],
+  "verified_model_assets": {
+    "assets/models/characters/model.ncnn.param": "a8ab4f1d2ee840995bb0d9b255f41d1ca3de9c9ef2eeca57746f957d91fcf42c",
+    "assets/models/characters/model.ncnn.bin": "043de747c73c26117ff037e6942cac04aed216baeef91219b13bd0359202270b",
+    "assets/models/plate_detector/model.ncnn.param": "9df3c72020c9f5247ae443d6b8ee87ded042cf675e6f37d704ca8a854d1b98e4",
+    "assets/models/plate_detector/model.ncnn.bin": "2b6743bed973e0249e36b5054975da9c7be9161f7314b6c794b3e12fbf492cc5"
+  },
+  "abis": [
+    "arm64-v8a",
+    "armeabi-v7a",
+    "x86_64"
+  ],
+  "source_commit": "dfb25dc2f0e195158616461e0d2b941d1ce04901",
+  "note": "android.permission.DUMP on an AndroidX receiver is a protection attribute, not a requested uses-permission.",
+  "signing_certificate_sha256": "d28226e8b52acbe94611fb47bbdd7fd6a8300341b9499b6542fd763c73c88a07"
+}

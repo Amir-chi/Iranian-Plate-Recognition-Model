@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="ir.platelens.app.NativePipelineTest" tests="7" failures="0" errors="0" skipped="0" time="43.775" timestamp="2026-11-05T06:31:37" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554 - 15" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="nativeAndroidReadsTheFiveFullFrameFixtures" classname="ir.platelens.app.NativePipelineTest" time="2.452" />
+  <testcase name="liveCameraActivityStartsAndCanStop" classname="ir.platelens.app.NativePipelineTest" time="28.757" />
+  <testcase name="twoPlatesPublishBeforeTheWholeFrameCompletes" classname="ir.platelens.app.NativePipelineTest" time="2.895" />
+  <testcase name="asyncWriterStoresOwnedCropOnce" classname="ir.platelens.app.PlateLogTest" time="0.007" />
+  <testcase name="thresholdUsesEveryCharacterAndLocator" classname="ir.platelens.app.PlateLogTest" time="0.0" />
+  <testcase name="recordsPersistDeduplicateAndExportMatchingJpegs" classname="ir.platelens.app.PlateLogTest" time="0.055" />
+  <testcase name="englishSettingsPersistAndHistoryShowsNativeReading" classname="ir.platelens.app.PlateLogTest" time="8.254" />
+</testsuite>

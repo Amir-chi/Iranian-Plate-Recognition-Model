@@ -11,9 +11,9 @@ A two-stage Persian license plate recognition prototype for a broader **weighbri
 
 ## Android app — live phone camera
 
-[Download the Android preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.2-preview/PlateLens-0.1.2-preview.apk) · [App source and instructions](android-app/README.md) · [Build and test evidence](training_results/android-zoom-2026-11-04/REPORT.md)
+[Download the Android preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.3-preview/PlateLens-0.1.3-preview.apk) · [App source and instructions](android-app/README.md) · [Build and test evidence](training_results/android-logs-2026-11-05/REPORT.md)
 
-Install **پلاک‌خوان** on Android 8.0 or later, grant camera access and point the rear camera at a plate. The app locates the plate, reads its clean crop and displays the crop and Persian characters on the phone. Both models run offline using NCNN, requesting Vulkan GPU with CPU fallback; no account, cloud server or Internet permission is required. This development-signed preview has passed Android emulator integration tests; performance and camera alignment on the target physical phone still need testing.
+Install **Plate Lens** on Android 8.0 or later, grant camera access and point the rear camera at a plate. The app locates the plate, reads its clean crop and displays the crop and Persian characters on the phone. Both models run offline using NCNN, requesting Vulkan GPU with CPU fallback; no account, cloud server or Internet permission is required. The English interface includes zoom and local image/text history, with automatic saving at an adjustable 80% minimum model confidence. Use **History → Export ZIP** to back up records before uninstalling. Physical-phone performance and accuracy still need device testing.
 
 ## Sample output — detected plate crop and character reading
 

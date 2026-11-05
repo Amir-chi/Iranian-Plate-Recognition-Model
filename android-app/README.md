@@ -1,36 +1,44 @@
-# Plate Lens — offline Android live camera prototype
+# Plate Lens — offline Android camera app
 
-A native Android app that opens the rear camera, locates plates, recognizes characters on clean crops, and displays Persian tokens in physical plate order. It bundles the released NCNN FP16 models and requires only camera permission. The application declares no Internet, microphone, location or shared-storage permission.
+[Download 0.1.3 preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.3-preview/PlateLens-0.1.3-preview.apk) · [Build and test evidence](../training_results/android-logs-2026-11-05/REPORT.md)
 
-[Download the installable preview APK](https://github.com/Amir-chi/Iranian-Plate-Recognition-Model/releases/download/android-v0.1.2-preview/PlateLens-0.1.2-preview.apk) · [Checksums and build evidence](../training_results/android-zoom-2026-11-04/REPORT.md)
+All application controls, messages, accessibility labels and number formatting are English, including on a phone with a Persian system language. The actual recognized Persian plate characters are preserved in physical plate order. Android system dialogs use the system's own settings.
 
-## First use
+## Camera and zoom
 
-Install the debug APK produced by the **Android live camera APK** workflow, open **پلاک‌خوان**, and tap **شروع دوربین** to grant camera access. After the first grant, the app opens the camera automatically on later launches. Use **توقف دوربین** to unbind and release the camera, **چراغ** to toggle the rear light if available, and **کپی متن خام** to copy the raw reading.
+Open **Plate Lens**, press **Start camera**, and grant camera access. Use **Stop camera**, **Light**, **Copy text**, or the processing-mode button as needed. The app requests hardware Vulkan acceleration and falls back to CPU when unavailable or when model load/inference returns an error. The timing card shows the actual backend and per-stage times.
 
-The lower card shows the actual detected crop and character sequence. A standard layout is not confirmation of correctness. Nonstandard counts/layouts are explicitly marked uncertain; characters are not truncated, invented or silently replaced. Cropped/full-frame camera images are not saved, uploaded or added to a history database. Copying a plate writes only the user-selected text to the system clipboard.
+Spread/pinch two fingers on the live preview, or use **+ / −**. Tap the displayed ratio to reset to **1×**. CameraX zoom applies to both preview and image analysis; camera limits are read from ZoomState. Pending zoom clears old readings and pauses analysis until the latest camera request completes. Digital zoom does not recover missing detail or guarantee better OCR.
 
-The timing card reports the actual backend, total analysis duration, detector time and cumulative character-reader time. The first GPU model load and inference may include shader setup; compare warmed-up readings on the same static scene. The processing-mode button is disabled during model changes. A backend change releases the camera and invalidates earlier queued results before reopening.
+## Automatic local records
 
-## Camera zoom
+**Auto-save is on by default at a minimum confidence of 80%.** Tap **Auto-save: 80%** to change the threshold (1–100%) or turn saving off. The setting persists between launches.
 
-Spread/pinch two fingers on the live preview, or use **+ / −**. The middle button displays the observed zoom ratio; tap it to reset to 1×. Limits come from the attached camera, and unsupported/limit controls are disabled. The requested ratio is restored when restarting the camera or switching processing backend during the same activity.
+The save score is the **minimum of the plate locator score and every retained character score**. Empty/incomplete readings without character confidences are not saved. These are model scores, not calibrated probabilities or confirmation that the plate is correct. Extra characters are not truncated, and a standard layout does not prove a correct reading.
 
-Zoom uses CameraX `CameraControl.setZoomRatio`, affecting the shared preview and analysis camera outputs; no `View` scale transform or separate fake enlarged preview is used. While a zoom request is pending, analysis pauses and previous readings are cleared. Session generations reject older results. The analysis resumes after the latest camera request completes. Digital zoom is camera-dependent and cannot restore missing image detail; optical zoom or a guaranteed accuracy improvement is not claimed.
+Each eligible detected plate is stored separately with its clean JPEG crop, exact raw text/tokens, timestamp, locator/character scores, selected threshold and layout status. Partial multi-plate results can be saved before all plates finish. The same text is saved at most once per 30 seconds, including after restarting the app. This is text-based duplicate suppression, not vehicle tracking.
 
-## Pipeline and limits
+JPEG encoding and SQLite writes run on a separate worker. Its bounded queue holds eight pending crops; saturation or storage failures produce a visible error. Crops are limited to 640 pixels on the longer side. Image and metadata are inserted as one SQLite row so a failed write cannot leave an unmatched image file. No automatic retention deletion is performed.
 
-- CameraX preview plus RGBA analysis, shared ViewPort, rear camera, portrait UI. Analysis crop and rotation are applied before native inference; the overlay uses the same fit-center presentation.
-- Keep-only-latest backpressure and a 100 ms minimum interval between analysis starts. Model work runs on a single worker thread, not the UI thread. Actual FPS, thermal behavior and overlay alignment must be measured on the target phone.
-- Native NCNN Vulkan inference when a compatible GPU is available; CPU fallback on model-load/inference errors. The processing-mode button switches between requesting GPU and forcing CPU. CPU inference uses at most four reported big-core threads. FP16 arithmetic stays disabled; weights are unchanged. No CUDA/Python is needed on the phone.
-- Plate confidence 0.5; character confidence 0.25; class-aware NMS IoU 0.7; cross-class duplicate suppression IoU 0.5; letterbox 640 × 640; five-pixel clean crop margin.
-- At most five highest-confidence plates are processed per frame to bound live OCR work. All their boxes and recognized tokens are drawn; the detail card shows the highest-confidence plate. Completed plates are published before the remaining readers finish, with a completed/total indicator. This reduces time to first result, not the number of OCR inferences.
-- No temporal voting/tracking, automatic gate-opening, identification decision or production accuracy guarantee is included. Reading errors and glare/blur/angle sensitivity remain those of the underlying prototype.
-- Contains arm64-v8a, armeabi-v7a and x86_64 native libraries. Minimum Android 8.0 (API 26). The x86_64 library permits Android-emulator testing; it is not evidence of performance on an ARM phone.
+## History and export
 
-## Build
+**History** stops the camera and opens a paginated list of saved crop/text/score records (50 per page). Use **Refresh**, **Previous**, **Next**, or tap a row for a larger crop and **Copy text**. Press **Export ZIP** and select a destination using Android's file picker.
 
-Use JDK 17, Gradle 8.9, Android SDK 35, NDK 30.0.16248370 and CMake 3.22.1. These are configured in CI; Android Studio can import this directory.
+The ZIP contains `plates/<record-id>.jpg` and UTF-8 `records.json`. Each JSON row names its corresponding image and includes `saved_at_epoch_ms`, raw `text`, `tokens`, `confidence`, `plate_confidence`, `character_confidences`, `threshold_percent`, crop dimensions and `standard_layout`. History displays timestamps in device-local time with English digits; exported epoch timestamps are unambiguous.
+
+Records are private app data on this phone. There is no Internet permission, background upload or new shared-storage permission. **Export before uninstalling or clearing app data:** those actions remove the private history. A failed export may leave an incomplete destination file; retry from History. Export is explicitly user initiated and includes only records present when it starts.
+
+## Install and update
+
+Android 8.0/API 26 minimum; arm64-v8a, armeabi-v7a and x86_64 libraries are included. This remains a sideload preview, not a Play Store release.
+
+0.1.3 introduces a dedicated persistent preview signing key in CI. Updating older 0.1.0–0.1.2 builds may require uninstalling them once because their development keys differed. Those older versions did not have plate history. Subsequent builds signed with this same preview key can update 0.1.3 without clearing its data. Preserve the signing key; do not uninstall a logging version without exporting its records.
+
+## Pipeline and build
+
+CameraX RGBA analysis and preview share a ViewPort. Analysis uses latest-frame backpressure and a 100 ms minimum start interval. The locator and character reader retain their released v0.2.0 NCNN FP16 weights, 640 × 640 letterboxing, confidences 0.5 / 0.25, class-aware NMS 0.7, duplicate suppression 0.5 and five-pixel crop margin. Up to five plates are read sequentially and published incrementally. There is no temporal voting, retraining, identification decision or production accuracy guarantee.
+
+Use JDK 17, Gradle 8.9, SDK 35, NDK 30.0.16248370 and CMake 3.22.1:
 
 ```sh
 python scripts/prepare_assets.py --fixtures
@@ -38,12 +46,6 @@ gradle assembleDebug testDebugUnitTest lintDebug
 gradle connectedDebugAndroidTest
 ```
 
-`prepare_assets.py` downloads the released model bundle and the official NCNN 20261020 Android Vulkan static SDK, verifies pinned SHA256 digests and creates normalized class tokens. SDK/model binaries and generated files are ignored by Git. Keep generated class IDs in their original order. Model notices and NCNN/AndroidX acknowledgements are bundled in assets.
+The preparation script verifies pinned model and NCNN Vulkan SDK hashes. Generated models/SDKs are ignored by Git; upstream notices are bundled. Without signing environment variables, a local debug build uses the developer's ordinary debug key. CI requires `ANDROID_PREVIEW_KEYSTORE_B64` and `ANDROID_PREVIEW_STORE_PASSWORD` repository secrets, decodes the PKCS12 file outside the project, and passes `PLATE_KEYSTORE_PATH` / `PLATE_KEYSTORE_PASSWORD` to Gradle. Private key material is never committed or uploaded as an artifact.
 
-The emulator tests exercise native full-frame inference on the five earlier public demonstration images on both requested backends, progressive delivery for a synthetic two-plate scene, and rear-camera start/stop. These are integration tests, not an independent OCR benchmark or a substitute for real-phone testing. Test fixtures come from the pinned ALPR_Dataset revision already documented under `training_results/cropped-output-2026-11-04/`.
-
-## Distribution
-
-This is a development-signed preview APK for sideload testing, not a Play Store release. A device may require allowing installation from the source used to open the APK. Signing/release management, Play deployment and testing on a real Android phone remain separate steps. Source and build evidence are available in this repository and its Actions artifacts.
-
-Software/virtual Vulkan devices are excluded from accelerator selection. The first software-Vulkan emulator attempt lost the entire emulator after five successful CPU fixture readings, before completing the GPU pass; it is not a passed GPU test. The corrected selection uses integrated/discrete hardware devices and keeps CPU execution for the emulator. Hardware Vulkan predictions and speed still require physical-phone testing.
+Tests cover fixture OCR, per-character confidence output, two-plate delivery, zoom/camera lifecycle, threshold boundaries, persistence, duplicate cooldown, independent background crops, ZIP image/text matching and English history/settings. Emulator checks do not establish A52s GPU speed, camera quality or physical-phone reliability. Previously inspected fixtures are integration examples, not a fresh accuracy benchmark.

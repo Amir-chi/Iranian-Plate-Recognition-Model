@@ -1,0 +1,27 @@
+{
+  "source_commit": "dfb25dc2f0e195158616461e0d2b941d1ce04901",
+  "ci_run": 41980450558,
+  "instrumented_tests": {
+    "name": "ir.platelens.app.NativePipelineTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "43.775",
+    "timestamp": "2026-11-05T06:31:37",
+    "hostname": "localhost"
+  },
+  "verified_features": [
+    "locator-and-character minimum confidence",
+    "80 percent acceptance boundary and below-threshold rejection",
+    "30-second cooldown",
+    "SQLite close/reopen persistence",
+    "paired JPEG and UTF-8 JSON ZIP",
+    "background writer crop ownership and deduplication",
+    "English settings and threshold persistence",
+    "history with actual native fixture reading",
+    "existing camera, zoom and OCR regressions"
+  ],
+  "signing_certificate_sha256": "d28226e8b52acbe94611fb47bbdd7fd6a8300341b9499b6542fd763c73c88a07",
+  "scope": "Android 15/API35 x86_64 emulator, CPU/fallback. No new A52s speed/accuracy measurement. History image is a public test fixture, not a user-phone capture."
+}
