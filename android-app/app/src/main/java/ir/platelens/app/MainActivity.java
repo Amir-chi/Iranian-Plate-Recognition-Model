@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.ScrollView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -157,7 +158,8 @@ public final class MainActivity extends EnglishActivity {
         });
         enabled.setOnCheckedChangeListener((view,checked)->slider.setEnabled(checked));
         TextView explanation=new TextView(this);explanation.setText(R.string.log_explanation);explanation.setTextSize(14);content.addView(explanation);
-        logDialog=new AlertDialog.Builder(this).setTitle(R.string.log_settings).setView(content).setNegativeButton(R.string.cancel,null)
+        ScrollView scroll=new ScrollView(this);scroll.addView(content);
+        logDialog=new AlertDialog.Builder(this).setTitle(R.string.log_settings).setView(scroll).setNegativeButton(R.string.cancel,null)
             .setPositiveButton(R.string.save_settings,(dialog,which)->{
                 saveEnabled=enabled.isChecked();saveThreshold=slider.getProgress();
                 logPreferences.edit().putBoolean("enabled",saveEnabled).putInt("threshold",saveThreshold).apply();updateLoggingControls();

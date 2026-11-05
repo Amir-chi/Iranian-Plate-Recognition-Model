@@ -107,6 +107,6 @@ public class PlateLogTest {
         Log.i("PlateLensBenchmark","history=English settings persisted, native fixture crop displayed");
     }
     private void capture(String filename) throws Exception {
-        try(ParcelFileDescriptor descriptor=InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("screencap -p /data/local/tmp/"+filename);InputStream result=new FileInputStream(descriptor.getFileDescriptor())){byte[] buffer=new byte[1024];while(result.read(buffer)!=-1){} }
+        try(InputStream result=new ParcelFileDescriptor.AutoCloseInputStream(InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("screencap -p /data/local/tmp/"+filename))){byte[] buffer=new byte[1024];while(result.read(buffer)!=-1){} }
     }
 }
