@@ -92,9 +92,10 @@ public class PlateLogTest {
                 // Dialog views live in a separate window; find its focused root through the activity's dialog reference.
                 AlertDialog dialog=activity.loggingDialog();SeekBar slider=dialog.findViewById(R.id.threshold_slider);assertEquals(80,slider.getProgress());slider.setProgress(85);dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
             });
-            assertEquals(85,app().getSharedPreferences("logging",Context.MODE_PRIVATE).getInt("threshold",0));
+            waitForThreshold(85);
             screen.onActivity(activity->activity.findViewById(R.id.log_settings).performClick());
             screen.onActivity(activity->{AlertDialog dialog=activity.loggingDialog();((SeekBar)dialog.findViewById(R.id.threshold_slider)).setProgress(80);dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();});
+            waitForThreshold(80);
         }
         try(InputStream source=InstrumentationRegistry.getInstrumentation().getContext().getAssets().open("fixtures/000001.jpg");NativeEngine engine=new NativeEngine(app().getAssets(),false);PlateLogStore store=new PlateLogStore(app())){
             Bitmap image=BitmapFactory.decodeStream(source);Recognition.Plate reading=Recognition.parse(engine.detect(image)).get(0);Bitmap crop=PlateLogWriter.crop(image,reading.box,640);
@@ -105,6 +106,13 @@ public class PlateLogTest {
             assertTrue(loaded.get());Thread.sleep(500);capture("plate-lens-test-history.png");
         }
         Log.i("PlateLensBenchmark","history=English settings persisted, native fixture crop displayed");
+    }
+    private void waitForThreshold(int expected) throws Exception {
+        for(int i=0;i<40;i++){
+            if(app().getSharedPreferences("logging",Context.MODE_PRIVATE).getInt("threshold",0)==expected)return;
+            Thread.sleep(50);
+        }
+        assertEquals(expected,app().getSharedPreferences("logging",Context.MODE_PRIVATE).getInt("threshold",0));
     }
     private void capture(String filename) throws Exception {
         try(InputStream result=new ParcelFileDescriptor.AutoCloseInputStream(InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("screencap -p /data/local/tmp/"+filename))){byte[] buffer=new byte[1024];while(result.read(buffer)!=-1){} }

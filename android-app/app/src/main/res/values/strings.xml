@@ -61,4 +61,5 @@
     <string name="export_failed">Export failed. The selected file may be incomplete; try again.</string>
     <string name="close">Close</string>
     <string name="refresh">Refresh</string>
+    <string name="reading_quality">Score: %1$.1f%% • %2$s</string>
 </resources>

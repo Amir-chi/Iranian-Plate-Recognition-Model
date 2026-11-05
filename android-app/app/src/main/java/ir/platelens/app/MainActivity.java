@@ -324,7 +324,7 @@ public final class MainActivity extends EnglishActivity {
                 }else{
                     Recognition.Plate plate=plates.get(0);latestText=plate.text;copy.setEnabled(!latestText.isEmpty());
                     plateText.setTokens(plate.tokens,plate.text);boolean standard=PlateFormat.isStandard(plate.text);
-                    quality.setText(standard?R.string.standard:R.string.uncertain);quality.setTextColor(getColor(standard?R.color.accent:R.color.warning));
+                    quality.setText(getString(R.string.reading_quality,plate.saveConfidence*100,getString(standard?R.string.standard:R.string.uncertain)));quality.setTextColor(getColor(standard?R.color.accent:R.color.warning));
                 }
                 status.setText(completed<plates.size()?getString(R.string.progress,completed,plates.size()):getString(R.string.ready));
             });
