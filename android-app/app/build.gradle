@@ -8,8 +8,8 @@ android {
         applicationId 'ir.platelens.app'
         minSdk 26
         targetSdk 35
-        versionCode 3
-        versionName '0.1.2-preview'
+        versionCode 4
+        versionName '0.1.3-preview'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64' }
         externalNativeBuild { cmake {
@@ -17,6 +17,18 @@ android {
             arguments '-DANDROID_STL=c++_shared', '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON'
         } }
     }
+    signingConfigs {
+        stablePreview {
+            if (System.getenv('PLATE_KEYSTORE_PATH')) {
+                storeFile file(System.getenv('PLATE_KEYSTORE_PATH'))
+                storePassword System.getenv('PLATE_KEYSTORE_PASSWORD')
+                keyAlias 'plate-lens'
+                keyPassword System.getenv('PLATE_KEYSTORE_PASSWORD')
+                storeType 'pkcs12'
+            }
+        }
+    }
+    buildTypes { debug { if (System.getenv('PLATE_KEYSTORE_PATH')) signingConfig signingConfigs.stablePreview } }
     externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.22.1' } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
     androidResources { noCompress += ['bin', 'param'] }

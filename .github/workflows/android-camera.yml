@@ -1,7 +1,7 @@
 name: Android live camera APK
 on:
   push:
-    branches: [main, codex/live-camera-app, codex/android-gpu-latency, codex/android-camera-zoom]
+    branches: [main, codex/live-camera-app, codex/android-gpu-latency, codex/android-camera-zoom, codex/android-english-logs]
     paths: ['android-app/**', '.github/workflows/android-camera.yml']
   workflow_dispatch:
 permissions:
@@ -10,6 +10,8 @@ jobs:
   build-and-test:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
+    env:
+      PLATE_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_PREVIEW_STORE_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -23,12 +25,21 @@ jobs:
         with:
           packages: platform-tools
           log-accepted-android-sdk-licenses: false
+      - name: Configure stable preview signing
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_PREVIEW_KEYSTORE_B64 }}
+        run: |
+          test -n "$KEYSTORE_B64" && test -n "$PLATE_KEYSTORE_PASSWORD"
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/plate-lens.p12"
+          echo "PLATE_KEYSTORE_PATH=$RUNNER_TEMP/plate-lens.p12" >> "$GITHUB_ENV"
       - name: Prepare verified models, native SDK and test images
         run: python3 android-app/scripts/prepare_assets.py --fixtures
       - name: Android build components
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0' 'ndk;30.0.16248370' 'cmake;3.22.1'
       - name: Build APK and run unit/lint checks
         run: gradle -p android-app --no-daemon assembleDebug testDebugUnitTest lintDebug
+      - name: Verify APK signature
+        run: '"$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs android-app/app/build/outputs/apk/debug/app-debug.apk > android-app/apk-signing.txt'
       - name: Upload installable APK
         if: always()
         uses: actions/upload-artifact@v4
@@ -50,7 +61,7 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated -camera-front emulated
           script: |
-            bash -c 'gradle -p android-app --no-daemon connectedDebugAndroidTest; task_exit=$?; timeout 30s adb -s emulator-5554 install -r android-app/app/build/outputs/apk/debug/app-debug.apk && timeout 10s adb -s emulator-5554 shell pm grant ir.platelens.app android.permission.CAMERA && timeout 15s adb -s emulator-5554 shell am start -W -n ir.platelens.app/.MainActivity && sleep 15 && timeout 10s adb -s emulator-5554 exec-out screencap -p > android-app/preview.png; timeout 10s adb -s emulator-5554 logcat -d -s PlateLens:E AndroidRuntime:E PlateLensBenchmark:I > android-app/camera-errors.log; exit $task_exit'
+            bash -c 'gradle -p android-app --no-daemon connectedDebugAndroidTest; task_exit=$?; timeout 30s adb -s emulator-5554 install -r android-app/app/build/outputs/apk/debug/app-debug.apk && timeout 10s adb -s emulator-5554 shell pm grant ir.platelens.app android.permission.CAMERA && timeout 15s adb -s emulator-5554 shell am start -W -n ir.platelens.app/.MainActivity && sleep 15 && timeout 10s adb -s emulator-5554 exec-out screencap -p > android-app/preview.png; timeout 10s adb -s emulator-5554 logcat -d -s PlateLens:E AndroidRuntime:E PlateLensBenchmark:I > android-app/camera-errors.log; timeout 10s adb -s emulator-5554 pull /data/local/tmp/plate-lens-test-history.png android-app/history.png; timeout 10s adb -s emulator-5554 pull /data/local/tmp/plate-lens-test-settings.png android-app/settings.png; exit $task_exit'
       - name: Upload test evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -61,3 +72,6 @@ jobs:
             android-app/app/build/outputs/androidTest-results/
             android-app/preview.png
             android-app/camera-errors.log
+            android-app/apk-signing.txt
+            android-app/history.png
+            android-app/settings.png

@@ -1,6 +1,11 @@
 package ir.platelens.app;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.SharedPreferences;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -47,7 +52,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.json.JSONObject;
 
-public final class MainActivity extends ComponentActivity {
+public final class MainActivity extends EnglishActivity {
     private PreviewView preview;
     private PlateOverlay overlay;
     private PlateTextView plateText;
@@ -70,6 +75,13 @@ public final class MainActivity extends ComponentActivity {
     private boolean ready=false,lightOn=false,denied=false;
     private long lastAnalysis=0;
     private String latestText="";
+    private SharedPreferences logPreferences;
+    private volatile boolean saveEnabled=true;
+    private volatile int saveThreshold=80;
+    private PlateLogWriter logWriter;
+    private TextView logStatus;
+    private Button logSettings;
+    private AlertDialog logDialog;
     private final ActivityResultLauncher<String> permission=registerForActivityResult(
         new ActivityResultContracts.RequestPermission(), granted -> {
             if(granted){denied=false;startCamera();}
@@ -117,9 +129,42 @@ public final class MainActivity extends ComponentActivity {
             ((ClipboardManager)getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name),latestText));
             Toast.makeText(this,R.string.copied,Toast.LENGTH_SHORT).show();
         });
+        logPreferences=getSharedPreferences("logging",MODE_PRIVATE);
+        saveEnabled=logPreferences.getBoolean("enabled",true);saveThreshold=Math.max(1,Math.min(100,logPreferences.getInt("threshold",80)));
+        logStatus=findViewById(R.id.log_status);logSettings=findViewById(R.id.log_settings);
+        logWriter=new PlateLogWriter(this,new PlateLogWriter.Listener(){
+            @Override public void saved(float confidence){runOnUiThread(()->{if(!isDestroyed())logStatus.setText(getString(R.string.log_saved,confidence*100));});}
+            @Override public void failed(boolean busy,Exception error){Log.e("PlateLens","Local record saving failed",error);runOnUiThread(()->{if(!isDestroyed())logStatus.setText(busy?R.string.log_busy:R.string.log_error);});}
+        });
+        updateLoggingControls();logSettings.setOnClickListener(v->showLogSettings());
+        findViewById(R.id.history).setOnClickListener(v->{stopCamera();startActivity(new Intent(this,HistoryActivity.class));});
         backend.setOnClickListener(v->{stopCamera();preferGpu=!preferGpu;loadEngine();});
         loadEngine();
     }
+    private void updateLoggingControls(){
+        logSettings.setText(saveEnabled?getString(R.string.auto_save,saveThreshold):getString(R.string.auto_save_off));
+        logStatus.setText(saveEnabled?getString(R.string.log_ready,saveThreshold):getString(R.string.log_disabled));
+    }
+    private void showLogSettings(){
+        LinearLayout content=new LinearLayout(this);content.setOrientation(LinearLayout.VERTICAL);content.setPadding(dp(24),dp(8),dp(24),dp(8));
+        Switch enabled=new Switch(this);enabled.setText(R.string.log_enable);enabled.setChecked(saveEnabled);enabled.setMinHeight(dp(48));content.addView(enabled);
+        TextView threshold=new TextView(this);threshold.setText(getString(R.string.log_threshold,saveThreshold));content.addView(threshold);
+        SeekBar slider=new SeekBar(this);slider.setId(R.id.threshold_slider);slider.setMax(100);slider.setProgress(saveThreshold);slider.setEnabled(saveEnabled);slider.setMinimumHeight(dp(48));slider.setContentDescription(getString(R.string.log_threshold,saveThreshold));content.addView(slider);
+        slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+            @Override public void onProgressChanged(SeekBar view,int progress,boolean fromUser){if(progress<1){view.setProgress(1);return;}threshold.setText(getString(R.string.log_threshold,progress));view.setContentDescription(getString(R.string.log_threshold,progress));}
+            @Override public void onStartTrackingTouch(SeekBar view){}
+            @Override public void onStopTrackingTouch(SeekBar view){}
+        });
+        enabled.setOnCheckedChangeListener((view,checked)->slider.setEnabled(checked));
+        TextView explanation=new TextView(this);explanation.setText(R.string.log_explanation);explanation.setTextSize(14);content.addView(explanation);
+        logDialog=new AlertDialog.Builder(this).setTitle(R.string.log_settings).setView(content).setNegativeButton(R.string.cancel,null)
+            .setPositiveButton(R.string.save_settings,(dialog,which)->{
+                saveEnabled=enabled.isChecked();saveThreshold=slider.getProgress();
+                logPreferences.edit().putBoolean("enabled",saveEnabled).putInt("threshold",saveThreshold).apply();updateLoggingControls();
+            }).create();
+        logDialog.show();
+    }
+    AlertDialog loggingDialog(){return logDialog;}
     private void loadEngine(){
         ready=false;toggle.setEnabled(false);backend.setEnabled(false);status.setText(R.string.loading);
         final boolean requested=preferGpu;
@@ -245,6 +290,10 @@ public final class MainActivity extends ComponentActivity {
         try {
             JSONObject metadata=new JSONObject(result);List<Recognition.Plate> plates=Recognition.parse(result);
             int completed=metadata.getInt("completed");
+            if(saveEnabled)for(int i=0;i<Math.min(completed,plates.size());i++){
+                if(!running||session.get()!=frameSession)break;
+                logWriter.offer(frame,plates.get(i),saveThreshold);
+            }
             Bitmap thumbnail=null;
             if(completed>0&&!plates.isEmpty()){
                 float[] b=plates.get(0).box;
@@ -282,6 +331,7 @@ public final class MainActivity extends ComponentActivity {
     @Override protected void onDestroy(){
         detachZoom();session.incrementAndGet();running=false;if(provider!=null)provider.unbindAll();
         if(displayedCrop!=null){cropView.setImageDrawable(null);displayedCrop.recycle();displayedCrop=null;}
+        if(logWriter!=null)logWriter.close();
         worker.execute(()->{if(engine!=null)engine.close();});worker.shutdown();super.onDestroy();
     }
 }

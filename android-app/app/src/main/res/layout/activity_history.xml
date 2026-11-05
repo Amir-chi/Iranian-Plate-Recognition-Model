@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_root" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:layoutDirection="ltr" android:padding="16dp" android:background="@color/background">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/history_title"
+        android:textSize="25sp" android:textStyle="bold" android:textColor="@color/foreground" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/history_notice"
+        android:textSize="13sp" android:textColor="@color/muted" android:paddingTop="8dp" android:paddingBottom="8dp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <Button android:id="@+id/history_back" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/back_camera" />
+        <Button android:id="@+id/history_refresh" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/refresh" />
+        <Button android:id="@+id/history_export" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/export_zip" />
+    </LinearLayout>
+    <TextView android:id="@+id/history_status" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/history_loading" android:textColor="@color/muted" android:textSize="14sp" android:padding="8dp" android:accessibilityLiveRegion="polite" />
+    <TextView android:id="@+id/history_empty" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+        android:text="@string/history_loading" android:textColor="@color/muted" android:textSize="16sp" android:gravity="center" />
+    <ListView android:id="@+id/history_list" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+        android:divider="@android:color/transparent" android:dividerHeight="8dp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <Button android:id="@+id/history_previous" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/previous" />
+        <Button android:id="@+id/history_next" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/next" />
+    </LinearLayout>
+</LinearLayout>

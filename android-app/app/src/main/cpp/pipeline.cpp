@@ -97,7 +97,12 @@ std::string encode(const std::vector<Box>& plates,const std::vector<std::vector<
         if(p<readings.size())for(auto& ch:readings[p])json<<CHARACTER_TOKENS[ch.cls];
         json<<"\",\"tokens\":[";
         if(p<readings.size())for(size_t i=0;i<readings[p].size();i++){if(i)json<<',';json<<'\"'<<CHARACTER_TOKENS[readings[p][i].cls]<<'\"';}
-        json<<"]}";
+        json<<"],\"character_confidences\":[";
+        float readingConfidence=p<readings.size()&&!readings[p].empty()?plate.score:0.f;
+        if(p<readings.size())for(size_t i=0;i<readings[p].size();i++){
+            if(i)json<<',';json<<readings[p][i].score;readingConfidence=std::min(readingConfidence,readings[p][i].score);
+        }
+        json<<"],\"reading_confidence\":"<<readingConfidence<<"}";
     }
     json<<"]}";return json.str();
 }

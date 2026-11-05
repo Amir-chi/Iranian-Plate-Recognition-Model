@@ -44,6 +44,9 @@ public class NativePipelineTest {
                     List<Recognition.Plate> result=Recognition.parse(json);
                     assertEquals("Plate count in fixture "+i,1,result.size());
                     assertEquals("OCR in fixture "+i,expected[i],result.get(0).text);
+                    assertEquals(result.get(0).tokens.size(),result.get(0).characterConfidences.size());
+                    assertTrue(result.get(0).saveConfidence>0);
+                    assertEquals(new JSONObject(json).getJSONArray("plates").getJSONObject(0).getDouble("reading_confidence"),result.get(0).saveConfidence,.00001);
                     frame.recycle();
                 }
             }
